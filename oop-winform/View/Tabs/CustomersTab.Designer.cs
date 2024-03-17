@@ -62,7 +62,7 @@
             this.CustomersListPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CustomersListPanel.Location = new System.Drawing.Point(3, 3);
             this.CustomersListPanel.Name = "CustomersListPanel";
-            this.CustomersListPanel.Size = new System.Drawing.Size(394, 694);
+            this.CustomersListPanel.Size = new System.Drawing.Size(494, 694);
             this.CustomersListPanel.TabIndex = 0;
             // 
             // ButtonsPanel
@@ -79,15 +79,15 @@
             this.ButtonsPanel.Name = "ButtonsPanel";
             this.ButtonsPanel.RowCount = 1;
             this.ButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.ButtonsPanel.Size = new System.Drawing.Size(388, 60);
+            this.ButtonsPanel.Size = new System.Drawing.Size(488, 60);
             this.ButtonsPanel.TabIndex = 2;
             // 
             // RemoveButton
             // 
             this.RemoveButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RemoveButton.Location = new System.Drawing.Point(132, 3);
+            this.RemoveButton.Location = new System.Drawing.Point(165, 3);
             this.RemoveButton.Name = "RemoveButton";
-            this.RemoveButton.Size = new System.Drawing.Size(123, 54);
+            this.RemoveButton.Size = new System.Drawing.Size(156, 54);
             this.RemoveButton.TabIndex = 1;
             this.RemoveButton.Text = "Remove";
             this.RemoveButton.UseVisualStyleBackColor = true;
@@ -98,7 +98,7 @@
             this.AddButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AddButton.Location = new System.Drawing.Point(3, 3);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(123, 54);
+            this.AddButton.Size = new System.Drawing.Size(156, 54);
             this.AddButton.TabIndex = 0;
             this.AddButton.Text = "Add";
             this.AddButton.UseVisualStyleBackColor = true;
@@ -112,7 +112,7 @@
             this.CustomersListBox.FormattingEnabled = true;
             this.CustomersListBox.Location = new System.Drawing.Point(3, 22);
             this.CustomersListBox.Name = "CustomersListBox";
-            this.CustomersListBox.Size = new System.Drawing.Size(388, 615);
+            this.CustomersListBox.Size = new System.Drawing.Size(488, 615);
             this.CustomersListBox.TabIndex = 1;
             this.CustomersListBox.SelectedIndexChanged += new System.EventHandler(this.CustomersListBox_SelectedIndexChanged);
             // 
@@ -150,12 +150,12 @@
             this.SplitedTableLayoutPanel.Controls.Add(this.SelectedItemPanel, 0, 0);
             this.SplitedTableLayoutPanel.Controls.Add(this.panel1, 0, 1);
             this.SplitedTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SplitedTableLayoutPanel.Location = new System.Drawing.Point(403, 3);
+            this.SplitedTableLayoutPanel.Location = new System.Drawing.Point(503, 3);
             this.SplitedTableLayoutPanel.Name = "SplitedTableLayoutPanel";
             this.SplitedTableLayoutPanel.RowCount = 2;
             this.SplitedTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.SplitedTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.SplitedTableLayoutPanel.Size = new System.Drawing.Size(594, 694);
+            this.SplitedTableLayoutPanel.Size = new System.Drawing.Size(494, 694);
             this.SplitedTableLayoutPanel.TabIndex = 1;
             this.SplitedTableLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.SplitedTableLayoutPanel_Paint);
             // 
@@ -174,7 +174,7 @@
             this.SelectedItemPanel.Location = new System.Drawing.Point(3, 3);
             this.SelectedItemPanel.Name = "SelectedItemPanel";
             this.SelectedItemPanel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.SelectedItemPanel.Size = new System.Drawing.Size(588, 233);
+            this.SelectedItemPanel.Size = new System.Drawing.Size(488, 341);
             this.SelectedItemPanel.TabIndex = 3;
             // 
             // WrongAddressLabel
@@ -206,7 +206,7 @@
             this.AddressTextBox.Location = new System.Drawing.Point(66, 122);
             this.AddressTextBox.Multiline = true;
             this.AddressTextBox.Name = "AddressTextBox";
-            this.AddressTextBox.Size = new System.Drawing.Size(519, 108);
+            this.AddressTextBox.Size = new System.Drawing.Size(419, 99);
             this.AddressTextBox.TabIndex = 7;
             this.AddressTextBox.TextChanged += new System.EventHandler(this.AddressTextBox_TextChanged);
             this.AddressTextBox.Leave += new System.EventHandler(this.AddressTextBox_Leave);
@@ -218,7 +218,7 @@
             this.FullNameTextBox.Enabled = false;
             this.FullNameTextBox.Location = new System.Drawing.Point(66, 77);
             this.FullNameTextBox.Name = "FullNameTextBox";
-            this.FullNameTextBox.Size = new System.Drawing.Size(519, 20);
+            this.FullNameTextBox.Size = new System.Drawing.Size(419, 20);
             this.FullNameTextBox.TabIndex = 6;
             this.FullNameTextBox.TextChanged += new System.EventHandler(this.FullNameTextBox_TextChanged);
             this.FullNameTextBox.Leave += new System.EventHandler(this.FullNameTextBox_Leave);
@@ -277,7 +277,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 350);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(588, 341);
+            this.panel1.Size = new System.Drawing.Size(488, 341);
             this.panel1.TabIndex = 4;
             // 
             // CustomersTab
