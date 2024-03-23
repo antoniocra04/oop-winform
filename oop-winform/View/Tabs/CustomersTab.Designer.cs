@@ -73,12 +73,12 @@
             this.ButtonsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.ButtonsPanel.Controls.Add(this.RemoveButton, 1, 0);
             this.ButtonsPanel.Controls.Add(this.AddButton, 0, 0);
-            this.ButtonsPanel.Location = new System.Drawing.Point(3, 639);
+            this.ButtonsPanel.Location = new System.Drawing.Point(3, 629);
             this.ButtonsPanel.Name = "ButtonsPanel";
             this.ButtonsPanel.RowCount = 1;
             this.ButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.ButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
-            this.ButtonsPanel.Size = new System.Drawing.Size(388, 52);
+            this.ButtonsPanel.Size = new System.Drawing.Size(388, 65);
             this.ButtonsPanel.TabIndex = 2;
             // 
             // RemoveButton
@@ -86,7 +86,7 @@
             this.RemoveButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RemoveButton.Location = new System.Drawing.Point(132, 3);
             this.RemoveButton.Name = "RemoveButton";
-            this.RemoveButton.Size = new System.Drawing.Size(123, 46);
+            this.RemoveButton.Size = new System.Drawing.Size(123, 59);
             this.RemoveButton.TabIndex = 1;
             this.RemoveButton.Text = "Remove";
             this.RemoveButton.UseVisualStyleBackColor = true;
@@ -97,7 +97,7 @@
             this.AddButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AddButton.Location = new System.Drawing.Point(3, 3);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(123, 46);
+            this.AddButton.Size = new System.Drawing.Size(123, 59);
             this.AddButton.TabIndex = 0;
             this.AddButton.Text = "Add";
             this.AddButton.UseVisualStyleBackColor = true;
@@ -177,10 +177,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AddressTextBox.Enabled = false;
-            this.AddressTextBox.Location = new System.Drawing.Point(66, 123);
+            this.AddressTextBox.Location = new System.Drawing.Point(66, 124);
             this.AddressTextBox.Multiline = true;
             this.AddressTextBox.Name = "AddressTextBox";
-            this.AddressTextBox.Size = new System.Drawing.Size(519, 215);
+            this.AddressTextBox.Size = new System.Drawing.Size(519, 115);
             this.AddressTextBox.TabIndex = 7;
             this.AddressTextBox.TextChanged += new System.EventHandler(this.AddressTextBox_TextChanged);
             // 
@@ -206,7 +206,7 @@
             // AddressLabel
             // 
             this.AddressLabel.AutoSize = true;
-            this.AddressLabel.Location = new System.Drawing.Point(3, 126);
+            this.AddressLabel.Location = new System.Drawing.Point(3, 127);
             this.AddressLabel.Name = "AddressLabel";
             this.AddressLabel.Size = new System.Drawing.Size(48, 13);
             this.AddressLabel.TabIndex = 4;
