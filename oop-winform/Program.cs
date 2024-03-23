@@ -1,4 +1,4 @@
-﻿using oop_winform.Model;
+﻿using oop_winform.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

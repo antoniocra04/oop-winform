@@ -1,10 +1,15 @@
-﻿using oop_winform.Model;
+﻿using oop_winform.Models;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace oop_winform.View.Tabs
 {
+    /// <summary>
+    /// Вкладка покупателей.
+    /// </summary>
     public partial class CustomersTab : UserControl
     {
         /// <summary>
@@ -13,68 +18,93 @@ namespace oop_winform.View.Tabs
         private List<Customer> _customers = new List<Customer>();
 
         /// <summary>
-        /// Инициализация компонента.
+        /// Выбранный покупатель.
+        /// </summary>
+        private Customer _currentCustomer;
+
+        /// <summary>
+        /// Создает экземпляр класса <see cref="CustomersTab"/>.
         /// </summary>
         public CustomersTab()
         {
             InitializeComponent();
-            WrongAddressLabel.Text = string.Empty;
-            WrongFullNameLabel.Text = string.Empty;
+        }
+
+        /// <summary>
+        /// Возвращает и задает список покупателей.
+        /// </summary>
+        public List<Customer> Customers
+        {
+            get => _customers;
+            set
+            {
+                _customers = value;
+                if (value != null)
+                {
+                    UpdateCustomersListBox();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Обновляет данные в CustomerList.
+        /// </summary>
+        /// <param name="selectedIndex">Выбранный элемент.</param>
+        private void UpdateCustomersListBox()
+        {
+            CustomersListBox.Items.Clear();
+            foreach (var customer in Customers)
+            {
+                CustomersListBox.Items.Add(customer.FullName);
+            }
         }
 
         /// <summary>
         /// Установка корректных данных в тексбоксах.
         /// </summary>
         /// <param name="index">Индекс покупателя.</param>
-        private void SetTextBoxes(int index)
+        private void SetTextBoxes(int selectedIndex)
         {
-            if (index >= 0)
+            var isSelectedIndexCorrect = selectedIndex >= 0;
+            FullNameTextBox.Enabled = isSelectedIndexCorrect;
+            AddressTextBox.Enabled = isSelectedIndexCorrect;
+            if (isSelectedIndexCorrect)
             {
-                IdTextBox.Text = _customers[CustomersListBox.SelectedIndex].Id.ToString();
-                AddressTextBox.Text = _customers[CustomersListBox.SelectedIndex].Address;
-                FullNameTextBox.Text = _customers[CustomersListBox.SelectedIndex].FullName;
-                AddressTextBox.Enabled = true;
-                FullNameTextBox.Enabled = true;
+                IdTextBox.Text = Customers[CustomersListBox.SelectedIndex].Id.ToString();
+                FullNameTextBox.Text = Customers[CustomersListBox.SelectedIndex].FullName;
             }
             else
             {
                 FullNameTextBox.Text = "";
-                AddressTextBox.Text = "";
                 IdTextBox.Text = "";
-                AddressTextBox.Enabled = false;
-                FullNameTextBox.Enabled = false;
             }
         }
 
-        /// <summary>
-        /// Событие изменения выбора в списке.
-        /// </summary>
-        /// <param name="sender">Обьект вызвавший событие.</param>
-        /// <param name="e">Событие.</param>
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int index = CustomersListBox.SelectedIndex;
+
+            if (index == -1)
+            {
+                return;
+            }
+
+            _currentCustomer = _customers[index];
             SetTextBoxes(CustomersListBox.SelectedIndex);
+            FullNameTextBox.Text = _currentCustomer.FullName;
+            AddressTextBox.Text = _currentCustomer.Address;
         }
 
-        /// <summary>
-        /// Событие нажатия кнопки добавления покупателя.
-        /// </summary>
-        /// <param name="sender">Обьект вызвавший событие.</param>
-        /// <param name="e">Событие.</param>
         private void AddButton_Click(object sender, EventArgs e)
         {
-            Customer newCustomer = new Customer();
-            newCustomer.FullName = newCustomer.Id.ToString();
-            _customers.Add(newCustomer);
+            var newCustomer = new Customer();
+            newCustomer.FullName = $"Customer{newCustomer.Id}";
+            _currentCustomer = newCustomer;
+            Customers.Add(newCustomer);
             CustomersListBox.Items.Add(newCustomer.FullName);
-            CustomersListBox.SelectedItem = newCustomer.FullName;
+            CustomersListBox.SelectedIndex = CustomersListBox.Items.Count - 1;
         }
 
-        /// <summary>
-        /// Событие нажатия кнопки удаления покупателя
-        /// </summary>
-        /// <param name="sender">Обьект вызвавший событие.</param>
-        /// <param name="e">Событие.</param>
         private void RemoveButton_Click(object sender, EventArgs e)
         {
             int removeIndex = CustomersListBox.SelectedIndex;
@@ -86,105 +116,47 @@ namespace oop_winform.View.Tabs
             }
         }
 
-        /// <summary>
-        /// Событие изменения текстбокса имени.
-        /// </summary>
-        /// <param name="sender">Обьект вызвавший событие.</param>
-        /// <param name="e">Событие.</param>
         private void FullNameTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (CustomersListBox.SelectedIndex < 0)
+            int index = CustomersListBox.SelectedIndex;
+
+            if (index == -1) return;
+
+            try
             {
-                WrongFullNameLabel.Text = "";
-                FullNameTextBox.BackColor = Constants.okColor;
+                string name = FullNameTextBox.Text;
+                _currentCustomer.FullName = name;
+                Customers[CustomersListBox.SelectedIndex].FullName = FullNameTextBox.Text;
+                CustomersListBox.Items[CustomersListBox.SelectedIndex] = FullNameTextBox.Text;
+            }
+            catch
+            {
+                FullNameTextBox.BackColor = Constants.ErrorColor;
                 return;
             }
 
-            if (FullNameTextBox.Text.Length == 0)
-            {
-                WrongFullNameLabel.Text = "Имя не должно быть пустым";
-                AddressTextBox.BackColor = Constants.errorColor;
-            }
-            else if (FullNameTextBox.Text.Length > 200)
-            {
-                WrongFullNameLabel.Text = "Имя может быть не больше 200 символов";
-                AddressTextBox.BackColor = Constants.errorColor;
-            }
-            else
-            {
-                WrongFullNameLabel.Text = "";
-                AddressTextBox.BackColor = Constants.okColor;
-            }
+            FullNameTextBox.BackColor = Constants.CorrectColor;
         }
 
-        /// <summary>
-        /// Событие изменения текстбокса адреса.
-        /// </summary>
-        /// <param name="sender">Обьект вызвавший событие.</param>
-        /// <param name="e">Событие.</param>
         private void AddressTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (CustomersListBox.SelectedIndex < 0)
+            int index = CustomersListBox.SelectedIndex;
+
+            if (index == -1) return;
+
+            try
             {
-                WrongAddressLabel.Text = "";
-                AddressTextBox.BackColor = Constants.okColor;
+                string address = AddressTextBox.Text;
+                _currentCustomer.Address = address;
+                Customers[CustomersListBox.SelectedIndex].Address = AddressTextBox.Text;
+            }
+            catch
+            {
+                AddressTextBox.BackColor = Constants.ErrorColor;
                 return;
             }
 
-            if (AddressTextBox.Text.Length > 500)
-            {
-                WrongAddressLabel.Text = "Адрес может быть не больше 500 символов";
-                AddressTextBox.BackColor = Constants.errorColor;
-            }
-            else
-            {
-                WrongAddressLabel.Text = "";
-                AddressTextBox.BackColor = Constants.okColor;
-            }
-
-            
-        }
-
-        /// <summary>
-        /// Событие выхода из текстбокса имени.
-        /// </summary>
-        /// <param name="sender">Обьект вызвавший событие.</param>
-        /// <param name="e">Событие.</param>
-        private void FullNameTextBox_Leave(object sender, EventArgs e)
-        {
-            if (CustomersListBox.SelectedIndex >= 0)
-            {
-                if (FullNameTextBox.BackColor == Constants.okColor)
-                {
-                    _customers[CustomersListBox.SelectedIndex].FullName = FullNameTextBox.Text;
-                    CustomersListBox.Items[CustomersListBox.SelectedIndex] = FullNameTextBox.Text;
-                }
-                else
-                {
-                    FullNameTextBox.Text = _customers[CustomersListBox.SelectedIndex].FullName;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Событие выхода из текстбокса адреса.
-        /// </summary>
-        /// <param name="sender">Обьект вызвавший событие.</param>
-        /// <param name="e">Событие.</param>
-        private void AddressTextBox_Leave(object sender, EventArgs e)
-        {
-            if (CustomersListBox.SelectedIndex >= 0)
-            {
-                if (AddressTextBox.BackColor == Constants.okColor)
-                {
-                    _customers[CustomersListBox.SelectedIndex].Address = AddressTextBox.Text;
-                    CustomersListBox.Items[CustomersListBox.SelectedIndex] = AddressTextBox.Text;
-                }
-                else
-                {
-                    AddressTextBox.Text = _customers[CustomersListBox.SelectedIndex].Address;
-                }
-            }
+            AddressTextBox.BackColor = Constants.CorrectColor;
         }
     }
 }

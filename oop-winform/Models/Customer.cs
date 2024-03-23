@@ -1,11 +1,14 @@
 ﻿using oop_winform.Services;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using System.Collections.Generic;
+using System.Net;
 
-namespace oop_winform.Model
+namespace oop_winform.Models
 {
     /// <summary>
     /// Хранит данные о покупателе.
     /// </summary>
-    internal class Customer
+    public class Customer
     {
         /// <summary>
         /// Id покупателя.
@@ -21,6 +24,23 @@ namespace oop_winform.Model
         /// Адрес покупателя.
         /// </summary>
         private string _address;
+
+        public Customer()
+        {
+            Address = "";
+            FullName = "";
+        }
+
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Customer"/>.
+        /// </summary>
+        /// <param name="fullname">Полное имя. Должно быть не более 200 символов.</param>
+        /// <param name="address">Адрес. Должен быть не более 500 символов.</param>
+        public Customer(string fullname, string address)
+        {
+            FullName = fullname;
+            Address = address;
+        }
 
         /// <summary>
         /// Возвращает Id покупателя.
@@ -50,7 +70,7 @@ namespace oop_winform.Model
         }
 
         /// <summary>
-        /// Возвращает и задает Id адреса покупателя.
+        /// Возвращает и задает адрес покупателя.
         /// </summary>
         public string Address
         {

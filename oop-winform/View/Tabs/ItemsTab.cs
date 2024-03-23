@@ -1,10 +1,13 @@
-﻿using oop_winform.Model;
+﻿using oop_winform.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace oop_winform.View.Tabs
 {
+    /// <summary>
+    /// Вкладка продуктов.
+    /// </summary>
     public partial class ItemsTab : UserControl
     {
         /// <summary>
@@ -13,32 +16,50 @@ namespace oop_winform.View.Tabs
         private List<Item> _items = new List<Item>();
 
         /// <summary>
-        /// Инициализация компонента.
+        /// Выбранный продукт.
+        /// </summary>
+        private Item _currentItem;
+
+        /// <summary>
+        /// Создает экземпляр класса <see cref="ItemsTab"/>.
         /// </summary>
         public ItemsTab()
         {
             InitializeComponent();
-            WrongCostLabel.Text = string.Empty;
-            WrongNameLabel.Text = string.Empty;
-            WrongDescriptionLabel.Text = string.Empty;
+        }
+
+        /// <summary>
+        /// Возвращает и задает список товаров.
+        /// </summary>
+        public List<Item> Items
+        {
+            get => _items;
+            set
+            {
+                _items = value;
+                if (value != null)
+                {
+                    UpdateItemsListBox();
+                }
+            }
         }
 
         /// <summary>
         /// Установка корректных данных в тексбоксах.
         /// </summary>
         /// <param name="index">Индекс товара.</param>
-        private void SetTextBoxes(int index)
+        private void SetTextBoxes(int selectedIndex)
         {
-
-            if (index >= 0)
+            var isSelectedIndexCorrect = selectedIndex >= 0;
+            CostTextBox.Enabled = isSelectedIndexCorrect;
+            NameTextBox.Enabled = isSelectedIndexCorrect;
+            DescriptionTextBox.Enabled = isSelectedIndexCorrect;
+            if (isSelectedIndexCorrect)
             {
-                NameTextBox.Text = _items[ItemsListBox.SelectedIndex].Name;
-                CostTextBox.Text = _items[ItemsListBox.SelectedIndex].Cost.ToString();
-                IdTextBox.Text = _items[ItemsListBox.SelectedIndex].Id.ToString();
-                DescriptionTextBox.Text = _items[ItemsListBox.SelectedIndex].Info;
-                CostTextBox.Enabled = true;
-                NameTextBox.Enabled = true;
-                DescriptionTextBox.Enabled = true;
+                NameTextBox.Text = Items[ItemsListBox.SelectedIndex].Name;
+                CostTextBox.Text = Items[ItemsListBox.SelectedIndex].Cost.ToString();
+                IdTextBox.Text = Items[ItemsListBox.SelectedIndex].Id.ToString();
+                DescriptionTextBox.Text = Items[ItemsListBox.SelectedIndex].Info;
             }
             else
             {
@@ -46,41 +67,48 @@ namespace oop_winform.View.Tabs
                 CostTextBox.Text = "";
                 IdTextBox.Text = "";
                 DescriptionTextBox.Text = "";
-                CostTextBox.Enabled = false;
-                NameTextBox.Enabled = false;
-                DescriptionTextBox.Enabled = false;
             }
         }
 
         /// <summary>
-        /// Событие изменения выбора в списке.
+        /// Обновляет данные в ItemList.
         /// </summary>
-        /// <param name="sender">Обьект вызвавший событие.</param>
-        /// <param name="e">Событие.</param>
+        /// <param name="selectedIndex">Выбранный элемент.</param>
+        private void UpdateItemsListBox()
+        {
+            ItemsListBox.Items.Clear();
+            foreach (var item in Items)
+            {
+                ItemsListBox.Items.Add(item.Name);
+            }
+        }
+
         private void ItemsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int index = ItemsListBox.SelectedIndex;
+
+            if (index == -1)
+            {
+                return;
+            }
+
+            _currentItem = _items[index];
             SetTextBoxes(ItemsListBox.SelectedIndex);
+            NameTextBox.Text = _currentItem.Name;
+            DescriptionTextBox.Text = _currentItem.Info;
+            CostTextBox.Text = _currentItem.Cost.ToString();
         }
 
-        /// <summary>
-        /// Событие нажатия кнопки добавления товара.
-        /// </summary>
-        /// <param name="sender">Обьект вызвавший событие.</param>
-        /// <param name="e">Событие.</param>
         private void AddButton_Click(object sender, EventArgs e)
         {
-            Item newItem = new Item();
-            newItem.Name = newItem.Id.ToString();
-            _items.Add(newItem);
+            var newItem = new Item();
+            newItem.Name = $"Item{newItem.Id}";
+            _currentItem = newItem;
+            Items.Add(newItem);
             ItemsListBox.Items.Add(newItem.Name);
-            ItemsListBox.SelectedItem = newItem.Name;
+            ItemsListBox.SelectedIndex = ItemsListBox.Items.Count - 1;
         }
 
-        /// <summary>
-        /// Событие нажатия кнопки удаления продукта
-        /// </summary>
-        /// <param name="sender">Обьект вызвавший событие.</param>
-        /// <param name="e">Событие.</param>
         private void RemoveButton_Click(object sender, EventArgs e)
         {
             int removeIndex = ItemsListBox.SelectedIndex;
@@ -92,160 +120,68 @@ namespace oop_winform.View.Tabs
             }
         }
 
-        /// <summary>
-        /// Событие изменения текстбокса стоимости.
-        /// </summary>
-        /// <param name="sender">Обьект вызвавший событие.</param>
-        /// <param name="e">Событие.</param>
         private void CostTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (ItemsListBox.SelectedIndex < 0)
+            int index = ItemsListBox.SelectedIndex;
+
+            if (index == -1) return;
+
+            try
             {
-                WrongCostLabel.Text = "";
-                CostTextBox.BackColor = Constants.okColor;
+                string cost = CostTextBox.Text;
+                _currentItem.Cost = float.Parse(cost);
+                _items[ItemsListBox.SelectedIndex].Cost = float.Parse(CostTextBox.Text);
+            }
+            catch
+            {
+                CostTextBox.BackColor = Constants.ErrorColor;
                 return;
             }
 
-            float getParse = 0;
-            if (!float.TryParse(CostTextBox.Text, out getParse))
-            {
-                WrongCostLabel.Text = "Стоимость должна быть числом";
-                CostTextBox.BackColor = Constants.errorColor;
-            }
-            else if (getParse <= 0)
-            {
-                WrongCostLabel.Text = "Стоимость должна быть больше 0.";
-                CostTextBox.BackColor = Constants.errorColor;
-            }
-            else if (getParse > 100000)
-            {
-                WrongCostLabel.Text = "Стоимость должна быть меньше 1000000.";
-                CostTextBox.BackColor = Constants.errorColor;
-            }
-            else
-            {
-                WrongCostLabel.Text = "";
-                CostTextBox.BackColor = Constants.okColor;
-            }
-
+            CostTextBox.BackColor = Constants.CorrectColor;
         }
 
-        /// <summary>
-        /// Событие изменения текстбокса имени.
-        /// </summary>
-        /// <param name="sender">Обьект вызвавший событие.</param>
-        /// <param name="e">Событие.</param>
         private void NameTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (ItemsListBox.SelectedIndex < 0)
+            int index = ItemsListBox.SelectedIndex;
+
+            if (index == -1) return;
+
+            try
             {
-                WrongNameLabel.Text = "";
-                NameTextBox.BackColor = Constants.okColor;
+                string name = NameTextBox.Text;
+                _currentItem.Name = name;
+                _items[ItemsListBox.SelectedIndex].Name = NameTextBox.Text;
+                ItemsListBox.Items[ItemsListBox.SelectedIndex] = NameTextBox.Text;
+            }
+            catch
+            {
+                CostTextBox.BackColor = Constants.ErrorColor;
                 return;
             }
 
-            if (NameTextBox.Text.Length == 0)
-            {
-                WrongNameLabel.Text = "Имя не должно быть пустым.";
-                NameTextBox.BackColor = Constants.errorColor;
-            }
-            else if (NameTextBox.Text.Length > 200)
-            {
-                WrongNameLabel.Text = "Имя должно быть меньше 200 символов.";
-                NameTextBox.BackColor = Constants.errorColor;
-            }
-            else
-            {
-                WrongNameLabel.Text = "";
-                NameTextBox.BackColor = Constants.okColor;
-            }
-
+            CostTextBox.BackColor = Constants.CorrectColor;
         }
 
-        /// <summary>
-        /// Событие изменения текстбокса описания.
-        /// </summary>
-        /// <param name="sender">Обьект вызвавший событие.</param>
-        /// <param name="e">Событие.</param>
         private void DescriptionTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (ItemsListBox.SelectedIndex < 0)
+            int index = ItemsListBox.SelectedIndex;
+
+            if (index == -1) return;
+
+            try
             {
-                WrongDescriptionLabel.Text = "";
-                DescriptionTextBox.BackColor = Constants.okColor;
+                string info = DescriptionTextBox.Text;
+                _currentItem.Info = info;
+                _items[ItemsListBox.SelectedIndex].Info = DescriptionTextBox.Text;
+            }
+            catch
+            {
+                CostTextBox.BackColor = Constants.ErrorColor;
                 return;
             }
 
-            if (DescriptionTextBox.Text.Length > 1000)
-            {
-                WrongDescriptionLabel.Text = "Описание должно быть меньше 1000 символов";
-                DescriptionTextBox.BackColor = Constants.errorColor;
-            }
-            else
-            {
-                WrongDescriptionLabel.Text = String.Empty;
-                DescriptionTextBox.BackColor = Constants.okColor;
-            }
-        }
-
-        /// <summary>
-        /// Событие выхода из текстбокса имени.
-        /// </summary>
-        /// <param name="sender">Обьект вызвавший событие.</param>
-        /// <param name="e">Событие.</param>
-        private void NameTextBox_Leave(object sender, EventArgs e)
-        {
-            if (ItemsListBox.SelectedIndex >= 0)
-            {
-                if (NameTextBox.BackColor == Constants.okColor)
-                {
-                    _items[ItemsListBox.SelectedIndex].Name = NameTextBox.Text;
-                    ItemsListBox.Items[ItemsListBox.SelectedIndex] = NameTextBox.Text;
-                }
-                else
-                {
-                    NameTextBox.Text = _items[ItemsListBox.SelectedIndex].Name;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Событие выхода из текстбокса стоимости.
-        /// </summary>
-        /// <param name="sender">Обьект вызвавший событие.</param>
-        /// <param name="e">Событие.</param>
-        private void CostTextBox_Leave(object sender, EventArgs e)
-        {
-            if (ItemsListBox.SelectedIndex >= 0)
-            {
-                if (CostTextBox.BackColor == Constants.okColor)
-                {
-                    _items[ItemsListBox.SelectedIndex].Cost = float.Parse(CostTextBox.Text);
-                }
-            }
-
-            CostTextBox.Text = _items[ItemsListBox.SelectedIndex].Cost.ToString();
-        }
-
-        /// <summary>
-        /// Событие выхода из текстбокса описания.
-        /// </summary>
-        /// <param name="sender">Обьект вызвавший событие.</param>
-        /// <param name="e">Событие.</param>
-        private void DescriptionTextBox_Leave(object sender, EventArgs e)
-        {
-            if (ItemsListBox.SelectedIndex >= 0)
-            {
-                if (DescriptionTextBox.BackColor == Constants.okColor)
-                {
-                    _items[ItemsListBox.SelectedIndex].Info = DescriptionTextBox.Text;
-                }
-                else
-                {
-                    DescriptionTextBox.Text = _items[ItemsListBox.SelectedIndex].Info;
-                }
-            }
-
+            CostTextBox.BackColor = Constants.CorrectColor;
         }
     }
 }

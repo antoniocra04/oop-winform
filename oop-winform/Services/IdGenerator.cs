@@ -1,4 +1,4 @@
-﻿namespace oop_winform.Model
+﻿namespace oop_winform.Services
 {
     /// <summary>
     /// Класс генератора id.

@@ -37,8 +37,6 @@
             this.MainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SplitedTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SelectedItemPanel = new System.Windows.Forms.Panel();
-            this.WrongAddressLabel = new System.Windows.Forms.Label();
-            this.WrongFullNameLabel = new System.Windows.Forms.Label();
             this.AddressTextBox = new System.Windows.Forms.TextBox();
             this.FullNameTextBox = new System.Windows.Forms.TextBox();
             this.IdTextBox = new System.Windows.Forms.TextBox();
@@ -67,7 +65,7 @@
             // 
             // ButtonsPanel
             // 
-            this.ButtonsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.ButtonsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonsPanel.ColumnCount = 3;
             this.ButtonsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -107,8 +105,8 @@
             // 
             // CustomersListBox
             // 
-            this.CustomersListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.CustomersListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CustomersListBox.FormattingEnabled = true;
             this.CustomersListBox.Location = new System.Drawing.Point(3, 22);
@@ -160,8 +158,6 @@
             // 
             // SelectedItemPanel
             // 
-            this.SelectedItemPanel.Controls.Add(this.WrongAddressLabel);
-            this.SelectedItemPanel.Controls.Add(this.WrongFullNameLabel);
             this.SelectedItemPanel.Controls.Add(this.AddressTextBox);
             this.SelectedItemPanel.Controls.Add(this.FullNameTextBox);
             this.SelectedItemPanel.Controls.Add(this.IdTextBox);
@@ -175,30 +171,10 @@
             this.SelectedItemPanel.Size = new System.Drawing.Size(588, 341);
             this.SelectedItemPanel.TabIndex = 3;
             // 
-            // WrongAddressLabel
-            // 
-            this.WrongAddressLabel.AutoSize = true;
-            this.WrongAddressLabel.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.WrongAddressLabel.Location = new System.Drawing.Point(63, 107);
-            this.WrongAddressLabel.Name = "WrongAddressLabel";
-            this.WrongAddressLabel.Size = new System.Drawing.Size(29, 13);
-            this.WrongAddressLabel.TabIndex = 10;
-            this.WrongAddressLabel.Text = "Error";
-            // 
-            // WrongFullNameLabel
-            // 
-            this.WrongFullNameLabel.AutoSize = true;
-            this.WrongFullNameLabel.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.WrongFullNameLabel.Location = new System.Drawing.Point(63, 61);
-            this.WrongFullNameLabel.Name = "WrongFullNameLabel";
-            this.WrongFullNameLabel.Size = new System.Drawing.Size(29, 13);
-            this.WrongFullNameLabel.TabIndex = 9;
-            this.WrongFullNameLabel.Text = "Error";
-            // 
             // AddressTextBox
             // 
-            this.AddressTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.AddressTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AddressTextBox.Enabled = false;
             this.AddressTextBox.Location = new System.Drawing.Point(66, 123);
@@ -207,11 +183,10 @@
             this.AddressTextBox.Size = new System.Drawing.Size(519, 215);
             this.AddressTextBox.TabIndex = 7;
             this.AddressTextBox.TextChanged += new System.EventHandler(this.AddressTextBox_TextChanged);
-            this.AddressTextBox.Leave += new System.EventHandler(this.AddressTextBox_Leave);
             // 
             // FullNameTextBox
             // 
-            this.FullNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.FullNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.FullNameTextBox.Enabled = false;
             this.FullNameTextBox.Location = new System.Drawing.Point(66, 77);
@@ -219,7 +194,6 @@
             this.FullNameTextBox.Size = new System.Drawing.Size(519, 20);
             this.FullNameTextBox.TabIndex = 6;
             this.FullNameTextBox.TextChanged += new System.EventHandler(this.FullNameTextBox_TextChanged);
-            this.FullNameTextBox.Leave += new System.EventHandler(this.FullNameTextBox_Leave);
             // 
             // IdTextBox
             // 
@@ -313,7 +287,5 @@
         private System.Windows.Forms.Label IdLabel;
         private System.Windows.Forms.Label SelectedCustomerLabel;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label WrongAddressLabel;
-        private System.Windows.Forms.Label WrongFullNameLabel;
     }
 }

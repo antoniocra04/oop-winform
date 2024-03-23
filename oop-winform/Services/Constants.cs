@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
-namespace oop_winform.Model
+namespace oop_winform.Models
 {
     /// <summary>
     /// Содержит константы.
@@ -15,11 +10,11 @@ namespace oop_winform.Model
         /// <summary>
         /// Цвет для полей с верными данными.
         /// </summary>
-        public static Color okColor = Color.White;
+        public readonly static Color CorrectColor = Color.White;
 
         /// <summary>
         /// Цвет для полей с неверными данными.
         /// </summary>
-        public static Color errorColor = Color.Red;
+        public readonly static Color ErrorColor = Color.Red;
     }
 }

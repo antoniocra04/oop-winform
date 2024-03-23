@@ -1,12 +1,12 @@
 ﻿using oop_winform.Services;
 using System;
 
-namespace oop_winform.Model
+namespace oop_winform.Models
 {
     /// <summary>
     /// Хранит данные о товаре.
     /// </summary>
-    internal class Item
+    public class Item
     {
         /// <summary>
         /// Id товара.
@@ -105,10 +105,7 @@ namespace oop_winform.Model
             }
             set
             {
-                if (value < 0 || value > 100000f)
-                {
-                    throw new ArgumentException("Cost is not included in the range from 0 to 100 000.");
-                }
+                ValueValidator.FloatLimitCheck(value, 0, 100000, nameof(_cost));
                 _cost = value;
             }
         }

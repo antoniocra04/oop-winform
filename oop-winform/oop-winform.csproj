@@ -49,9 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Constants.cs" />
+    <Compile Include="Services\Constants.cs" />
     <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\IdGenerator.cs" />
+    <Compile Include="Services\IdGenerator.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Services\ValueValidator.cs" />
     <Compile Include="View\MainForm.cs">
@@ -88,6 +88,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Tabs\CustomersTab.resx">
       <DependentUpon>CustomersTab.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Tabs\ItemsTab.resx">
       <DependentUpon>ItemsTab.cs</DependentUpon>
@@ -126,6 +127,8 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="View\Icons\statistic_analysis_data_chart_graph_icon_262584.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

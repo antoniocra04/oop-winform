@@ -44,9 +44,6 @@
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.DescriptionTextBox = new System.Windows.Forms.TextBox();
             this.SelectedItemPanel = new System.Windows.Forms.Panel();
-            this.WrongDescriptionLabel = new System.Windows.Forms.Label();
-            this.WrongNameLabel = new System.Windows.Forms.Label();
-            this.WrongCostLabel = new System.Windows.Forms.Label();
             this.MainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.ItemsListPanel.SuspendLayout();
             this.ButtonPanel.SuspendLayout();
@@ -67,7 +64,7 @@
             // 
             // ButtonPanel
             // 
-            this.ButtonPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.ButtonPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonPanel.ColumnCount = 3;
             this.ButtonPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -106,8 +103,8 @@
             // 
             // ItemsListBox
             // 
-            this.ItemsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.ItemsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ItemsListBox.FormattingEnabled = true;
             this.ItemsListBox.Location = new System.Drawing.Point(3, 16);
@@ -188,11 +185,10 @@
             this.CostTextBox.Size = new System.Drawing.Size(100, 20);
             this.CostTextBox.TabIndex = 6;
             this.CostTextBox.TextChanged += new System.EventHandler(this.CostTextBox_TextChanged);
-            this.CostTextBox.Leave += new System.EventHandler(this.CostTextBox_Leave);
             // 
             // NameTextBox
             // 
-            this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.NameTextBox.Enabled = false;
             this.NameTextBox.Location = new System.Drawing.Point(3, 98);
@@ -201,11 +197,10 @@
             this.NameTextBox.Size = new System.Drawing.Size(588, 94);
             this.NameTextBox.TabIndex = 7;
             this.NameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
-            this.NameTextBox.Leave += new System.EventHandler(this.NameTextBox_Leave);
             // 
             // DescriptionTextBox
             // 
-            this.DescriptionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.DescriptionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DescriptionTextBox.Enabled = false;
             this.DescriptionTextBox.Location = new System.Drawing.Point(3, 220);
@@ -214,13 +209,9 @@
             this.DescriptionTextBox.Size = new System.Drawing.Size(588, 157);
             this.DescriptionTextBox.TabIndex = 8;
             this.DescriptionTextBox.TextChanged += new System.EventHandler(this.DescriptionTextBox_TextChanged);
-            this.DescriptionTextBox.Leave += new System.EventHandler(this.DescriptionTextBox_Leave);
             // 
             // SelectedItemPanel
             // 
-            this.SelectedItemPanel.Controls.Add(this.WrongDescriptionLabel);
-            this.SelectedItemPanel.Controls.Add(this.WrongNameLabel);
-            this.SelectedItemPanel.Controls.Add(this.WrongCostLabel);
             this.SelectedItemPanel.Controls.Add(this.DescriptionTextBox);
             this.SelectedItemPanel.Controls.Add(this.NameTextBox);
             this.SelectedItemPanel.Controls.Add(this.CostTextBox);
@@ -235,36 +226,6 @@
             this.SelectedItemPanel.Name = "SelectedItemPanel";
             this.SelectedItemPanel.Size = new System.Drawing.Size(594, 694);
             this.SelectedItemPanel.TabIndex = 1;
-            // 
-            // WrongDescriptionLabel
-            // 
-            this.WrongDescriptionLabel.AutoSize = true;
-            this.WrongDescriptionLabel.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.WrongDescriptionLabel.Location = new System.Drawing.Point(72, 204);
-            this.WrongDescriptionLabel.Name = "WrongDescriptionLabel";
-            this.WrongDescriptionLabel.Size = new System.Drawing.Size(29, 13);
-            this.WrongDescriptionLabel.TabIndex = 12;
-            this.WrongDescriptionLabel.Text = "Error";
-            // 
-            // WrongNameLabel
-            // 
-            this.WrongNameLabel.AutoSize = true;
-            this.WrongNameLabel.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.WrongNameLabel.Location = new System.Drawing.Point(47, 82);
-            this.WrongNameLabel.Name = "WrongNameLabel";
-            this.WrongNameLabel.Size = new System.Drawing.Size(29, 13);
-            this.WrongNameLabel.TabIndex = 11;
-            this.WrongNameLabel.Text = "Error";
-            // 
-            // WrongCostLabel
-            // 
-            this.WrongCostLabel.AutoSize = true;
-            this.WrongCostLabel.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.WrongCostLabel.Location = new System.Drawing.Point(151, 63);
-            this.WrongCostLabel.Name = "WrongCostLabel";
-            this.WrongCostLabel.Size = new System.Drawing.Size(29, 13);
-            this.WrongCostLabel.TabIndex = 10;
-            this.WrongCostLabel.Text = "Error";
             // 
             // MainTableLayoutPanel
             // 
@@ -318,9 +279,6 @@
         private System.Windows.Forms.TextBox NameTextBox;
         private System.Windows.Forms.TextBox DescriptionTextBox;
         private System.Windows.Forms.Panel SelectedItemPanel;
-        private System.Windows.Forms.Label WrongDescriptionLabel;
-        private System.Windows.Forms.Label WrongNameLabel;
-        private System.Windows.Forms.Label WrongCostLabel;
         private System.Windows.Forms.TableLayoutPanel MainTableLayoutPanel;
     }
 }

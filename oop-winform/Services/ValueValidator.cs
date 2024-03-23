@@ -5,7 +5,7 @@ namespace oop_winform.Services
     /// <summary>
     /// Осуществляет валидацию входных данных.
     /// </summary>
-    static internal class ValueValidator
+    public static class ValueValidator
     {
         /// <summary>
         /// Проверка на превышение длинны строки.
@@ -17,8 +17,27 @@ namespace oop_winform.Services
         {
             if (value.Length > maxLength)
             {
-                throw new 
-                    ArgumentException(property + " должно быть меньше " + maxLength + " символов.");
+                throw new
+                    ArgumentException($"{property} должно быть меньше {maxLength} символов.");
+            }
+        }
+
+        /// <summary>
+        /// Проверка числа на диапазон.
+        /// </summary>
+        /// <param name="value">Входное значение.</param>
+        /// <param name="min">Минимальное число (нижняя граница).</param>
+        /// <param name="max">Максимальное число (верхняя граница).</param>
+        /// <param name="propertyName">Имя свойства класса.</param>
+        public static void FloatLimitCheck(float value, float min,
+            float max, string propertyName)
+        {
+            if (value < min || value > max)
+            {
+                throw new
+                    ArgumentException(
+                        $"{propertyName} expected to be from {min} to {max}."
+                    );
             }
         }
     }
