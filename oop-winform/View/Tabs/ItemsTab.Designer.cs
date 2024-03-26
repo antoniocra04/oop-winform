@@ -136,7 +136,7 @@
             // IdLabel
             // 
             this.IdLabel.AutoSize = true;
-            this.IdLabel.Location = new System.Drawing.Point(3, 34);
+            this.IdLabel.Location = new System.Drawing.Point(3, 38);
             this.IdLabel.Name = "IdLabel";
             this.IdLabel.Size = new System.Drawing.Size(21, 13);
             this.IdLabel.TabIndex = 1;
@@ -180,7 +180,7 @@
             // CostTextBox
             // 
             this.CostTextBox.Enabled = false;
-            this.CostTextBox.Location = new System.Drawing.Point(45, 62);
+            this.CostTextBox.Location = new System.Drawing.Point(45, 58);
             this.CostTextBox.Name = "CostTextBox";
             this.CostTextBox.Size = new System.Drawing.Size(100, 20);
             this.CostTextBox.TabIndex = 6;

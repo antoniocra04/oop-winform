@@ -1,20 +1,20 @@
 ﻿using System.Drawing;
 
-namespace oop_winform.Models
+namespace oop_winform.Services
 {
     /// <summary>
     /// Содержит константы.
     /// </summary>
-    static class Constants
+    public static class Constants
     {
         /// <summary>
         /// Цвет для полей с верными данными.
         /// </summary>
-        public readonly static Color CorrectColor = Color.White;
+        public static readonly Color CorrectColor = Color.White;
 
         /// <summary>
         /// Цвет для полей с неверными данными.
         /// </summary>
-        public readonly static Color ErrorColor = Color.Red;
+        public static readonly Color ErrorColor = Color.Red;
     }
 }

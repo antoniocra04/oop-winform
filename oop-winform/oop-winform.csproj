@@ -128,7 +128,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="View\Icons\statistic_analysis_data_chart_graph_icon_262584.ico" />
+    <Content Include="View\Icons\main.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

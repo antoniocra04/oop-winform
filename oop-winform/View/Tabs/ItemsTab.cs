@@ -1,4 +1,5 @@
 ﻿using oop_winform.Models;
+using oop_winform.Services;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -47,27 +48,17 @@ namespace oop_winform.View.Tabs
         /// <summary>
         /// Установка корректных данных в тексбоксах.
         /// </summary>
-        /// <param name="index">Индекс товара.</param>
+        /// <param name="selectedIndex">Индекс товара.</param>
         private void SetTextBoxes(int selectedIndex)
         {
             var isSelectedIndexCorrect = selectedIndex >= 0;
             CostTextBox.Enabled = isSelectedIndexCorrect;
             NameTextBox.Enabled = isSelectedIndexCorrect;
             DescriptionTextBox.Enabled = isSelectedIndexCorrect;
-            if (isSelectedIndexCorrect)
-            {
-                NameTextBox.Text = Items[ItemsListBox.SelectedIndex].Name;
-                CostTextBox.Text = Items[ItemsListBox.SelectedIndex].Cost.ToString();
-                IdTextBox.Text = Items[ItemsListBox.SelectedIndex].Id.ToString();
-                DescriptionTextBox.Text = Items[ItemsListBox.SelectedIndex].Info;
-            }
-            else
-            {
-                NameTextBox.Text = "";
-                CostTextBox.Text = "";
-                IdTextBox.Text = "";
-                DescriptionTextBox.Text = "";
-            }
+            NameTextBox.Text = Items[ItemsListBox.SelectedIndex].Name;
+            CostTextBox.Text = Items[ItemsListBox.SelectedIndex].Cost.ToString();
+            IdTextBox.Text = Items[ItemsListBox.SelectedIndex].Id.ToString();
+            DescriptionTextBox.Text = Items[ItemsListBox.SelectedIndex].Info;
         }
 
         /// <summary>
@@ -76,11 +67,13 @@ namespace oop_winform.View.Tabs
         /// <param name="selectedIndex">Выбранный элемент.</param>
         private void UpdateItemsListBox()
         {
+            int index = ItemsListBox.SelectedIndex;
             ItemsListBox.Items.Clear();
             foreach (var item in Items)
             {
                 ItemsListBox.Items.Add(item.Name);
             }
+            ItemsListBox.SelectedIndex = index;
         }
 
         private void ItemsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -149,10 +142,8 @@ namespace oop_winform.View.Tabs
 
             try
             {
-                string name = NameTextBox.Text;
-                _currentItem.Name = name;
-                _items[ItemsListBox.SelectedIndex].Name = NameTextBox.Text;
-                ItemsListBox.Items[ItemsListBox.SelectedIndex] = NameTextBox.Text;
+                _currentItem.Name = NameTextBox.Text;
+                UpdateItemsListBox();
             }
             catch
             {

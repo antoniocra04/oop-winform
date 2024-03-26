@@ -1,9 +1,8 @@
 ﻿using oop_winform.Models;
+using oop_winform.Services;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace oop_winform.View.Tabs
 {
@@ -49,35 +48,28 @@ namespace oop_winform.View.Tabs
         /// <summary>
         /// Обновляет данные в CustomerList.
         /// </summary>
-        /// <param name="selectedIndex">Выбранный элемент.</param>
         private void UpdateCustomersListBox()
         {
+            int index = CustomersListBox.SelectedIndex;
             CustomersListBox.Items.Clear();
             foreach (var customer in Customers)
             {
                 CustomersListBox.Items.Add(customer.FullName);
             }
+            CustomersListBox.SelectedIndex = index;
         }
 
         /// <summary>
         /// Установка корректных данных в тексбоксах.
         /// </summary>
-        /// <param name="index">Индекс покупателя.</param>
+        /// <param name="selectedIndex">Индекс покупателя.</param>
         private void SetTextBoxes(int selectedIndex)
         {
             var isSelectedIndexCorrect = selectedIndex >= 0;
             FullNameTextBox.Enabled = isSelectedIndexCorrect;
             AddressTextBox.Enabled = isSelectedIndexCorrect;
-            if (isSelectedIndexCorrect)
-            {
-                IdTextBox.Text = Customers[CustomersListBox.SelectedIndex].Id.ToString();
-                FullNameTextBox.Text = Customers[CustomersListBox.SelectedIndex].FullName;
-            }
-            else
-            {
-                FullNameTextBox.Text = "";
-                IdTextBox.Text = "";
-            }
+            IdTextBox.Text = Customers[CustomersListBox.SelectedIndex].Id.ToString();
+            FullNameTextBox.Text = Customers[CustomersListBox.SelectedIndex].FullName;
         }
 
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -99,7 +91,6 @@ namespace oop_winform.View.Tabs
         {
             var newCustomer = new Customer();
             newCustomer.FullName = $"Customer{newCustomer.Id}";
-            _currentCustomer = newCustomer;
             Customers.Add(newCustomer);
             CustomersListBox.Items.Add(newCustomer.FullName);
             CustomersListBox.SelectedIndex = CustomersListBox.Items.Count - 1;
@@ -109,7 +100,7 @@ namespace oop_winform.View.Tabs
         {
             int removeIndex = CustomersListBox.SelectedIndex;
 
-            if (removeIndex > 0)
+            if (removeIndex >= 0)
             {
                 CustomersListBox.Items.RemoveAt(removeIndex);
                 _customers.RemoveAt(removeIndex);
@@ -124,10 +115,8 @@ namespace oop_winform.View.Tabs
 
             try
             {
-                string name = FullNameTextBox.Text;
-                _currentCustomer.FullName = name;
-                Customers[CustomersListBox.SelectedIndex].FullName = FullNameTextBox.Text;
-                CustomersListBox.Items[CustomersListBox.SelectedIndex] = FullNameTextBox.Text;
+                _currentCustomer.FullName = FullNameTextBox.Text;
+                UpdateCustomersListBox();
             }
             catch
             {

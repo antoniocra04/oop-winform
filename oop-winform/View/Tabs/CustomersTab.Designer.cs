@@ -73,12 +73,12 @@
             this.ButtonsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.ButtonsPanel.Controls.Add(this.RemoveButton, 1, 0);
             this.ButtonsPanel.Controls.Add(this.AddButton, 0, 0);
-            this.ButtonsPanel.Location = new System.Drawing.Point(3, 629);
+            this.ButtonsPanel.Location = new System.Drawing.Point(3, 632);
             this.ButtonsPanel.Name = "ButtonsPanel";
             this.ButtonsPanel.RowCount = 1;
             this.ButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.ButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
-            this.ButtonsPanel.Size = new System.Drawing.Size(388, 65);
+            this.ButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
+            this.ButtonsPanel.Size = new System.Drawing.Size(388, 62);
             this.ButtonsPanel.TabIndex = 2;
             // 
             // RemoveButton
@@ -86,7 +86,7 @@
             this.RemoveButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RemoveButton.Location = new System.Drawing.Point(132, 3);
             this.RemoveButton.Name = "RemoveButton";
-            this.RemoveButton.Size = new System.Drawing.Size(123, 59);
+            this.RemoveButton.Size = new System.Drawing.Size(123, 56);
             this.RemoveButton.TabIndex = 1;
             this.RemoveButton.Text = "Remove";
             this.RemoveButton.UseVisualStyleBackColor = true;
@@ -97,7 +97,7 @@
             this.AddButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AddButton.Location = new System.Drawing.Point(3, 3);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(123, 59);
+            this.AddButton.Size = new System.Drawing.Size(123, 56);
             this.AddButton.TabIndex = 0;
             this.AddButton.Text = "Add";
             this.AddButton.UseVisualStyleBackColor = true;
@@ -198,7 +198,7 @@
             // IdTextBox
             // 
             this.IdTextBox.Enabled = false;
-            this.IdTextBox.Location = new System.Drawing.Point(66, 31);
+            this.IdTextBox.Location = new System.Drawing.Point(66, 30);
             this.IdTextBox.Name = "IdTextBox";
             this.IdTextBox.Size = new System.Drawing.Size(100, 20);
             this.IdTextBox.TabIndex = 5;
