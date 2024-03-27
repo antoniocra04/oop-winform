@@ -72,11 +72,11 @@
             this.ButtonPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.ButtonPanel.Controls.Add(this.RemoveButton, 1, 0);
             this.ButtonPanel.Controls.Add(this.AddButton, 0, 0);
-            this.ButtonPanel.Location = new System.Drawing.Point(3, 628);
+            this.ButtonPanel.Location = new System.Drawing.Point(3, 632);
             this.ButtonPanel.Name = "ButtonPanel";
             this.ButtonPanel.RowCount = 1;
             this.ButtonPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.ButtonPanel.Size = new System.Drawing.Size(388, 69);
+            this.ButtonPanel.Size = new System.Drawing.Size(388, 62);
             this.ButtonPanel.TabIndex = 1;
             // 
             // RemoveButton
@@ -84,7 +84,7 @@
             this.RemoveButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RemoveButton.Location = new System.Drawing.Point(132, 3);
             this.RemoveButton.Name = "RemoveButton";
-            this.RemoveButton.Size = new System.Drawing.Size(123, 63);
+            this.RemoveButton.Size = new System.Drawing.Size(123, 56);
             this.RemoveButton.TabIndex = 2;
             this.RemoveButton.Text = "Remove";
             this.RemoveButton.UseVisualStyleBackColor = true;
@@ -95,7 +95,7 @@
             this.AddButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AddButton.Location = new System.Drawing.Point(3, 3);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(123, 63);
+            this.AddButton.Size = new System.Drawing.Size(123, 56);
             this.AddButton.TabIndex = 1;
             this.AddButton.Text = "Add";
             this.AddButton.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ItemsListBox.FormattingEnabled = true;
-            this.ItemsListBox.Location = new System.Drawing.Point(3, 16);
+            this.ItemsListBox.Location = new System.Drawing.Point(3, 22);
             this.ItemsListBox.Name = "ItemsListBox";
             this.ItemsListBox.Size = new System.Drawing.Size(388, 615);
             this.ItemsListBox.TabIndex = 1;
@@ -226,6 +226,7 @@
             this.SelectedItemPanel.Name = "SelectedItemPanel";
             this.SelectedItemPanel.Size = new System.Drawing.Size(594, 694);
             this.SelectedItemPanel.TabIndex = 1;
+            this.SelectedItemPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.SelectedItemPanel_Paint);
             // 
             // MainTableLayoutPanel
             // 

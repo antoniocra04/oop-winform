@@ -129,7 +129,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="View\Icons\main.ico" />
+    <Content Include="View\Icons\main_50x50.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

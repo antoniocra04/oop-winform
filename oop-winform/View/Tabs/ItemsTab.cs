@@ -40,7 +40,7 @@ namespace oop_winform.View.Tabs
                 _items = value;
                 if (value != null)
                 {
-                    UpdateItemsListBox();
+                    UpdateItemsListBox(ItemsListBox.SelectedIndex);
                 }
             }
         }
@@ -48,10 +48,9 @@ namespace oop_winform.View.Tabs
         /// <summary>
         /// Установка корректных данных в тексбоксах.
         /// </summary>
-        /// <param name="selectedIndex">Индекс товара.</param>
-        private void SetTextBoxes(int selectedIndex)
+        private void SetTextBoxes()
         {
-            var isSelectedIndexCorrect = selectedIndex >= 0;
+            var isSelectedIndexCorrect = ItemsListBox.SelectedIndex >= 0;
             CostTextBox.Enabled = isSelectedIndexCorrect;
             NameTextBox.Enabled = isSelectedIndexCorrect;
             DescriptionTextBox.Enabled = isSelectedIndexCorrect;
@@ -65,15 +64,14 @@ namespace oop_winform.View.Tabs
         /// Обновляет данные в ItemList.
         /// </summary>
         /// <param name="selectedIndex">Выбранный элемент.</param>
-        private void UpdateItemsListBox()
+        private void UpdateItemsListBox(int selectedIndex)
         {
-            int index = ItemsListBox.SelectedIndex;
             ItemsListBox.Items.Clear();
             foreach (var item in Items)
             {
                 ItemsListBox.Items.Add(item.Name);
             }
-            ItemsListBox.SelectedIndex = index;
+            ItemsListBox.SelectedIndex = selectedIndex;
         }
 
         private void ItemsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -86,7 +84,7 @@ namespace oop_winform.View.Tabs
             }
 
             _currentItem = _items[index];
-            SetTextBoxes(ItemsListBox.SelectedIndex);
+            SetTextBoxes();
             NameTextBox.Text = _currentItem.Name;
             DescriptionTextBox.Text = _currentItem.Info;
             CostTextBox.Text = _currentItem.Cost.ToString();
@@ -98,8 +96,7 @@ namespace oop_winform.View.Tabs
             newItem.Name = $"Item{newItem.Id}";
             _currentItem = newItem;
             Items.Add(newItem);
-            ItemsListBox.Items.Add(newItem.Name);
-            ItemsListBox.SelectedIndex = ItemsListBox.Items.Count - 1;
+            UpdateItemsListBox(Items.Count - 1);
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
@@ -108,8 +105,8 @@ namespace oop_winform.View.Tabs
 
             if (removeIndex >= 0)
             {
-                ItemsListBox.Items.RemoveAt(removeIndex);
-                _items.RemoveAt(removeIndex);
+                Items.RemoveAt(removeIndex);
+                UpdateItemsListBox(-1);
             }
         }
 
@@ -125,7 +122,7 @@ namespace oop_winform.View.Tabs
                 _currentItem.Cost = float.Parse(cost);
                 _items[ItemsListBox.SelectedIndex].Cost = float.Parse(CostTextBox.Text);
             }
-            catch
+            catch(ArgumentException exception)
             {
                 CostTextBox.BackColor = Constants.ErrorColor;
                 return;
@@ -143,9 +140,9 @@ namespace oop_winform.View.Tabs
             try
             {
                 _currentItem.Name = NameTextBox.Text;
-                UpdateItemsListBox();
+                UpdateItemsListBox(ItemsListBox.SelectedIndex);
             }
-            catch
+            catch(ArgumentException exception)
             {
                 CostTextBox.BackColor = Constants.ErrorColor;
                 return;
@@ -166,13 +163,18 @@ namespace oop_winform.View.Tabs
                 _currentItem.Info = info;
                 _items[ItemsListBox.SelectedIndex].Info = DescriptionTextBox.Text;
             }
-            catch
+            catch(ArgumentException exception)
             {
                 CostTextBox.BackColor = Constants.ErrorColor;
                 return;
             }
 
             CostTextBox.BackColor = Constants.CorrectColor;
+        }
+
+        private void SelectedItemPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
