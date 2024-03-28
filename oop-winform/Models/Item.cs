@@ -105,7 +105,7 @@ namespace oop_winform.Models
             }
             set
             {
-                ValueValidator.FloatLimitCheck(value, 0, 100000, nameof(_cost));
+                ValueValidator.FloatLimitCheck(value, 1, 100000, nameof(_cost));
                 _cost = value;
             }
         }

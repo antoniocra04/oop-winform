@@ -15,6 +15,6 @@ namespace oop_winform.Services
         /// <summary>
         /// Цвет для полей с неверными данными.
         /// </summary>
-        public static readonly Color ErrorColor = Color.Red;
+        public static readonly Color ErrorColor = Color.LightPink;
     }
 }

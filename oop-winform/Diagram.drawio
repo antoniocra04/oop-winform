@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-03-19T13:00:14.026Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0" etag="QNcF4jquPsqO1d5CvUBB" version="24.0.4" type="device">
+<mxfile host="app.diagrams.net" modified="2024-03-28T11:44:53.754Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0" etag="p7QqTRgrVjOpEw9s5l6Q" version="24.1.0" type="device">
   <diagram name="Страница — 1" id="dKUkYGr1s_UcH-8YKei1">
     <mxGraphModel dx="1354" dy="616" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -41,18 +41,18 @@
           <mxGeometry y="72" width="160" height="28" as="geometry" />
         </mxCell>
         <mxCell id="oU2BkXmcU1scd5kveSyB-17" value="&amp;lt;&amp;lt;static&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ValueValidator&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="40" y="470" width="360" height="60" as="geometry" />
+          <mxGeometry x="20" y="470" width="420" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="oU2BkXmcU1scd5kveSyB-18" value="+ StringLengthCheck(string value, int maxLength, string property)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="oU2BkXmcU1scd5kveSyB-17" vertex="1">
-          <mxGeometry y="30" width="360" height="30" as="geometry" />
+        <mxCell id="oU2BkXmcU1scd5kveSyB-18" value="&lt;div&gt;+ StringLengthCheck(string value, int maxLength, string property): void&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ FloatLimitCheck(float value, float min, float max, string propertyName): void&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="oU2BkXmcU1scd5kveSyB-17" vertex="1">
+          <mxGeometry y="30" width="420" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="oU2BkXmcU1scd5kveSyB-23" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=0.191;entryY=0.022;entryDx=0;entryDy=0;exitX=0.335;exitY=1.004;exitDx=0;exitDy=0;exitPerimeter=0;entryPerimeter=0;" parent="1" source="oU2BkXmcU1scd5kveSyB-4" target="oU2BkXmcU1scd5kveSyB-17" edge="1">
+        <mxCell id="oU2BkXmcU1scd5kveSyB-23" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.335;exitY=1.004;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="oU2BkXmcU1scd5kveSyB-4" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="130" y="300" as="sourcePoint" />
-            <mxPoint x="290" y="300" as="targetPoint" />
+            <mxPoint x="107" y="460" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="oU2BkXmcU1scd5kveSyB-24" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.397;exitY=1.003;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.871;entryY=0.022;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="oU2BkXmcU1scd5kveSyB-8" target="oU2BkXmcU1scd5kveSyB-17" edge="1">
+        <mxCell id="oU2BkXmcU1scd5kveSyB-24" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.397;exitY=1.003;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.793;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="oU2BkXmcU1scd5kveSyB-8" target="oU2BkXmcU1scd5kveSyB-17" edge="1">
           <mxGeometry x="-0.4631" width="160" relative="1" as="geometry">
             <mxPoint x="330" y="380" as="sourcePoint" />
             <mxPoint x="350" y="470" as="targetPoint" />

@@ -50,14 +50,25 @@ namespace oop_winform.View.Tabs
         /// </summary>
         private void SetTextBoxes()
         {
-            var isSelectedIndexCorrect = ItemsListBox.SelectedIndex >= 0;
+            var isSelectedIndexCorrect = ItemsListBox.SelectedIndex != -1;
             CostTextBox.Enabled = isSelectedIndexCorrect;
             NameTextBox.Enabled = isSelectedIndexCorrect;
             DescriptionTextBox.Enabled = isSelectedIndexCorrect;
-            NameTextBox.Text = Items[ItemsListBox.SelectedIndex].Name;
-            CostTextBox.Text = Items[ItemsListBox.SelectedIndex].Cost.ToString();
-            IdTextBox.Text = Items[ItemsListBox.SelectedIndex].Id.ToString();
-            DescriptionTextBox.Text = Items[ItemsListBox.SelectedIndex].Info;
+
+            if (isSelectedIndexCorrect)
+            {
+                NameTextBox.Text = Items[ItemsListBox.SelectedIndex].Name;
+                CostTextBox.Text = Items[ItemsListBox.SelectedIndex].Cost.ToString();
+                IdTextBox.Text = Items[ItemsListBox.SelectedIndex].Id.ToString();
+                DescriptionTextBox.Text = Items[ItemsListBox.SelectedIndex].Info;
+            }
+            else
+            {
+                NameTextBox.Text = "";
+                CostTextBox.Text = "";
+                IdTextBox.Text = "";
+                DescriptionTextBox.Text = "";
+            }
         }
 
         /// <summary>
@@ -92,9 +103,7 @@ namespace oop_winform.View.Tabs
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            var newItem = new Item();
-            newItem.Name = $"Item{newItem.Id}";
-            _currentItem = newItem;
+            var newItem = new Item("Item", "info", 1);
             Items.Add(newItem);
             UpdateItemsListBox(Items.Count - 1);
         }
@@ -108,6 +117,8 @@ namespace oop_winform.View.Tabs
                 Items.RemoveAt(removeIndex);
                 UpdateItemsListBox(-1);
             }
+
+            SetTextBoxes();
         }
 
         private void CostTextBox_TextChanged(object sender, EventArgs e)
@@ -119,8 +130,16 @@ namespace oop_winform.View.Tabs
             try
             {
                 string cost = CostTextBox.Text;
-                _currentItem.Cost = float.Parse(cost);
-                _items[ItemsListBox.SelectedIndex].Cost = float.Parse(CostTextBox.Text);
+                if(cost.Length == 0 ) 
+                {
+                    _currentItem.Cost = 0;
+                }
+                else
+                {
+                    _currentItem.Cost = float.Parse(cost);
+                    UpdateItemsListBox(ItemsListBox.SelectedIndex);
+                }
+
             }
             catch(ArgumentException exception)
             {
@@ -144,7 +163,7 @@ namespace oop_winform.View.Tabs
             }
             catch(ArgumentException exception)
             {
-                CostTextBox.BackColor = Constants.ErrorColor;
+                NameTextBox.BackColor = Constants.ErrorColor;
                 return;
             }
 
@@ -161,20 +180,15 @@ namespace oop_winform.View.Tabs
             {
                 string info = DescriptionTextBox.Text;
                 _currentItem.Info = info;
-                _items[ItemsListBox.SelectedIndex].Info = DescriptionTextBox.Text;
+                UpdateItemsListBox(ItemsListBox.SelectedIndex);
             }
             catch(ArgumentException exception)
             {
-                CostTextBox.BackColor = Constants.ErrorColor;
+                DescriptionTextBox.BackColor = Constants.ErrorColor;
                 return;
             }
 
             CostTextBox.BackColor = Constants.CorrectColor;
-        }
-
-        private void SelectedItemPanel_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

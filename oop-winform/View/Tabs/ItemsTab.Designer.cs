@@ -109,7 +109,7 @@
             this.ItemsListBox.FormattingEnabled = true;
             this.ItemsListBox.Location = new System.Drawing.Point(3, 22);
             this.ItemsListBox.Name = "ItemsListBox";
-            this.ItemsListBox.Size = new System.Drawing.Size(388, 615);
+            this.ItemsListBox.Size = new System.Drawing.Size(391, 615);
             this.ItemsListBox.TabIndex = 1;
             this.ItemsListBox.SelectedIndexChanged += new System.EventHandler(this.ItemsListBox_SelectedIndexChanged);
             // 
@@ -117,7 +117,7 @@
             // 
             this.ItemsLabel.AutoSize = true;
             this.ItemsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            this.ItemsLabel.Location = new System.Drawing.Point(3, 0);
+            this.ItemsLabel.Location = new System.Drawing.Point(3, 3);
             this.ItemsLabel.Name = "ItemsLabel";
             this.ItemsLabel.Size = new System.Drawing.Size(37, 13);
             this.ItemsLabel.TabIndex = 0;
@@ -127,7 +127,7 @@
             // 
             this.SelectedItemLabel.AutoSize = true;
             this.SelectedItemLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            this.SelectedItemLabel.Location = new System.Drawing.Point(3, 0);
+            this.SelectedItemLabel.Location = new System.Drawing.Point(10, 3);
             this.SelectedItemLabel.Name = "SelectedItemLabel";
             this.SelectedItemLabel.Size = new System.Drawing.Size(85, 13);
             this.SelectedItemLabel.TabIndex = 0;
@@ -136,7 +136,7 @@
             // IdLabel
             // 
             this.IdLabel.AutoSize = true;
-            this.IdLabel.Location = new System.Drawing.Point(3, 38);
+            this.IdLabel.Location = new System.Drawing.Point(10, 38);
             this.IdLabel.Name = "IdLabel";
             this.IdLabel.Size = new System.Drawing.Size(21, 13);
             this.IdLabel.TabIndex = 1;
@@ -145,7 +145,7 @@
             // CostLabel
             // 
             this.CostLabel.AutoSize = true;
-            this.CostLabel.Location = new System.Drawing.Point(3, 62);
+            this.CostLabel.Location = new System.Drawing.Point(10, 67);
             this.CostLabel.Name = "CostLabel";
             this.CostLabel.Size = new System.Drawing.Size(31, 13);
             this.CostLabel.TabIndex = 2;
@@ -154,7 +154,7 @@
             // NameLabel
             // 
             this.NameLabel.AutoSize = true;
-            this.NameLabel.Location = new System.Drawing.Point(3, 91);
+            this.NameLabel.Location = new System.Drawing.Point(10, 96);
             this.NameLabel.Name = "NameLabel";
             this.NameLabel.Size = new System.Drawing.Size(38, 13);
             this.NameLabel.TabIndex = 3;
@@ -163,7 +163,7 @@
             // DiscriptionLabel
             // 
             this.DiscriptionLabel.AutoSize = true;
-            this.DiscriptionLabel.Location = new System.Drawing.Point(3, 216);
+            this.DiscriptionLabel.Location = new System.Drawing.Point(10, 220);
             this.DiscriptionLabel.Name = "DiscriptionLabel";
             this.DiscriptionLabel.Size = new System.Drawing.Size(63, 13);
             this.DiscriptionLabel.TabIndex = 4;
@@ -172,7 +172,7 @@
             // IdTextBox
             // 
             this.IdTextBox.Enabled = false;
-            this.IdTextBox.Location = new System.Drawing.Point(45, 34);
+            this.IdTextBox.Location = new System.Drawing.Point(56, 34);
             this.IdTextBox.Name = "IdTextBox";
             this.IdTextBox.Size = new System.Drawing.Size(100, 20);
             this.IdTextBox.TabIndex = 5;
@@ -180,7 +180,7 @@
             // CostTextBox
             // 
             this.CostTextBox.Enabled = false;
-            this.CostTextBox.Location = new System.Drawing.Point(45, 58);
+            this.CostTextBox.Location = new System.Drawing.Point(56, 63);
             this.CostTextBox.Name = "CostTextBox";
             this.CostTextBox.Size = new System.Drawing.Size(100, 20);
             this.CostTextBox.TabIndex = 6;
@@ -191,10 +191,10 @@
             this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.NameTextBox.Enabled = false;
-            this.NameTextBox.Location = new System.Drawing.Point(3, 107);
+            this.NameTextBox.Location = new System.Drawing.Point(10, 112);
             this.NameTextBox.Multiline = true;
             this.NameTextBox.Name = "NameTextBox";
-            this.NameTextBox.Size = new System.Drawing.Size(588, 94);
+            this.NameTextBox.Size = new System.Drawing.Size(577, 94);
             this.NameTextBox.TabIndex = 7;
             this.NameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
             // 
@@ -203,10 +203,10 @@
             this.DescriptionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DescriptionTextBox.Enabled = false;
-            this.DescriptionTextBox.Location = new System.Drawing.Point(3, 232);
+            this.DescriptionTextBox.Location = new System.Drawing.Point(10, 236);
             this.DescriptionTextBox.Multiline = true;
             this.DescriptionTextBox.Name = "DescriptionTextBox";
-            this.DescriptionTextBox.Size = new System.Drawing.Size(588, 157);
+            this.DescriptionTextBox.Size = new System.Drawing.Size(577, 157);
             this.DescriptionTextBox.TabIndex = 8;
             this.DescriptionTextBox.TextChanged += new System.EventHandler(this.DescriptionTextBox_TextChanged);
             // 
@@ -226,7 +226,6 @@
             this.SelectedItemPanel.Name = "SelectedItemPanel";
             this.SelectedItemPanel.Size = new System.Drawing.Size(594, 694);
             this.SelectedItemPanel.TabIndex = 1;
-            this.SelectedItemPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.SelectedItemPanel_Paint);
             // 
             // MainTableLayoutPanel
             // 

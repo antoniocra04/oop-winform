@@ -62,14 +62,23 @@ namespace oop_winform.View.Tabs
         /// <summary>
         /// Установка корректных данных в тексбоксах.
         /// </summary>
-        /// <param name="selectedIndex">Индекс покупателя.</param>
         private void SetTextBoxes()
         {
-            var isSelectedIndexCorrect = CustomersListBox.SelectedIndex >= 0;
+            var isSelectedIndexCorrect = CustomersListBox.SelectedIndex != -1;
             FullNameTextBox.Enabled = isSelectedIndexCorrect;
             AddressTextBox.Enabled = isSelectedIndexCorrect;
-            IdTextBox.Text = Customers[CustomersListBox.SelectedIndex].Id.ToString();
-            FullNameTextBox.Text = Customers[CustomersListBox.SelectedIndex].FullName;
+            if (isSelectedIndexCorrect)
+            {
+                IdTextBox.Text = Customers[CustomersListBox.SelectedIndex].Id.ToString();
+                FullNameTextBox.Text = Customers[CustomersListBox.SelectedIndex].FullName;
+                AddressTextBox.Text = Customers[CustomersListBox.SelectedIndex].Address;
+            }
+            else
+            {
+                IdTextBox.Text = "";
+                FullNameTextBox.Text = "";
+                AddressTextBox.Text = "";
+            }
         }
 
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -89,8 +98,7 @@ namespace oop_winform.View.Tabs
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            var newCustomer = new Customer();
-            newCustomer.FullName = $"Customer{newCustomer.Id}";
+            var newCustomer = new Customer("Customer", "address");
             Customers.Add(newCustomer);
             UpdateCustomersListBox(Customers.Count - 1);
         }
@@ -104,6 +112,8 @@ namespace oop_winform.View.Tabs
                 Customers.RemoveAt(removeIndex);
                 UpdateCustomersListBox(-1);
             }
+
+            SetTextBoxes();
         }
 
         private void FullNameTextBox_TextChanged(object sender, EventArgs e)
