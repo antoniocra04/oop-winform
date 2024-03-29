@@ -69,9 +69,8 @@ namespace oop_winform.View.Tabs
             AddressTextBox.Enabled = isSelectedIndexCorrect;
             if (isSelectedIndexCorrect)
             {
-                IdTextBox.Text = Customers[CustomersListBox.SelectedIndex].Id.ToString();
-                FullNameTextBox.Text = Customers[CustomersListBox.SelectedIndex].FullName;
-                AddressTextBox.Text = Customers[CustomersListBox.SelectedIndex].Address;
+                _currentCustomer.FullName = Customers[CustomersListBox.SelectedIndex].FullName;
+                _currentCustomer.Address = Customers[CustomersListBox.SelectedIndex].Address;
             }
             else
             {

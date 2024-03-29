@@ -57,10 +57,9 @@ namespace oop_winform.View.Tabs
 
             if (isSelectedIndexCorrect)
             {
-                NameTextBox.Text = Items[ItemsListBox.SelectedIndex].Name;
-                CostTextBox.Text = Items[ItemsListBox.SelectedIndex].Cost.ToString();
-                IdTextBox.Text = Items[ItemsListBox.SelectedIndex].Id.ToString();
-                DescriptionTextBox.Text = Items[ItemsListBox.SelectedIndex].Info;
+                _currentItem.Name = Items[ItemsListBox.SelectedIndex].Name;
+                _currentItem.Cost = Items[ItemsListBox.SelectedIndex].Cost;
+                _currentItem.Info = Items[ItemsListBox.SelectedIndex].Info;
             }
             else
             {
@@ -130,18 +129,16 @@ namespace oop_winform.View.Tabs
             try
             {
                 string cost = CostTextBox.Text;
-                if(cost.Length == 0 ) 
-                {
-                    _currentItem.Cost = 0;
-                }
-                else
-                {
-                    _currentItem.Cost = float.Parse(cost);
-                    UpdateItemsListBox(ItemsListBox.SelectedIndex);
-                }
+                _currentItem.Cost = float.Parse(cost);
+                UpdateItemsListBox(ItemsListBox.SelectedIndex);
 
             }
             catch(ArgumentException exception)
+            {
+                CostTextBox.BackColor = Constants.ErrorColor;
+                return;
+            }
+            catch(Exception exception)
             {
                 CostTextBox.BackColor = Constants.ErrorColor;
                 return;
@@ -167,7 +164,7 @@ namespace oop_winform.View.Tabs
                 return;
             }
 
-            CostTextBox.BackColor = Constants.CorrectColor;
+            NameTextBox.BackColor = Constants.CorrectColor;
         }
 
         private void DescriptionTextBox_TextChanged(object sender, EventArgs e)
@@ -176,19 +173,9 @@ namespace oop_winform.View.Tabs
 
             if (index == -1) return;
 
-            try
-            {
-                string info = DescriptionTextBox.Text;
-                _currentItem.Info = info;
-                UpdateItemsListBox(ItemsListBox.SelectedIndex);
-            }
-            catch(ArgumentException exception)
-            {
-                DescriptionTextBox.BackColor = Constants.ErrorColor;
-                return;
-            }
-
-            CostTextBox.BackColor = Constants.CorrectColor;
+            string info = DescriptionTextBox.Text;
+            _currentItem.Info = info;
+            UpdateItemsListBox(ItemsListBox.SelectedIndex);
         }
     }
 }

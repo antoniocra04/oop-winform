@@ -25,6 +25,9 @@ namespace oop_winform.Models
         /// </summary>
         private string _address;
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Customer"/>.
+        /// </summary>
         public Customer()
         {
             Address = "";
