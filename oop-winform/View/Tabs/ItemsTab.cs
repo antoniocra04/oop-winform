@@ -48,7 +48,7 @@ namespace oop_winform.View.Tabs
         /// <summary>
         /// Установка корректных данных в тексбоксах.
         /// </summary>
-        private void SetTextBoxes()
+        private void SetValuesTextBoxes()
         {
             var isSelectedIndexCorrect = ItemsListBox.SelectedIndex != -1;
             CostTextBox.Enabled = isSelectedIndexCorrect;
@@ -57,9 +57,10 @@ namespace oop_winform.View.Tabs
 
             if (isSelectedIndexCorrect)
             {
-                _currentItem.Name = Items[ItemsListBox.SelectedIndex].Name;
-                _currentItem.Cost = Items[ItemsListBox.SelectedIndex].Cost;
-                _currentItem.Info = Items[ItemsListBox.SelectedIndex].Info;
+                NameTextBox.Text = _currentItem.Name;
+                CostTextBox.Text = _currentItem.Cost.ToString();
+                IdTextBox.Text = _currentItem.Id.ToString();
+                DescriptionTextBox.Text = _currentItem.Info;
             }
             else
             {
@@ -94,10 +95,7 @@ namespace oop_winform.View.Tabs
             }
 
             _currentItem = _items[index];
-            SetTextBoxes();
-            NameTextBox.Text = _currentItem.Name;
-            DescriptionTextBox.Text = _currentItem.Info;
-            CostTextBox.Text = _currentItem.Cost.ToString();
+            SetValuesTextBoxes();
         }
 
         private void AddButton_Click(object sender, EventArgs e)
@@ -117,7 +115,7 @@ namespace oop_winform.View.Tabs
                 UpdateItemsListBox(-1);
             }
 
-            SetTextBoxes();
+            SetValuesTextBoxes();
         }
 
         private void CostTextBox_TextChanged(object sender, EventArgs e)
@@ -173,9 +171,19 @@ namespace oop_winform.View.Tabs
 
             if (index == -1) return;
 
-            string info = DescriptionTextBox.Text;
-            _currentItem.Info = info;
-            UpdateItemsListBox(ItemsListBox.SelectedIndex);
+            try
+            {
+                string info = DescriptionTextBox.Text;
+                _currentItem.Info = info;
+                UpdateItemsListBox(ItemsListBox.SelectedIndex);
+            }
+            catch (ArgumentException exception)
+            {
+                DescriptionTextBox.BackColor = Constants.ErrorColor;
+                return;
+            }
+
+            DescriptionTextBox.BackColor = Constants.CorrectColor;
         }
     }
 }

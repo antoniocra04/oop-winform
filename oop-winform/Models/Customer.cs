@@ -67,7 +67,7 @@ namespace oop_winform.Models
             }
             set
             {
-                ValueValidator.StringLengthCheck(value, 200, nameof(_fullname));
+                ValueValidator.StringLengthCheck(value, 200, 1, nameof(_fullname));
                 _fullname = value;
             }
         }
@@ -83,7 +83,7 @@ namespace oop_winform.Models
             }
             set
             {
-                ValueValidator.StringLengthCheck(value, 500, nameof(_address));
+                ValueValidator.StringLengthCheck(value, 500, 1, nameof(_address));
                 _address = value;
             }
         }
