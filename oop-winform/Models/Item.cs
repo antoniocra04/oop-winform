@@ -36,6 +36,7 @@ namespace oop_winform.Models
             Name = "";
             Info = "";
             Cost = 0;
+            Category = Category.Food;
         }
 
         /// <summary>
@@ -44,11 +45,12 @@ namespace oop_winform.Models
         /// <param name="name">Имя продукта.</param>
         /// <param name="info">Информация продукта.</param>
         /// <param name="cost">Цена продукта.</param>
-        public Item(string name, string info, float cost)
+        public Item(string name, string info, float cost, Category category)
         {
             Name = name;
             Info = info;
             Cost = cost;
+            Category = category;
         }
 
         /// <summary>
@@ -108,5 +110,10 @@ namespace oop_winform.Models
                 _cost = value;
             }
         }
+
+        /// <summary>
+        /// Возвращает и задает категорию товара <see cref="Item"/>.
+        /// </summary>
+        public Category Category { get; set; }
     }
 }

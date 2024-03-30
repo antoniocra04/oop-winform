@@ -43,5 +43,20 @@ namespace oop_winform.Services
                     );
             }
         }
+
+        /// <summary>
+        /// Проверка, числа на количество цифр.
+        /// </summary>
+        /// <param name="value">Входное значение.</param>
+        /// <param name="digit">Число разрядов.</param>
+        /// <param name="propertyName">Имя свойства класса.</param>
+        public static void CheckDigitsInInt(int value, int digit, string propertyName)
+        {
+            if (value.ToString().Length != digit)
+            {
+                throw new
+                    ArgumentException($"{propertyName} expect to contain {digit} digits.");
+            }
+        }
     }
 }
