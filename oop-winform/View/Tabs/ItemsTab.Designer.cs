@@ -45,6 +45,8 @@
             this.DescriptionTextBox = new System.Windows.Forms.TextBox();
             this.SelectedItemPanel = new System.Windows.Forms.Panel();
             this.MainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.CategoryComboBox = new System.Windows.Forms.ComboBox();
+            this.CategoryLabel = new System.Windows.Forms.Label();
             this.ItemsListPanel.SuspendLayout();
             this.ButtonPanel.SuspendLayout();
             this.SelectedItemPanel.SuspendLayout();
@@ -154,7 +156,7 @@
             // NameLabel
             // 
             this.NameLabel.AutoSize = true;
-            this.NameLabel.Location = new System.Drawing.Point(10, 102);
+            this.NameLabel.Location = new System.Drawing.Point(10, 145);
             this.NameLabel.Name = "NameLabel";
             this.NameLabel.Size = new System.Drawing.Size(38, 13);
             this.NameLabel.TabIndex = 3;
@@ -163,7 +165,7 @@
             // DiscriptionLabel
             // 
             this.DiscriptionLabel.AutoSize = true;
-            this.DiscriptionLabel.Location = new System.Drawing.Point(10, 226);
+            this.DiscriptionLabel.Location = new System.Drawing.Point(10, 269);
             this.DiscriptionLabel.Name = "DiscriptionLabel";
             this.DiscriptionLabel.Size = new System.Drawing.Size(63, 13);
             this.DiscriptionLabel.TabIndex = 4;
@@ -172,7 +174,7 @@
             // IdTextBox
             // 
             this.IdTextBox.Enabled = false;
-            this.IdTextBox.Location = new System.Drawing.Point(56, 34);
+            this.IdTextBox.Location = new System.Drawing.Point(81, 34);
             this.IdTextBox.Name = "IdTextBox";
             this.IdTextBox.Size = new System.Drawing.Size(100, 20);
             this.IdTextBox.TabIndex = 5;
@@ -180,7 +182,7 @@
             // CostTextBox
             // 
             this.CostTextBox.Enabled = false;
-            this.CostTextBox.Location = new System.Drawing.Point(56, 68);
+            this.CostTextBox.Location = new System.Drawing.Point(81, 68);
             this.CostTextBox.Name = "CostTextBox";
             this.CostTextBox.Size = new System.Drawing.Size(100, 20);
             this.CostTextBox.TabIndex = 6;
@@ -191,7 +193,7 @@
             this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.NameTextBox.Enabled = false;
-            this.NameTextBox.Location = new System.Drawing.Point(10, 118);
+            this.NameTextBox.Location = new System.Drawing.Point(10, 161);
             this.NameTextBox.Multiline = true;
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.Size = new System.Drawing.Size(577, 94);
@@ -203,7 +205,7 @@
             this.DescriptionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DescriptionTextBox.Enabled = false;
-            this.DescriptionTextBox.Location = new System.Drawing.Point(10, 242);
+            this.DescriptionTextBox.Location = new System.Drawing.Point(10, 285);
             this.DescriptionTextBox.Multiline = true;
             this.DescriptionTextBox.Name = "DescriptionTextBox";
             this.DescriptionTextBox.Size = new System.Drawing.Size(577, 157);
@@ -212,6 +214,8 @@
             // 
             // SelectedItemPanel
             // 
+            this.SelectedItemPanel.Controls.Add(this.CategoryComboBox);
+            this.SelectedItemPanel.Controls.Add(this.CategoryLabel);
             this.SelectedItemPanel.Controls.Add(this.DescriptionTextBox);
             this.SelectedItemPanel.Controls.Add(this.NameTextBox);
             this.SelectedItemPanel.Controls.Add(this.CostTextBox);
@@ -241,6 +245,25 @@
             this.MainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.MainTableLayoutPanel.Size = new System.Drawing.Size(1000, 700);
             this.MainTableLayoutPanel.TabIndex = 2;
+            // 
+            // CategoryComboBox
+            // 
+            this.CategoryComboBox.Enabled = false;
+            this.CategoryComboBox.FormattingEnabled = true;
+            this.CategoryComboBox.Location = new System.Drawing.Point(81, 105);
+            this.CategoryComboBox.Name = "CategoryComboBox";
+            this.CategoryComboBox.Size = new System.Drawing.Size(121, 21);
+            this.CategoryComboBox.TabIndex = 18;
+            this.CategoryComboBox.TextChanged += new System.EventHandler(this.CategoryComboBox_TextChanged);
+            // 
+            // CategoryLabel
+            // 
+            this.CategoryLabel.AutoSize = true;
+            this.CategoryLabel.Location = new System.Drawing.Point(11, 108);
+            this.CategoryLabel.Name = "CategoryLabel";
+            this.CategoryLabel.Size = new System.Drawing.Size(52, 13);
+            this.CategoryLabel.TabIndex = 17;
+            this.CategoryLabel.Text = "Category:";
             // 
             // ItemsTab
             // 
@@ -280,5 +303,7 @@
         private System.Windows.Forms.TextBox DescriptionTextBox;
         private System.Windows.Forms.Panel SelectedItemPanel;
         private System.Windows.Forms.TableLayoutPanel MainTableLayoutPanel;
+        private System.Windows.Forms.ComboBox CategoryComboBox;
+        private System.Windows.Forms.Label CategoryLabel;
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace oop_winform.Models
 {
-    internal class Address
+    public class Address
     {
         /// <summary>
         /// Почтовый индекс.
@@ -44,7 +44,7 @@ namespace oop_winform.Models
         /// </summary>
         public Address()
         {
-            Index = 000000;
+            Index = 999999;
             Country = "";
             City = "";
             Street = "";

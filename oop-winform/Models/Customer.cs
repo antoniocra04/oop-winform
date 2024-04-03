@@ -21,16 +21,11 @@ namespace oop_winform.Models
         private string _fullname;
 
         /// <summary>
-        /// Адрес покупателя.
-        /// </summary>
-        private string _address;
-
-        /// <summary>
         /// Создаёт экземпляр класса <see cref="Customer"/>.
         /// </summary>
         public Customer()
         {
-            Address = "";
+            Address = new Address();
             FullName = "";
         }
 
@@ -39,7 +34,7 @@ namespace oop_winform.Models
         /// </summary>
         /// <param name="fullname">Полное имя. Должно быть не более 200 символов.</param>
         /// <param name="address">Адрес. Должен быть не более 500 символов.</param>
-        public Customer(string fullname, string address)
+        public Customer(string fullname, Address address)
         {
             FullName = fullname;
             Address = address;
@@ -75,17 +70,6 @@ namespace oop_winform.Models
         /// <summary>
         /// Возвращает и задает адрес покупателя.
         /// </summary>
-        public string Address
-        {
-            get
-            {
-                return _address;
-            }
-            set
-            {
-                ValueValidator.StringLengthCheck(value, 500, nameof(_address));
-                _address = value;
-            }
-        }
+        public Address Address { get; set; }
     }
 }

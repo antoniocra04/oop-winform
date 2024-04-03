@@ -1,5 +1,6 @@
 ﻿using oop_winform.Models;
 using oop_winform.Services;
+using oop_winform.View.Controls;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -66,7 +67,6 @@ namespace oop_winform.View.Tabs
         {
             var isSelectedIndexCorrect = CustomersListBox.SelectedIndex != -1;
             FullNameTextBox.Enabled = isSelectedIndexCorrect;
-            AddressTextBox.Enabled = isSelectedIndexCorrect;
             if (isSelectedIndexCorrect)
             {
                 _currentCustomer.FullName = Customers[CustomersListBox.SelectedIndex].FullName;
@@ -76,7 +76,7 @@ namespace oop_winform.View.Tabs
             {
                 IdTextBox.Text = "";
                 FullNameTextBox.Text = "";
-                AddressTextBox.Text = "";
+                addressControl1.Address = null;
             }
         }
 
@@ -92,12 +92,12 @@ namespace oop_winform.View.Tabs
             _currentCustomer = _customers[index];
             SetTextBoxes();
             FullNameTextBox.Text = _currentCustomer.FullName;
-            AddressTextBox.Text = _currentCustomer.Address;
+            addressControl1.Address = _currentCustomer.Address;
         }
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            var newCustomer = new Customer("Customer", "address");
+            var newCustomer = new Customer("Customer", new Address());
             Customers.Add(newCustomer);
             UpdateCustomersListBox(Customers.Count - 1);
         }
@@ -133,27 +133,6 @@ namespace oop_winform.View.Tabs
             }
 
             FullNameTextBox.BackColor = Constants.CorrectColor;
-        }
-
-        private void AddressTextBox_TextChanged(object sender, EventArgs e)
-        {
-            int index = CustomersListBox.SelectedIndex;
-
-            if (index == -1) return;
-
-            try
-            {
-                string address = AddressTextBox.Text;
-                _currentCustomer.Address = address;
-                Customers[CustomersListBox.SelectedIndex].Address = AddressTextBox.Text;
-            }
-            catch(ArgumentException exception)
-            {
-                AddressTextBox.BackColor = Constants.ErrorColor;
-                return;
-            }
-
-            AddressTextBox.BackColor = Constants.CorrectColor;
         }
     }
 }

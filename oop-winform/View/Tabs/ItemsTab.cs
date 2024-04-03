@@ -27,6 +27,7 @@ namespace oop_winform.View.Tabs
         public ItemsTab()
         {
             InitializeComponent();
+            CategoryComboBox.DataSource = Enum.GetValues(typeof(Category));
         }
 
         /// <summary>
@@ -54,12 +55,14 @@ namespace oop_winform.View.Tabs
             CostTextBox.Enabled = isSelectedIndexCorrect;
             NameTextBox.Enabled = isSelectedIndexCorrect;
             DescriptionTextBox.Enabled = isSelectedIndexCorrect;
+            CategoryComboBox.Enabled = isSelectedIndexCorrect;
 
             if (isSelectedIndexCorrect)
             {
                 _currentItem.Name = Items[ItemsListBox.SelectedIndex].Name;
                 _currentItem.Cost = Items[ItemsListBox.SelectedIndex].Cost;
                 _currentItem.Info = Items[ItemsListBox.SelectedIndex].Info;
+                _currentItem.Category = Items[ItemsListBox.SelectedIndex].Category;
             }
             else
             {
@@ -67,6 +70,7 @@ namespace oop_winform.View.Tabs
                 CostTextBox.Text = "";
                 IdTextBox.Text = "";
                 DescriptionTextBox.Text = "";
+                CategoryComboBox.Text = "";
             }
         }
 
@@ -98,11 +102,12 @@ namespace oop_winform.View.Tabs
             NameTextBox.Text = _currentItem.Name;
             DescriptionTextBox.Text = _currentItem.Info;
             CostTextBox.Text = _currentItem.Cost.ToString();
+            CategoryComboBox.Text = _currentItem.Category.ToString();
         }
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            var newItem = new Item("Item", "info", 1);
+            var newItem = new Item("Item", "info", 1, Category.Cloths);
             Items.Add(newItem);
             UpdateItemsListBox(Items.Count - 1);
         }
@@ -176,6 +181,17 @@ namespace oop_winform.View.Tabs
             string info = DescriptionTextBox.Text;
             _currentItem.Info = info;
             UpdateItemsListBox(ItemsListBox.SelectedIndex);
+        }
+
+        private void CategoryComboBox_TextChanged(object sender, EventArgs e)
+        {
+            int index = ItemsListBox.SelectedIndex;
+
+            if (index == -1) return;
+
+            _currentItem.Category = (Category) CategoryComboBox.SelectedItem;
+            UpdateItemsListBox(ItemsListBox.SelectedIndex);
+
         }
     }
 }

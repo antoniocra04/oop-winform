@@ -15,7 +15,7 @@ namespace oop_winform.Services
         /// <param name="property">Имя свойства класса.</param>
         public static void StringLengthCheck(string value, int maxLength, string property)
         {
-            if (value.Length > maxLength || value.Length < 1)
+            if (value.Length > maxLength || value.Length < 0)
             {
                 throw new
                     ArgumentException($"{property} expect to be less than {maxLength} symbols.");
