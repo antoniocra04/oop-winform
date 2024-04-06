@@ -63,14 +63,14 @@ namespace oop_winform.View.Tabs
         /// <summary>
         /// Установка корректных данных в тексбоксах.
         /// </summary>
-        private void SetTextBoxes()
+        private void SetValuesTextBoxes()
         {
             var isSelectedIndexCorrect = CustomersListBox.SelectedIndex != -1;
             FullNameTextBox.Enabled = isSelectedIndexCorrect;
             if (isSelectedIndexCorrect)
             {
-                _currentCustomer.FullName = Customers[CustomersListBox.SelectedIndex].FullName;
-                _currentCustomer.Address = Customers[CustomersListBox.SelectedIndex].Address;
+                IdTextBox.Text = _currentCustomer.Id.ToString();
+                FullNameTextBox.Text = _currentCustomer.FullName;
             }
             else
             {
@@ -90,7 +90,7 @@ namespace oop_winform.View.Tabs
             }
 
             _currentCustomer = _customers[index];
-            SetTextBoxes();
+            SetValuesTextBoxes();
             FullNameTextBox.Text = _currentCustomer.FullName;
             addressControl1.Address = _currentCustomer.Address;
         }
@@ -112,7 +112,7 @@ namespace oop_winform.View.Tabs
                 UpdateCustomersListBox(-1);
             }
 
-            SetTextBoxes();
+            SetValuesTextBoxes();
         }
 
         private void FullNameTextBox_TextChanged(object sender, EventArgs e)

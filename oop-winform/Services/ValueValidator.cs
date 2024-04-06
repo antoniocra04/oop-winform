@@ -13,9 +13,9 @@ namespace oop_winform.Services
         /// <param name="value">Строка.</param>
         /// <param name="maxLength">Максимальная длина.</param>
         /// <param name="property">Имя свойства класса.</param>
-        public static void StringLengthCheck(string value, int maxLength, string property)
+        public static void StringLengthCheck(string value, int maxLength, int minLength, string property)
         {
-            if (value.Length > maxLength || value.Length < 0)
+            if (value.Length > maxLength || value.Length < minLength)
             {
                 throw new
                     ArgumentException($"{property} expect to be less than {maxLength} symbols.");
@@ -28,18 +28,18 @@ namespace oop_winform.Services
         /// <param name="value">Входное значение.</param>
         /// <param name="min">Минимальное число (нижняя граница).</param>
         /// <param name="max">Максимальное число (верхняя граница).</param>
-        /// <param name="propertyName">Имя свойства класса.</param>
+        /// <param name="property">Имя свойства класса.</param>
         public static void FloatLimitCheck(
             float value,
             float min,
             float max,
-            string propertyName)
+            string property)
         {
             if (value < min || value > max)
             {
                 throw new
                     ArgumentException(
-                        $"{propertyName} expected to be from {min} to {max}."
+                        $"{property} expected to be from {min} to {max}."
                     );
             }
         }

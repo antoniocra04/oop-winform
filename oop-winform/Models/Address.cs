@@ -98,7 +98,7 @@ namespace oop_winform.Models
             get => _country;
             set
             {
-                ValueValidator.StringLengthCheck(value, 50, nameof(Country));
+                ValueValidator.StringLengthCheck(value, 50, 0, nameof(Country));
                 _country = value;
             }
         }
@@ -111,7 +111,7 @@ namespace oop_winform.Models
             get => _city;
             set
             {
-                ValueValidator.StringLengthCheck(value, 50, nameof(City));
+                ValueValidator.StringLengthCheck(value, 50, 0, nameof(City));
                 _city = value;
             }
         }
@@ -124,7 +124,7 @@ namespace oop_winform.Models
             get => _street;
             set
             {
-                ValueValidator.StringLengthCheck(value, 100, nameof(Street));
+                ValueValidator.StringLengthCheck(value, 100, 0, nameof(Street));
                 _street = value;
             }
         }
@@ -137,7 +137,7 @@ namespace oop_winform.Models
             get => _building;
             set
             {
-                ValueValidator.StringLengthCheck(value, 10, nameof(Building));
+                ValueValidator.StringLengthCheck(value, 10, 0, nameof(Building));
                 _building = value;
             }
         }
@@ -150,7 +150,7 @@ namespace oop_winform.Models
             get => _apartment;
             set
             {
-                ValueValidator.StringLengthCheck(value, 10, nameof(Apartment));
+                ValueValidator.StringLengthCheck(value, 10, 0, nameof(Apartment));
                 _apartment = value;
             }
         }
