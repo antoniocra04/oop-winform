@@ -1,7 +1,6 @@
 ﻿using oop_winform.Services;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using System.Collections.Generic;
-using System.Net;
+using oop_winform.Models.Orders;
 
 namespace oop_winform.Models
 {
@@ -71,5 +70,15 @@ namespace oop_winform.Models
         /// Возвращает и задает адрес покупателя.
         /// </summary>
         public Address Address { get; set; }
+
+        /// <summary>
+        /// Возвращает и задает корзину покупателя.
+        /// </summary>
+        public Cart Cart { get; set; } = new Cart();
+
+        /// <summary>
+        /// Возвращает и задает список заказов покупателя.
+        /// </summary>
+        public List<Order> Orders { get; set; } = new List<Order>();
     }
 }
