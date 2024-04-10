@@ -36,10 +36,13 @@
             this.CustomersTab = new oop_winform.View.Tabs.CustomersTab();
             this.CartTab = new System.Windows.Forms.TabPage();
             this.cartTab1 = new oop_winform.View.Tabs.CartTab();
+            this.OrdersTab = new System.Windows.Forms.TabPage();
+            this.ordersTab1 = new oop_winform.View.Tabs.OrdersTab();
             this.MainTabControl.SuspendLayout();
             this.ItemsTabPage.SuspendLayout();
             this.CustomersTabPage.SuspendLayout();
             this.CartTab.SuspendLayout();
+            this.OrdersTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabControl
@@ -47,6 +50,7 @@
             this.MainTabControl.Controls.Add(this.ItemsTabPage);
             this.MainTabControl.Controls.Add(this.CustomersTabPage);
             this.MainTabControl.Controls.Add(this.CartTab);
+            this.MainTabControl.Controls.Add(this.OrdersTab);
             this.MainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainTabControl.Location = new System.Drawing.Point(0, 0);
             this.MainTabControl.Name = "MainTabControl";
@@ -118,6 +122,23 @@
             this.cartTab1.Size = new System.Drawing.Size(976, 635);
             this.cartTab1.TabIndex = 0;
             // 
+            // OrdersTab
+            // 
+            this.OrdersTab.Controls.Add(this.ordersTab1);
+            this.OrdersTab.Location = new System.Drawing.Point(4, 22);
+            this.OrdersTab.Name = "OrdersTab";
+            this.OrdersTab.Size = new System.Drawing.Size(976, 635);
+            this.OrdersTab.TabIndex = 3;
+            this.OrdersTab.Text = "Orders";
+            this.OrdersTab.UseVisualStyleBackColor = true;
+            // 
+            // ordersTab1
+            // 
+            this.ordersTab1.Location = new System.Drawing.Point(0, 0);
+            this.ordersTab1.Name = "ordersTab1";
+            this.ordersTab1.Size = new System.Drawing.Size(980, 635);
+            this.ordersTab1.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -133,6 +154,7 @@
             this.ItemsTabPage.ResumeLayout(false);
             this.CustomersTabPage.ResumeLayout(false);
             this.CartTab.ResumeLayout(false);
+            this.OrdersTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -146,5 +168,7 @@
         private View.Tabs.CustomersTab CustomersTab;
         private System.Windows.Forms.TabPage CartTab;
         private View.Tabs.CartTab cartTab1;
+        private System.Windows.Forms.TabPage OrdersTab;
+        private View.Tabs.OrdersTab ordersTab1;
     }
 }

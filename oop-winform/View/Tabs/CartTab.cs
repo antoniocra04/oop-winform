@@ -188,7 +188,7 @@ namespace oop_winform.View.Tabs
 
             if (indexListBox == -1 || indexComboBox == -1)
             {
-                return;
+                return; 
             }
             else
             {
