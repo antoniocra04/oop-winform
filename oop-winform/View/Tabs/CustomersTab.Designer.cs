@@ -38,6 +38,7 @@
             this.MainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SplitedTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SelectedItemPanel = new System.Windows.Forms.Panel();
+            this.IsPriorityCheckBox = new System.Windows.Forms.CheckBox();
             this.addressControl1 = new oop_winform.View.Controls.AddressControl();
             this.FullNameTextBox = new System.Windows.Forms.TextBox();
             this.IdTextBox = new System.Windows.Forms.TextBox();
@@ -159,6 +160,7 @@
             // 
             // SelectedItemPanel
             // 
+            this.SelectedItemPanel.Controls.Add(this.IsPriorityCheckBox);
             this.SelectedItemPanel.Controls.Add(this.addressControl1);
             this.SelectedItemPanel.Controls.Add(this.FullNameTextBox);
             this.SelectedItemPanel.Controls.Add(this.IdTextBox);
@@ -171,9 +173,22 @@
             this.SelectedItemPanel.Size = new System.Drawing.Size(588, 580);
             this.SelectedItemPanel.TabIndex = 3;
             // 
+            // IsPriorityCheckBox
+            // 
+            this.IsPriorityCheckBox.AutoSize = true;
+            this.IsPriorityCheckBox.Enabled = false;
+            this.IsPriorityCheckBox.Location = new System.Drawing.Point(70, 100);
+            this.IsPriorityCheckBox.Name = "IsPriorityCheckBox";
+            this.IsPriorityCheckBox.Size = new System.Drawing.Size(68, 17);
+            this.IsPriorityCheckBox.TabIndex = 13;
+            this.IsPriorityCheckBox.Text = "Is Priority";
+            this.IsPriorityCheckBox.UseVisualStyleBackColor = true;
+            this.IsPriorityCheckBox.CheckedChanged += new System.EventHandler(this.IsPriorityCheckBox_CheckedChanged);
+            // 
             // addressControl1
             // 
-            this.addressControl1.Location = new System.Drawing.Point(3, 107);
+            this.addressControl1.Address = null;
+            this.addressControl1.Location = new System.Drawing.Point(3, 134);
             this.addressControl1.Name = "addressControl1";
             this.addressControl1.Size = new System.Drawing.Size(582, 137);
             this.addressControl1.TabIndex = 8;
@@ -281,5 +296,6 @@
         private System.Windows.Forms.Panel panel1;
         private ItemsTab itemsTab1;
         private Controls.AddressControl addressControl1;
+        private System.Windows.Forms.CheckBox IsPriorityCheckBox;
     }
 }
