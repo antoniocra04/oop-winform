@@ -1,7 +1,4 @@
 ﻿using oop_winform.Services;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
-using System.Collections.Generic;
-using System.Net;
 
 namespace oop_winform.Models
 {
@@ -41,14 +38,16 @@ namespace oop_winform.Models
         }
 
         /// <summary>
+        /// Возвращает и задает адрес покупателя.
+        /// </summary>
+        public Address Address { get; set; }
+
+        /// <summary>
         /// Возвращает Id покупателя.
         /// </summary>
         public int Id
         {
-            get
-            {
-                return _id;
-            }
+            get => _id;
         }
 
         /// <summary>
@@ -56,20 +55,12 @@ namespace oop_winform.Models
         /// </summary>
         public string FullName
         {
-            get
-            {
-                return _fullname;
-            }
+            get => _fullname;
             set
             {
                 ValueValidator.StringLengthCheck(value, 200, 1, nameof(_fullname));
                 _fullname = value;
             }
         }
-
-        /// <summary>
-        /// Возвращает и задает адрес покупателя.
-        /// </summary>
-        public Address Address { get; set; }
     }
 }

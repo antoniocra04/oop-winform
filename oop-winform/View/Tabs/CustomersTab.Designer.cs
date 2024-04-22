@@ -38,7 +38,7 @@
             this.MainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SplitedTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SelectedItemPanel = new System.Windows.Forms.Panel();
-            this.addressControl1 = new oop_winform.View.Controls.AddressControl();
+            this.AddressControl = new oop_winform.View.Controls.AddressControl();
             this.FullNameTextBox = new System.Windows.Forms.TextBox();
             this.IdTextBox = new System.Windows.Forms.TextBox();
             this.FullNameLabel = new System.Windows.Forms.Label();
@@ -46,6 +46,7 @@
             this.SelectedCustomerLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.itemsTab1 = new oop_winform.View.Tabs.ItemsTab();
+            this.addressControl1 = new oop_winform.View.Controls.AddressControl();
             this.CustomersListPanel.SuspendLayout();
             this.ButtonsPanel.SuspendLayout();
             this.MainTableLayoutPanel.SuspendLayout();
@@ -159,7 +160,7 @@
             // 
             // SelectedItemPanel
             // 
-            this.SelectedItemPanel.Controls.Add(this.addressControl1);
+            this.SelectedItemPanel.Controls.Add(this.AddressControl);
             this.SelectedItemPanel.Controls.Add(this.FullNameTextBox);
             this.SelectedItemPanel.Controls.Add(this.IdTextBox);
             this.SelectedItemPanel.Controls.Add(this.FullNameLabel);
@@ -171,12 +172,13 @@
             this.SelectedItemPanel.Size = new System.Drawing.Size(588, 580);
             this.SelectedItemPanel.TabIndex = 3;
             // 
-            // addressControl1
+            // AddressControl
             // 
-            this.addressControl1.Location = new System.Drawing.Point(3, 107);
-            this.addressControl1.Name = "addressControl1";
-            this.addressControl1.Size = new System.Drawing.Size(582, 137);
-            this.addressControl1.TabIndex = 8;
+            this.AddressControl.Address = null;
+            this.AddressControl.Location = new System.Drawing.Point(-4, 107);
+            this.AddressControl.Name = "AddressControl";
+            this.AddressControl.Size = new System.Drawing.Size(582, 137);
+            this.AddressControl.TabIndex = 8;
             // 
             // FullNameTextBox
             // 
@@ -242,6 +244,14 @@
             this.itemsTab1.Size = new System.Drawing.Size(1000, 700);
             this.itemsTab1.TabIndex = 0;
             // 
+            // addressControl1
+            // 
+            this.addressControl1.Address = null;
+            this.addressControl1.Location = new System.Drawing.Point(3, 107);
+            this.addressControl1.Name = "addressControl1";
+            this.addressControl1.Size = new System.Drawing.Size(582, 137);
+            this.addressControl1.TabIndex = 8;
+            // 
             // CustomersTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -280,6 +290,7 @@
         private System.Windows.Forms.Label SelectedCustomerLabel;
         private System.Windows.Forms.Panel panel1;
         private ItemsTab itemsTab1;
+        private Controls.AddressControl AddressControl;
         private Controls.AddressControl addressControl1;
     }
 }

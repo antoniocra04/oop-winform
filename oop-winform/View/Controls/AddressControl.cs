@@ -1,28 +1,25 @@
 ﻿using oop_winform.Models;
 using oop_winform.Services;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace oop_winform.View.Controls
 {
+    /// <summary>
+    /// Управляет логикой работы с полями адреса.
+    /// </summary>
     public partial class AddressControl : UserControl
     {
-        /// <summary>
-        /// Адрес.
-        /// </summary>
-        private Address _address;
 
         /// <summary>
         /// Возвращает и задает адрес.
         /// </summary>
         public Address Address
         {
-            get => _address;
-
+            get => Address;
             set
             {
-                _address = value;
+                Address = value;
                 SetValuesTextBoxes();
             }
         }
@@ -37,12 +34,12 @@ namespace oop_winform.View.Controls
         }
 
         /// <summary>
-        /// Активность элементов.
+        /// Возвращает активность элементов.
         /// </summary>
         private bool IsEnabled { get; set; }
 
         /// <summary>
-        /// Устанавливает 
+        /// Установка корректных данных в тексбоксах.
         /// </summary>
         private void SetValuesTextBoxes()
         {
@@ -54,62 +51,37 @@ namespace oop_winform.View.Controls
             BuildingTextBox.Enabled = IsEnabled;
             ApartmentTextBox.Enabled = IsEnabled;
 
-            if (IsEnabled)
-            {
-                PostIndexTextBox.Text = Address.Index.ToString();
-                CountryTextBox.Text = Address.Country;
-                CityTextBox.Text = Address.City;
-                StreetTextBox.Text = Address.Street;
-                BuildingTextBox.Text = Address.Building;
-                ApartmentTextBox.Text = Address.Apartment;
-            }
-            else
-            {
-                PostIndexTextBox.Text = "";
-                CountryTextBox.Text = "";
-                CityTextBox.Text = "";
-                StreetTextBox.Text = "";
-                BuildingTextBox.Text = "";
-                ApartmentTextBox.Text = "";
-            }
-        }
-
-        public void Clear()
-        {
-            PostIndexTextBox.Clear();
-            CountryTextBox.Clear();
-            CityTextBox.Clear();
-            StreetTextBox.Clear();
-            BuildingTextBox.Clear();
-            ApartmentTextBox.Clear();
-
-            PostIndexTextBox.BackColor = Constants.CorrectColor;
+            PostIndexTextBox.Text = IsEnabled ? Address.Index.ToString() : "";
+            CountryTextBox.Text = IsEnabled ? Address.Country.ToString() : "";
+            CityTextBox.Text = IsEnabled ? Address.City.ToString() : "";
+            StreetTextBox.Text = IsEnabled ? Address.Street.ToString() : "";
+            BuildingTextBox.Text = IsEnabled ? Address.Building.ToString() : "";
+            ApartmentTextBox.Text = IsEnabled ? Address.Apartment.ToString() : "";
         }
 
         private void PostIndexTextBox_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                int index = Convert.ToInt32(PostIndexTextBox.Text);
-                _address.Index = index;
+                var index = Convert.ToInt32(PostIndexTextBox.Text);
+                Address.Index = index;
             }
             catch(ArgumentException exeption)
             {
                 PostIndexTextBox.BackColor = Constants.ErrorColor;
                 return;
             }
-            catch { }
 
             PostIndexTextBox.BackColor = Constants.CorrectColor;
         }
 
         private void CountryTextBox_TextChanged(object sender, EventArgs e)
         {
-            if(_address != null)
+            if(Address != null)
             {
                 try
                 {
-                    _address.Country = CountryTextBox.Text;
+                    Address.Country = CountryTextBox.Text;
                 }
                 catch (ArgumentException exeption)
                 {
@@ -123,11 +95,11 @@ namespace oop_winform.View.Controls
 
         private void CityTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (_address != null)
+            if (Address != null)
             {
                 try
                 {
-                    _address.City = CityTextBox.Text;
+                    Address.City = CityTextBox.Text;
                 }
                 catch (ArgumentException exeption)
                 {
@@ -141,11 +113,11 @@ namespace oop_winform.View.Controls
 
         private void StreetTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (_address != null)
+            if (Address != null)
             {
                 try
                 {
-                    _address.Street = StreetTextBox.Text;
+                    Address.Street = StreetTextBox.Text;
                 }
                 catch (ArgumentException exeption)
                 {
@@ -159,11 +131,11 @@ namespace oop_winform.View.Controls
 
         private void BuildingTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (_address != null)
+            if (Address != null)
             {
                 try
                 {
-                    _address.Building = BuildingTextBox.Text;
+                    Address.Building = BuildingTextBox.Text;
                 }
                 catch (ArgumentException exeption)
                 {
@@ -177,11 +149,11 @@ namespace oop_winform.View.Controls
 
         private void ApartmentTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (_address != null)
+            if (Address != null)
             {
                 try
                 {
-                    _address.Apartment = ApartmentTextBox.Text;
+                    Address.Apartment = ApartmentTextBox.Text;
                 }
                 catch (ArgumentException exeption)
                 {

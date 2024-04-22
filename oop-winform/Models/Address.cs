@@ -1,12 +1,10 @@
 ﻿using oop_winform.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace oop_winform.Models
 {
+    /// <summary>
+    /// Хранит данные об адресе
+    /// </summary>
     public class Address
     {
         /// <summary>

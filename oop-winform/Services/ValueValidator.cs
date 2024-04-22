@@ -8,17 +8,18 @@ namespace oop_winform.Services
     public static class ValueValidator
     {
         /// <summary>
-        /// Проверка на превышение длинны строки.
+        /// Проверка длины строки.
         /// </summary>
         /// <param name="value">Строка.</param>
         /// <param name="maxLength">Максимальная длина.</param>
         /// <param name="property">Имя свойства класса.</param>
-        public static void StringLengthCheck(string value, int maxLength, int minLength, string property)
+        /// <param name="minLength">Минимальная длина.</param>
+        public static void StringLengthCheck(string value, int maxLength, int minLength, string propertyName)
         {
             if (value.Length > maxLength || value.Length < minLength)
             {
                 throw new
-                    ArgumentException($"{property} expect to be less than {maxLength} symbols.");
+                    ArgumentException($"{propertyName} expect to be less than {maxLength} symbols or greater than {minLength} symbols.");
             }
         }
 
@@ -45,7 +46,7 @@ namespace oop_winform.Services
         }
 
         /// <summary>
-        /// Проверка, числа на количество цифр.
+        /// Проверка числа на количество цифр.
         /// </summary>
         /// <param name="value">Входное значение.</param>
         /// <param name="digit">Число разрядов.</param>

@@ -27,7 +27,7 @@ namespace oop_winform.View.Tabs
         public ItemsTab()
         {
             InitializeComponent();
-            CategoryComboBox.DataSource = Enum.GetValues(typeof(Category));
+            CategoryComboBox.DataSource = Enum.GetValues(typeof(CategoryTypes));
         }
 
         /// <summary>
@@ -57,23 +57,11 @@ namespace oop_winform.View.Tabs
             DescriptionTextBox.Enabled = isSelectedIndexCorrect;
             CategoryComboBox.Enabled = isSelectedIndexCorrect;
 
-            if (isSelectedIndexCorrect)
-            {
-                NameTextBox.Text = _currentItem.Name;
-                CostTextBox.Text = _currentItem.Cost.ToString();
-                IdTextBox.Text = _currentItem.Id.ToString();
-                DescriptionTextBox.Text = _currentItem.Info;
-                CategoryComboBox.Text = _currentItem.Category.ToString();
-
-            }
-            else
-            {
-                NameTextBox.Text = "";
-                CostTextBox.Text = "";
-                IdTextBox.Text = "";
-                DescriptionTextBox.Text = "";
-                CategoryComboBox.Text = "";
-            }
+            NameTextBox.Text = isSelectedIndexCorrect ? _currentItem.Name : "";
+            CostTextBox.Text = isSelectedIndexCorrect ? _currentItem.Cost.ToString() : "";
+            IdTextBox.Text = isSelectedIndexCorrect ? _currentItem.Id.ToString() : "";
+            DescriptionTextBox.Text = isSelectedIndexCorrect ? _currentItem.Info : "";
+            CategoryComboBox.Text = isSelectedIndexCorrect ? _currentItem.Category.ToString() : "";
         }
 
         /// <summary>
@@ -92,7 +80,7 @@ namespace oop_winform.View.Tabs
 
         private void ItemsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int index = ItemsListBox.SelectedIndex;
+            var index = ItemsListBox.SelectedIndex;
 
             if (index == -1)
             {
@@ -105,14 +93,14 @@ namespace oop_winform.View.Tabs
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            var newItem = new Item("Item", "info", 1, Category.Cloths);
+            var newItem = new Item("Item", "info", 1, CategoryTypes.Cloths);
             Items.Add(newItem);
             UpdateItemsListBox(Items.Count - 1);
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
-            int removeIndex = ItemsListBox.SelectedIndex;
+            var removeIndex = ItemsListBox.SelectedIndex;
 
             if (removeIndex >= 0)
             {
@@ -125,23 +113,18 @@ namespace oop_winform.View.Tabs
 
         private void CostTextBox_TextChanged(object sender, EventArgs e)
         {
-            int index = ItemsListBox.SelectedIndex;
+            var index = ItemsListBox.SelectedIndex;
 
             if (index == -1) return;
 
             try
             {
-                string cost = CostTextBox.Text;
+                var cost = CostTextBox.Text;
                 _currentItem.Cost = float.Parse(cost);
                 UpdateItemsListBox(ItemsListBox.SelectedIndex);
 
             }
-            catch(ArgumentException exception)
-            {
-                CostTextBox.BackColor = Constants.ErrorColor;
-                return;
-            }
-            catch(Exception exception)
+            catch (ArgumentException exception)
             {
                 CostTextBox.BackColor = Constants.ErrorColor;
                 return;
@@ -152,7 +135,7 @@ namespace oop_winform.View.Tabs
 
         private void NameTextBox_TextChanged(object sender, EventArgs e)
         {
-            int index = ItemsListBox.SelectedIndex;
+            var index = ItemsListBox.SelectedIndex;
 
             if (index == -1) return;
 
@@ -161,7 +144,7 @@ namespace oop_winform.View.Tabs
                 _currentItem.Name = NameTextBox.Text;
                 UpdateItemsListBox(ItemsListBox.SelectedIndex);
             }
-            catch(ArgumentException exception)
+            catch (ArgumentException exception)
             {
                 NameTextBox.BackColor = Constants.ErrorColor;
                 return;
@@ -172,13 +155,13 @@ namespace oop_winform.View.Tabs
 
         private void DescriptionTextBox_TextChanged(object sender, EventArgs e)
         {
-            int index = ItemsListBox.SelectedIndex;
+            var index = ItemsListBox.SelectedIndex;
 
             if (index == -1) return;
 
             try
             {
-                string info = DescriptionTextBox.Text;
+                var info = DescriptionTextBox.Text;
                 _currentItem.Info = info;
                 UpdateItemsListBox(ItemsListBox.SelectedIndex);
             }
@@ -193,13 +176,12 @@ namespace oop_winform.View.Tabs
 
         private void CategoryComboBox_TextChanged(object sender, EventArgs e)
         {
-            int index = ItemsListBox.SelectedIndex;
+            var index = ItemsListBox.SelectedIndex;
 
             if (index == -1) return;
 
-            _currentItem.Category = (Category) CategoryComboBox.SelectedItem;
+            _currentItem.Category = (CategoryTypes) CategoryComboBox.SelectedItem;
             UpdateItemsListBox(ItemsListBox.SelectedIndex);
-
         }
     }
 }
