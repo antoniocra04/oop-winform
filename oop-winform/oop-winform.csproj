@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Models\CategoryTypes.cs" />
     <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\Store.cs" />
     <Compile Include="Services\Constants.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Services\IdGenerator.cs" />

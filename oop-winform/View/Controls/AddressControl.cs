@@ -10,16 +10,21 @@ namespace oop_winform.View.Controls
     /// </summary>
     public partial class AddressControl : UserControl
     {
+        /// <summary>
+        /// Адрес.
+        /// </summary>
+        private Address _address;
 
         /// <summary>
         /// Возвращает и задает адрес.
         /// </summary>
         public Address Address
         {
-            get => Address;
+            get => _address;
+
             set
             {
-                Address = value;
+                _address = value;
                 SetValuesTextBoxes();
             }
         }
