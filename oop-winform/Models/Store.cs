@@ -9,7 +9,7 @@ namespace oop_winform.Models
     {
 
         /// <summary>
-        /// Возвращает и задает список товаров класса <see cref="Customer"/>.
+        /// Возвращает и задает список товаров класса <see cref="Item"/>.
         /// </summary>
         public List<Item> Items { get; set; } = new List<Item>();
 

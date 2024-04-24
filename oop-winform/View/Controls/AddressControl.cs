@@ -16,20 +16,6 @@ namespace oop_winform.View.Controls
         private Address _address;
 
         /// <summary>
-        /// Возвращает и задает адрес.
-        /// </summary>
-        public Address Address
-        {
-            get => _address;
-
-            set
-            {
-                _address = value;
-                SetValuesTextBoxes();
-            }
-        }
-
-        /// <summary>
         /// Создает экземпляр класса <see cref="AddressControl"/>.
         /// </summary>
         public AddressControl()
@@ -39,7 +25,20 @@ namespace oop_winform.View.Controls
         }
 
         /// <summary>
-        /// Возвращает активность элементов.
+        /// Возвращает и задает адрес.
+        /// </summary>
+        public Address Address
+        {
+            get => _address;
+            set
+            {
+                _address = value;
+                SetValuesTextBoxes();
+            }
+        }
+
+        /// <summary>
+        /// Возвращает и задает активность элементов.
         /// </summary>
         private bool IsEnabled { get; set; }
 
@@ -82,17 +81,14 @@ namespace oop_winform.View.Controls
 
         private void CountryTextBox_TextChanged(object sender, EventArgs e)
         {
-            if(Address != null)
+            try
             {
-                try
-                {
-                    Address.Country = CountryTextBox.Text;
-                }
-                catch (ArgumentException exeption)
-                {
-                    CountryTextBox.BackColor = Constants.ErrorColor;
-                    return;
-                }
+                Address.Country = CountryTextBox.Text;
+            }
+            catch (ArgumentException exeption)
+            {
+                CountryTextBox.BackColor = Constants.ErrorColor;
+                return;
             }
 
             CountryTextBox.BackColor = Constants.CorrectColor;

@@ -66,6 +66,7 @@ namespace oop_winform.View.Tabs
         {
             var isSelectedIndexCorrect = CustomersListBox.SelectedIndex != -1;
             FullNameTextBox.Enabled = isSelectedIndexCorrect;
+            addressControl1.Enabled= isSelectedIndexCorrect;
 
             IdTextBox.Text = isSelectedIndexCorrect ? _currentCustomer.Id.ToString() : "";
             FullNameTextBox.Text = isSelectedIndexCorrect ? _currentCustomer.FullName : "";
@@ -102,7 +103,7 @@ namespace oop_winform.View.Tabs
                 Customers.RemoveAt(removeIndex);
                 UpdateCustomersListBox(-1);
             }
-
+            
             SetValuesTextBoxes();
         }
 

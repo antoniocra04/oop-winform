@@ -129,6 +129,11 @@ namespace oop_winform.View.Tabs
                 CostTextBox.BackColor = Constants.ErrorColor;
                 return;
             }
+            catch (Exception exception)
+            {
+                CostTextBox.BackColor = Constants.ErrorColor;
+                return;
+            }
 
             CostTextBox.BackColor = Constants.CorrectColor;
         }

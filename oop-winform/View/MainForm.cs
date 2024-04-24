@@ -19,9 +19,5 @@ namespace oop_winform
             ItemsTab.Items = _store.Items;
             CustomersTab.Customers = _store.Customers;
         }
-
-        private void CustomersTab_Load(object sender, System.EventArgs e)
-        {
-        }
     }
 }

@@ -87,7 +87,7 @@ namespace oop_winform.Models
             get => _info;
             set
             {
-                ValueValidator.StringLengthCheck(value, 200, 0, nameof(_name));
+                ValueValidator.StringLengthCheck(value, 1000, 0, nameof(_name));
                 _info = value;
             }
         }
