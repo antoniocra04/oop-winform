@@ -77,6 +77,11 @@ namespace oop_winform.View.Tabs
         private Customer CurrentCustomer { get; set; }
 
         /// <summary>
+        /// Возвращает и задает размер скидки.
+        /// </summary>
+        public double DiscountAmount { get; set; }
+
+        /// <summary>
         /// Обновляет данные.
         /// </summary>
         public void RefreshData()
@@ -92,6 +97,7 @@ namespace oop_winform.View.Tabs
             if (CustomerComboBox.Items.Count > 0)
             {
                 CustomerComboBox.SelectedIndex = 0;
+                UpdateDiscount();
             }
             else
             {
@@ -137,6 +143,40 @@ namespace oop_winform.View.Tabs
             CreateOrderButton.Enabled = false;
         }
 
+        /// <summary>
+        /// Обновляет скидку.
+        /// </summary>
+        private void UpdateDiscount()
+        {
+            double discountAmount = 0;
+            for (int i = 0; i < DiscountsCheckedListBox.Items.Count; i++)
+            {
+                if (DiscountsCheckedListBox.GetItemChecked(i))
+                {
+                    discountAmount += CurrentCustomer.Discounts[i].Calculate(CurrentCustomer.Cart.Items);
+                }
+            }
+            DiscountAmountLabel.Text = discountAmount.ToString();
+            if (CurrentCustomer.Cart.Amount == 0)
+            {
+                TotalLabel.Text = CurrentCustomer.Cart.Amount.ToString();
+                return;
+            }
+            TotalLabel.Text = (CurrentCustomer.Cart.Amount - discountAmount).ToString();
+        }
+
+        /// <summary>
+        /// Обновляет чекбоксы скидок.
+        /// </summary>
+        private void UpdateDiscountCheckedListBox()
+        {
+            DiscountsCheckedListBox.Items.Clear();
+            foreach (var discount in CurrentCustomer.Discounts)
+            {
+                DiscountsCheckedListBox.Items.Add(discount.Info, true);
+            }
+        }
+
         private void CustomerComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = CustomerComboBox.SelectedIndex;
@@ -158,6 +198,7 @@ namespace oop_winform.View.Tabs
                     AmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
                     UpdateCartListBox(-1);
                 }
+                UpdateDiscountCheckedListBox();
             }
         }
 
@@ -179,6 +220,7 @@ namespace oop_winform.View.Tabs
                 UpdateCartListBox(-1);
                 CreateOrderButton.Enabled = true;
             }
+            UpdateDiscount();
         }
 
         private void RemoveItemButton_Click(object sender, EventArgs e)
@@ -197,6 +239,7 @@ namespace oop_winform.View.Tabs
 
                 UpdateCartListBox(-1);
             }
+            UpdateDiscount();
         }
 
         private void ClearCartButton_Click(object sender, EventArgs e)
@@ -204,6 +247,7 @@ namespace oop_winform.View.Tabs
             CurrentCustomer.Cart = new Cart();
             UpdateCartListBox(-1);
             AmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
+            UpdateDiscount();
         }
 
         private void CreateOrderButton_Click(object sender, EventArgs e)
@@ -222,6 +266,23 @@ namespace oop_winform.View.Tabs
             order.Items = CurrentCustomer.Cart.Items;
             order.Status = OrderStatusTypes.New;
 
+            double discountAmount = 0;
+            discountAmount = CurrentCustomer.Discounts
+                .Where(d => DiscountsCheckedListBox.Items.Contains(d))
+                .Sum(d => d.Calculate(CurrentCustomer.Cart.Items)); 
+
+            order.Discount = discountAmount;
+            CurrentCustomer.Orders.Add(order);
+
+            foreach (var discount in CurrentCustomer.Discounts)
+            {
+                if (DiscountsCheckedListBox.Items.Contains(discount))
+                {
+                    discount.Apply(CurrentCustomer.Cart.Items);
+                    discount.Update(CurrentCustomer.Cart.Items);
+                }
+            }
+            UpdateDiscountCheckedListBox();
 
             CurrentCustomer.Orders.Add(order);
 
@@ -229,6 +290,11 @@ namespace oop_winform.View.Tabs
             UpdateCartListBox(-1);
             AmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
             CreateOrderButton.Enabled = false;
+        }
+
+        private void DiscountsCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateDiscount();
         }
     }
 }

@@ -28,6 +28,7 @@ namespace oop_winform
             cartTab1.RefreshData();
             ordersTab1.Customers = _store.Customers;
             ordersTab1.RefreshData();
+            CustomersTab.UpdateDiscountsListBox();
         }
     }
 }

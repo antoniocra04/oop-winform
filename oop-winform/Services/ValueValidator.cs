@@ -45,7 +45,7 @@ namespace oop_winform.Services
         }
 
         /// <summary>
-        /// Проверка, числа на количество цифр.
+        /// Проверка числа на количество цифр.
         /// </summary>
         /// <param name="value">Входное значение.</param>
         /// <param name="digit">Число разрядов.</param>
@@ -56,6 +56,43 @@ namespace oop_winform.Services
             {
                 throw new
                     ArgumentException($"{propertyName} expect to contain {digit} digits.");
+            }
+        }
+
+        /// <summary>
+        /// Проверка числа на вхождение в нижний предел.
+        /// </summary>
+        /// <param name="value">Входное значение.</param>
+        /// <param name="minimum">Минимальное число (нижняя граница).</param>
+        /// <param name="propertyName">Имя свойства класса.</param>
+        public static void CheckDigitOnLowLimit(int value, int minimum, string propertyName)
+        {
+            if (value < minimum)
+            {
+                throw new
+                    ArgumentException(
+                    $"{propertyName} expect to be less than {minimum}.");
+            }
+        }
+
+        /// <summary>
+        /// Проверка числа на вхождение в заданные границы.
+        /// </summary>
+        /// <param name="value">Входное значение.</param>
+        /// <param name="minimum">Минимальное число.</param>
+        /// <param name="maximum">Максимальное число.</param>
+        /// <param name="propertyName">Имя свойства класса.</param>
+        public static void CheckLimitInInt(
+            int value,
+            int minimum,
+            int maximum,
+            string propertyName)
+        {
+            if (value > maximum || value < minimum)
+            {
+                throw new
+                    ArgumentException(
+                    $"{propertyName} less than {minimum} or greater than {maximum}.");
             }
         }
     }

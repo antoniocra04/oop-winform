@@ -51,6 +51,11 @@ namespace oop_winform.Models.Orders
         public List<Item> Items { get; set; }
 
         /// <summary>
+        /// Возвращает и задает скидку на товары.
+        /// </summary>
+        public double Discount { get; set; }
+
+        /// <summary>
         /// Возвращает общую стоимость товаров в заказе.
         /// </summary>
         public float Amount
@@ -97,5 +102,10 @@ namespace oop_winform.Models.Orders
             Address = address;
             Items = items;
         }
+
+        /// <summary>
+        /// Суммарная скидка заказа.
+        /// </summary>
+        public double DiscountAmount { get; }
     }
 }

@@ -32,6 +32,8 @@ namespace oop_winform.Models
             Address = new Address();
             FullName = "";
             IsPriority= false;
+            Discounts = new List<IDiscount>();
+            Discounts.Add(new PointsDiscount());
         }
 
         /// <summary>
@@ -43,6 +45,8 @@ namespace oop_winform.Models
         {
             FullName = fullname;
             Address = address;
+            Discounts = new List<IDiscount>();
+            Discounts.Add(new PointsDiscount());
         }
 
         /// <summary>
@@ -95,5 +99,10 @@ namespace oop_winform.Models
             get => _isPriority;
             set => _isPriority = value;
         }
+
+        /// <summary>
+        /// Возвращает и задает скидки покупателя.
+        /// </summary>
+        public List<IDiscount> Discounts { get; set; }
     }
 }
