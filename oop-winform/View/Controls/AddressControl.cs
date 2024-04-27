@@ -75,6 +75,11 @@ namespace oop_winform.View.Controls
                 PostIndexTextBox.BackColor = Constants.ErrorColor;
                 return;
             }
+            catch (Exception ex)
+            {
+                PostIndexTextBox.BackColor = Constants.ErrorColor;
+                return;
+            }
 
             PostIndexTextBox.BackColor = Constants.CorrectColor;
         }
@@ -96,17 +101,14 @@ namespace oop_winform.View.Controls
 
         private void CityTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (Address != null)
+            try
             {
-                try
-                {
-                    Address.City = CityTextBox.Text;
-                }
-                catch (ArgumentException exeption)
-                {
-                    CityTextBox.BackColor = Constants.ErrorColor;
-                    return;
-                }
+                Address.City = CityTextBox.Text;
+            }
+            catch (ArgumentException exeption)
+            {
+                CityTextBox.BackColor = Constants.ErrorColor;
+                return;
             }
 
             CityTextBox.BackColor = Constants.CorrectColor;
@@ -114,35 +116,29 @@ namespace oop_winform.View.Controls
 
         private void StreetTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (Address != null)
-            {
-                try
+            try
                 {
                     Address.Street = StreetTextBox.Text;
                 }
-                catch (ArgumentException exeption)
+            catch (ArgumentException exeption)
                 {
                     StreetTextBox.BackColor = Constants.ErrorColor;
                     return;
                 }
-            }
 
             StreetTextBox.BackColor = Constants.CorrectColor;
         }
 
         private void BuildingTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (Address != null)
+            try
             {
-                try
-                {
-                    Address.Building = BuildingTextBox.Text;
-                }
-                catch (ArgumentException exeption)
-                {
-                    BuildingTextBox.BackColor = Constants.ErrorColor;
-                    return;
-                }
+                Address.Building = BuildingTextBox.Text;
+            }
+            catch (ArgumentException exeption)
+            {
+                BuildingTextBox.BackColor = Constants.ErrorColor;
+                return;
             }
 
             BuildingTextBox.BackColor = Constants.CorrectColor;
@@ -150,17 +146,14 @@ namespace oop_winform.View.Controls
 
         private void ApartmentTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (Address != null)
+            try
             {
-                try
-                {
-                    Address.Apartment = ApartmentTextBox.Text;
-                }
-                catch (ArgumentException exeption)
-                {
-                    ApartmentTextBox.BackColor = Constants.ErrorColor;
-                    return;
-                }
+                Address.Apartment = ApartmentTextBox.Text;
+            }
+            catch (ArgumentException exeption)
+            {
+                ApartmentTextBox.BackColor = Constants.ErrorColor;
+                return;
             }
 
             ApartmentTextBox.BackColor = Constants.CorrectColor;

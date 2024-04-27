@@ -91,7 +91,6 @@
             this.CustomersTab.Name = "CustomersTab";
             this.CustomersTab.Size = new System.Drawing.Size(970, 629);
             this.CustomersTab.TabIndex = 0;
-            this.CustomersTab.Load += new System.EventHandler(this.CustomersTab_Load);
             // 
             // MainForm
             // 

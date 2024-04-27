@@ -66,10 +66,19 @@ namespace oop_winform.View.Tabs
         {
             var isSelectedIndexCorrect = CustomersListBox.SelectedIndex != -1;
             FullNameTextBox.Enabled = isSelectedIndexCorrect;
-            addressControl1.Enabled= isSelectedIndexCorrect;
+            AddressControl.Enabled= isSelectedIndexCorrect;
 
             IdTextBox.Text = isSelectedIndexCorrect ? _currentCustomer.Id.ToString() : "";
             FullNameTextBox.Text = isSelectedIndexCorrect ? _currentCustomer.FullName : "";
+
+            foreach (Control c in AddressControl.Controls)
+            {
+                if (c is TextBox && !isSelectedIndexCorrect)
+                {
+                    c.Text = "";
+                    c.BackColor = Constants.CorrectColor;
+                }
+            }
         }
 
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -125,6 +134,11 @@ namespace oop_winform.View.Tabs
             }
 
             FullNameTextBox.BackColor = Constants.CorrectColor;
+        }
+
+        private void MainTableLayoutPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
