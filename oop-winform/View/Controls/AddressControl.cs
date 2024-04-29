@@ -67,6 +67,7 @@ namespace oop_winform.View.Controls
         {
             if (Address == null)
             {
+                PostIndexTextBox.BackColor = Constants.CorrectColor;
                 return;
             }
             try
@@ -92,6 +93,7 @@ namespace oop_winform.View.Controls
         {
             if(Address == null)
             {
+                CountryTextBox.BackColor = Constants.CorrectColor;
                 return;
             }
             try
@@ -111,6 +113,7 @@ namespace oop_winform.View.Controls
         {
             if (Address == null)
             {
+                CityTextBox.BackColor = Constants.CorrectColor;
                 return;
             }
             try
@@ -130,6 +133,7 @@ namespace oop_winform.View.Controls
         {
             if (Address == null)
             {
+                StreetTextBox.BackColor = Constants.CorrectColor;
                 return;
             }
             try
@@ -149,6 +153,7 @@ namespace oop_winform.View.Controls
         {
             if (Address == null)
             {
+                BuildingTextBox.BackColor = Constants.CorrectColor;
                 return;
             }
             try
@@ -168,6 +173,7 @@ namespace oop_winform.View.Controls
         {
             if (Address == null)
             {
+                ApartmentTextBox.BackColor = Constants.CorrectColor;
                 return;
             }
             try
