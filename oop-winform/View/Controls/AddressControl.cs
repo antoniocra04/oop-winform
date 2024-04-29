@@ -80,7 +80,7 @@ namespace oop_winform.View.Controls
                 PostIndexTextBox.BackColor = Constants.ErrorColor;
                 return;
             }
-            catch (Exception ex)
+            catch (FormatException ex)
             {
                 PostIndexTextBox.BackColor = Constants.ErrorColor;
                 return;
