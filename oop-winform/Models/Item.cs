@@ -1,5 +1,4 @@
 ﻿using oop_winform.Services;
-using System;
 
 namespace oop_winform.Models
 {
@@ -36,6 +35,7 @@ namespace oop_winform.Models
             Name = "";
             Info = "";
             Cost = 0;
+            Category = CategoryTypes.Food;
         }
 
         /// <summary>
@@ -44,22 +44,26 @@ namespace oop_winform.Models
         /// <param name="name">Имя продукта.</param>
         /// <param name="info">Информация продукта.</param>
         /// <param name="cost">Цена продукта.</param>
-        public Item(string name, string info, float cost)
+        /// <param name="category">Категория продукта.</param>
+        public Item(string name, string info, float cost, CategoryTypes category)
         {
             Name = name;
             Info = info;
             Cost = cost;
+            Category = category;
         }
+
+        /// <summary>
+        /// Возвращает и задает категорию товара <see cref="Item"/>.
+        /// </summary>
+        public CategoryTypes Category { get; set; }
 
         /// <summary>
         /// Возвращает Id товара.
         /// </summary>
         public int Id 
-        { 
-            get 
-            { 
-                return _id; 
-            } 
+        {
+            get => _id;
         }
 
         /// <summary>
@@ -67,10 +71,7 @@ namespace oop_winform.Models
         /// </summary>
         public string Name
         {
-            get
-            {
-                return _name;
-            }
+            get => _name;
             set
             {
                 ValueValidator.StringLengthCheck(value, 200, 1, nameof(_name));
@@ -83,13 +84,10 @@ namespace oop_winform.Models
         /// </summary>
         public string Info
         {
-            get
-            {
-                return _info;
-            }
+            get => _info;
             set
             {
-                ValueValidator.StringLengthCheck(value, 200, 0, nameof(_name));
+                ValueValidator.StringLengthCheck(value, 1000, 0, nameof(_name));
                 _info = value;
             }
         }
@@ -99,10 +97,7 @@ namespace oop_winform.Models
         /// </summary>
         public float Cost
         {
-            get
-            {
-                return _cost;
-            }
+            get => _cost;
             set
             {
                 ValueValidator.FloatLimitCheck(value, 1, 100000, nameof(_cost));
