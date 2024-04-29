@@ -55,7 +55,7 @@ namespace oop_winform.View.Controls
             BuildingTextBox.Enabled = IsEnabled;
             ApartmentTextBox.Enabled = IsEnabled;
 
-            PostIndexTextBox.Text = IsEnabled ? Address.Index.ToString() : "";
+            PostIndexTextBox.Text = IsEnabled ? Address.Index.ToString() : "999999";
             CountryTextBox.Text = IsEnabled ? Address.Country.ToString() : "";
             CityTextBox.Text = IsEnabled ? Address.City.ToString() : "";
             StreetTextBox.Text = IsEnabled ? Address.Street.ToString() : "";
@@ -65,6 +65,10 @@ namespace oop_winform.View.Controls
 
         private void PostIndexTextBox_TextChanged(object sender, EventArgs e)
         {
+            if (Address == null)
+            {
+                return;
+            }
             try
             {
                 var index = Convert.ToInt32(PostIndexTextBox.Text);
@@ -86,6 +90,10 @@ namespace oop_winform.View.Controls
 
         private void CountryTextBox_TextChanged(object sender, EventArgs e)
         {
+            if(Address == null)
+            {
+                return;
+            }
             try
             {
                 Address.Country = CountryTextBox.Text;
@@ -101,6 +109,10 @@ namespace oop_winform.View.Controls
 
         private void CityTextBox_TextChanged(object sender, EventArgs e)
         {
+            if (Address == null)
+            {
+                return;
+            }
             try
             {
                 Address.City = CityTextBox.Text;
@@ -116,21 +128,29 @@ namespace oop_winform.View.Controls
 
         private void StreetTextBox_TextChanged(object sender, EventArgs e)
         {
+            if (Address == null)
+            {
+                return;
+            }
             try
-                {
-                    Address.Street = StreetTextBox.Text;
-                }
+            {
+                Address.Street = StreetTextBox.Text;
+            }
             catch (ArgumentException exeption)
-                {
-                    StreetTextBox.BackColor = Constants.ErrorColor;
-                    return;
-                }
+            {
+                StreetTextBox.BackColor = Constants.ErrorColor;
+                return;
+            }
 
             StreetTextBox.BackColor = Constants.CorrectColor;
         }
 
         private void BuildingTextBox_TextChanged(object sender, EventArgs e)
         {
+            if (Address == null)
+            {
+                return;
+            }
             try
             {
                 Address.Building = BuildingTextBox.Text;
@@ -146,6 +166,10 @@ namespace oop_winform.View.Controls
 
         private void ApartmentTextBox_TextChanged(object sender, EventArgs e)
         {
+            if (Address == null)
+            {
+                return;
+            }
             try
             {
                 Address.Apartment = ApartmentTextBox.Text;

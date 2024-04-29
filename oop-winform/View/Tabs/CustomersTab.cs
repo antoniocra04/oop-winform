@@ -70,15 +70,7 @@ namespace oop_winform.View.Tabs
 
             IdTextBox.Text = isSelectedIndexCorrect ? _currentCustomer.Id.ToString() : "";
             FullNameTextBox.Text = isSelectedIndexCorrect ? _currentCustomer.FullName : "";
-
-            foreach (Control c in AddressControl.Controls)
-            {
-                if (c is TextBox && !isSelectedIndexCorrect)
-                {
-                    c.Text = "";
-                    c.BackColor = Constants.CorrectColor;
-                }
-            }
+            AddressControl.Address = null;
         }
 
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -107,12 +99,12 @@ namespace oop_winform.View.Tabs
         {
             var removeIndex = CustomersListBox.SelectedIndex;
 
-            if (removeIndex >= 0)
+            if (removeIndex < 0)
             {
-                Customers.RemoveAt(removeIndex);
-                UpdateCustomersListBox(-1);
+                return;
             }
-            
+            Customers.RemoveAt(removeIndex);
+            UpdateCustomersListBox(-1);
             SetValuesTextBoxes();
         }
 
@@ -134,11 +126,6 @@ namespace oop_winform.View.Tabs
             }
 
             FullNameTextBox.BackColor = Constants.CorrectColor;
-        }
-
-        private void MainTableLayoutPanel_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

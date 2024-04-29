@@ -140,7 +140,6 @@
             this.MainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.MainTableLayoutPanel.Size = new System.Drawing.Size(1000, 700);
             this.MainTableLayoutPanel.TabIndex = 2;
-            this.MainTableLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.MainTableLayoutPanel_Paint);
             // 
             // SplitedTableLayoutPanel
             // 
