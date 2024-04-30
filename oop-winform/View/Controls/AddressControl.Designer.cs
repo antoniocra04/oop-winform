@@ -51,7 +51,7 @@
             this.CityTextBox.Name = "CityTextBox";
             this.CityTextBox.Size = new System.Drawing.Size(194, 20);
             this.CityTextBox.TabIndex = 25;
-            this.CityTextBox.TextChanged += new System.EventHandler(this.CountryTextBox_TextChanged);
+            this.CityTextBox.TextChanged += new System.EventHandler(this.CityTextBox_TextChanged);
             // 
             // ApartmentTextBox
             // 

@@ -44,10 +44,7 @@ namespace oop_winform.Models
         /// </summary>
         public int Id
         {
-            get
-            {
-                return _id;
-            }
+            get => _id;
         }
 
         /// <summary>
@@ -55,10 +52,7 @@ namespace oop_winform.Models
         /// </summary>
         public string FullName
         {
-            get
-            {
-                return _fullname;
-            }
+            get => _fullname;
             set
             {
                 ValueValidator.StringLengthCheck(value, 200, 1, nameof(_fullname));

@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace oop_winform
 {
+    /// <summary>
+    /// Управляет главным окном программы.
+    /// </summary>
     public partial class MainForm : Form
     {
         /// <summary>
