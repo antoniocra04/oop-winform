@@ -1,16 +1,10 @@
-﻿using oop_winform.Models.Orders;
-using oop_winform.Models;
+﻿using oop_winform.Models;
 using oop_winform.View.Controls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace oop_winform.View.Tabs
 {
@@ -25,7 +19,7 @@ namespace oop_winform.View.Tabs
         private List<Customer> _customers;
 
         /// <summary>
-        /// Возвращает и задает покупателей.
+        /// Возвращает и задает список покупателей.
         /// </summary>
         public List<Customer> Customers
         {
@@ -42,12 +36,12 @@ namespace oop_winform.View.Tabs
         }
 
         /// <summary>
-        /// Возвращает список заказов.
+        /// Возвращает и задает список заказов.
         /// </summary>
         public List<Order> Orders { get; set; } = new List<Order>();
 
         /// <summary>
-        /// Создает экзепляр класса <see cref="OrdersTab"/>.
+        /// Создает экзепмляр класса <see cref="OrdersTab"/>.
         /// </summary>
         public OrdersTab()
         {
@@ -102,39 +96,37 @@ namespace oop_winform.View.Tabs
 
         private void OrdersDataGridView_SelectionChanged(object sender, EventArgs e)
         {
+            var selectedCells = OrdersDataGridView.SelectedCells.Count;
+            var selectedIndex = OrdersDataGridView.SelectedCells[0].RowIndex;
+
             if (OrdersDataGridView.SelectedCells.Count == 0)
             {
-                IdTextBox.Text = string.Empty;
-                CreatedTextBox.Text = string.Empty;
                 StatusComboBox.SelectedIndex = -1;
-                StatusComboBox.Enabled = false;
-                AddressControl.Address = null;
-                OrderItemsListBox.DataSource = new List<string>();
-                AmountLabel.Text = string.Empty;
             }
             else
             {
-                var selectedIndex = OrdersDataGridView.SelectedCells[0].RowIndex;
-
-                IdTextBox.Text = Orders[selectedIndex].Id.ToString();
-                CreatedTextBox.Text = Orders[selectedIndex].CreationDate.ToString();
                 StatusComboBox.SelectedItem = Orders[selectedIndex].Status;
-                StatusComboBox.Enabled = true;
-                AddressControl.Address = Orders[selectedIndex].Address;
-                OrderItemsListBox.DataSource = ParseItemNames(Orders[selectedIndex].Items);
-                AmountLabel.Text = Orders[selectedIndex].Amount.ToString();
             }
 
+            IdTextBox.Text = selectedCells == 0 ? "" : Orders[selectedIndex].Id.ToString();
+            CreatedTextBox.Text = selectedCells == 0 ? "" : Orders[selectedIndex].CreationDate.ToString();
+            StatusComboBox.Enabled = selectedCells == 0 ? false : true;
+            AddressControl.Address = selectedCells == 0 ? null : Orders[selectedIndex].Address;
+            OrderItemsListBox.DataSource = selectedCells == 0 ? new List<string>() : ParseItemNames(Orders[selectedIndex].Items);
+            AmountLabel.Text = selectedCells == 0 ? "" :Orders[selectedIndex].Amount.ToString();
         }
 
         private void StatusComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (OrdersDataGridView.SelectedCells.Count != 0)
+            if (OrdersDataGridView.SelectedCells.Count == 0)
             {
-                var selectedIndex = OrdersDataGridView.SelectedCells[0].RowIndex;
-                Orders[selectedIndex].Status = (OrderStatusTypes)StatusComboBox.SelectedItem;
-                OrdersDataGridView[2, selectedIndex].Value = Enum.GetName(typeof(OrderStatusTypes), Orders[selectedIndex].Status);
+                return;
             }
+            var selectedIndex = OrdersDataGridView.SelectedCells[0].RowIndex;
+            Orders[selectedIndex].Status = (OrderStatusTypes)StatusComboBox.SelectedItem;
+            OrdersDataGridView[2, selectedIndex].Value = Enum.GetName(
+                                                                    typeof(OrderStatusTypes), 
+                                                                    Orders[selectedIndex].Status);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using oop_winform.Models;
-using oop_winform.Models.Orders;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,6 +7,9 @@ using System.Windows.Forms;
 
 namespace oop_winform.View.Tabs
 {
+    /// <summary>
+    /// Вкладка корзины.
+    /// </summary>
     public partial class CartTab : UserControl
     {
         /// <summary>
@@ -33,10 +35,7 @@ namespace oop_winform.View.Tabs
         /// </summary>
         public List<Item> Items
         {
-            get
-            {
-                return _items;
-            }
+            get => _items;
             set
             {
                 _items = value;
@@ -53,20 +52,14 @@ namespace oop_winform.View.Tabs
         /// </summary>
         public List<Customer> Customers
         {
-            get
-            {
-                return _customers;
-            }
+            get => _customers;
             set
             {
                 _customers = value;
 
                 if (_customers != null)
                 {
-                    foreach (var customer in _customers)
-                    {
-                        CustomerComboBox.Items.Add(customer.FullName);
-                    }
+                    UpdateCustomerComboBox();
                 }
             }
         }
@@ -100,13 +93,23 @@ namespace oop_winform.View.Tabs
         }
 
         /// <summary>
+        /// Обновляет комбобокс с покупателями.
+        /// </summary>
+        private void UpdateCustomerComboBox()
+        {
+            foreach (var customer in _customers)
+            {
+                CustomerComboBox.Items.Add(customer.FullName);
+            }
+        }
+
+        /// <summary>
         /// Сортирует и обновляет товары.
         /// </summary>
-        /// <param name="selectedIndex">Выбраный элемент.</param>
+        /// <param name="selectedIndex">Выбранный элемент.</param>
         private void UpdateItemsListBox(int selectedIndex)
         {
             ItemsListBox.Items.Clear();
-
             var orderedListItems = _items.OrderBy(item => item.Name).ToList();
 
             foreach (Item item in orderedListItems)
@@ -120,11 +123,10 @@ namespace oop_winform.View.Tabs
         /// <summary>
         /// Сортирует и обновляет корзины.
         /// </summary>
-        /// <param name="selectedIndex">Выбраный элемент.</param>
+        /// <param name="selectedIndex">выбранный элемент.</param>
         private void UpdateCartListBox(int selectedIndex)
         {
             CartListBox.Items.Clear();
-
             var orderedListItems = CurrentCustomer.Cart.Items.OrderBy(item => item.Name).ToList();
 
             foreach (Item item in orderedListItems)
@@ -139,64 +141,48 @@ namespace oop_winform.View.Tabs
 
         private void CustomerComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int index = CustomerComboBox.SelectedIndex;
+            var index = CustomerComboBox.SelectedIndex;
 
             if (index == -1)
             {
                 return;
             }
-            else
+            CurrentCustomer = _customers[index];
+            if (CurrentCustomer.Cart.Items == null)
             {
-                CurrentCustomer = _customers[index];
-
-                if (CurrentCustomer.Cart.Items == null)
-                {
-                    return;
-                }
-                else
-                {
-                    AmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
-                    UpdateCartListBox(-1);
-                }
+                return;
             }
+            AmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
+            UpdateCartListBox(-1);
         }
 
         private void AddToCartButton_Click(object sender, EventArgs e)
         {
-            int indexListBox = ItemsListBox.SelectedIndex;
-            int indexComboBox = CustomerComboBox.SelectedIndex;
+            var indexListBox = ItemsListBox.SelectedIndex;
+            var indexComboBox = CustomerComboBox.SelectedIndex;
 
             if (indexListBox == -1 || indexComboBox == -1)
             {
                 return;
             }
-            else
-            {
-                CurrentCustomer.Cart.Items.Add(_items[indexListBox]);
-
-                AmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
-
-                UpdateCartListBox(-1);
-                CreateOrderButton.Enabled = true;
-            }
+            CurrentCustomer.Cart.Items.Add(_items[indexListBox]);
+            AmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
+            UpdateCartListBox(-1);
+            CreateOrderButton.Enabled = true;
         }
 
         private void RemoveItemButton_Click(object sender, EventArgs e)
         {
-            int indexComboBox = CustomerComboBox.SelectedIndex;
-            int indexListBox = CartListBox.SelectedIndex;
+            var indexComboBox = CustomerComboBox.SelectedIndex;
+            var indexListBox = CartListBox.SelectedIndex;
 
             if (indexListBox == -1 || indexComboBox == -1)
             {
                 return; 
             }
-            else
-            {
-                CurrentCustomer.Cart.Items.RemoveAt(indexListBox);
-                AmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
-
-                UpdateCartListBox(-1);
-            }
+            CurrentCustomer.Cart.Items.RemoveAt(indexListBox);
+            AmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
+            UpdateCartListBox(-1);
         }
 
         private void ClearCartButton_Click(object sender, EventArgs e)

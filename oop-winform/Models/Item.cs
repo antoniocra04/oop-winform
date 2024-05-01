@@ -26,7 +26,6 @@ namespace oop_winform.Models
         /// Стоимость товара.
         /// </summary>
         private float _cost;
-        private Item item;
 
         /// <summary>
         /// Создаёт экземпляр класса <see cref="Item"/>.

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using oop_winform.Services;
 
-namespace oop_winform.Models.Orders
+namespace oop_winform.Models
 {
     /// <summary>
     /// Хранит данные о заказе.
@@ -38,17 +38,17 @@ namespace oop_winform.Models.Orders
         /// <summary>
         /// Возвращает и задает статус заказа.
         /// </summary>
-        public OrderStatusTypes Status { get; set; }
+        public OrderStatusTypes Status { get; set; } = OrderStatusTypes.New;
 
         /// <summary>
         /// Возращает и задает адрес доставки.
         /// </summary>
-        public Address Address { get; set; }
+        public Address Address { get; set; } = new Address();
 
         /// <summary>
         /// Возращает и задает адрес доставки.
         /// </summary>
-        public List<Item> Items { get; set; }
+        public List<Item> Items { get; set; } = new List<Item>();
 
         /// <summary>
         /// Возвращает общую стоимость товаров в заказе.
@@ -74,18 +74,15 @@ namespace oop_winform.Models.Orders
         }
 
         /// <summary>
-        /// Создает экзепляр класса <see cref="Order"/>.
+        /// Создает экземпляр класса <see cref="Order"/>.
         /// </summary>
         public Order()
         {
             _id = IdGenerator.GetId();
-            Status = OrderStatusTypes.New;
-            Address = new Address();
-            Items = new List<Item>();
         }
 
         /// <summary>
-        /// Создает экзепляр класса <see cref="Order"/>.
+        /// Создает экземпляр класса <see cref="Order"/>.
         /// </summary>
         /// <param name="status">Статус заказа.</param>
         /// <param name="address">Адрес доставки.</param>
