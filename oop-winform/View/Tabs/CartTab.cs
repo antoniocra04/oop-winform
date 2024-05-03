@@ -1,7 +1,6 @@
 ﻿using oop_winform.Models;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -21,6 +20,11 @@ namespace oop_winform.View.Tabs
         /// Список покупателей.
         /// </summary>
         private List<Customer> _customers;
+
+        /// <summary>
+        /// Выбранный покупатель.
+        /// </summary>
+        private Customer _currentCustomer;
 
         /// <summary>
         /// Создает экземпляр класса <see cref="CartTab"/>.
@@ -65,11 +69,6 @@ namespace oop_winform.View.Tabs
         }
 
         /// <summary>
-        /// Возвращает и задает выбранного покупателя.
-        /// </summary>
-        private Customer CurrentCustomer { get; set; }
-
-        /// <summary>
         /// Обновляет данные.
         /// </summary>
         public void RefreshData()
@@ -106,13 +105,13 @@ namespace oop_winform.View.Tabs
         /// <summary>
         /// Сортирует и обновляет товары.
         /// </summary>
-        /// <param name="selectedIndex">Выбранный элемент.</param>
+        /// <param name="selectedIndex">выбранный элемент.</param>
         private void UpdateItemsListBox(int selectedIndex)
         {
             ItemsListBox.Items.Clear();
             var orderedListItems = _items.OrderBy(item => item.Name).ToList();
 
-            foreach (Item item in orderedListItems)
+            foreach (var item in orderedListItems)
             {
                 ItemsListBox.Items.Add(item.Name);
             }
@@ -127,9 +126,11 @@ namespace oop_winform.View.Tabs
         private void UpdateCartListBox(int selectedIndex)
         {
             CartListBox.Items.Clear();
-            var orderedListItems = CurrentCustomer.Cart.Items.OrderBy(item => item.Name).ToList();
+            var orderedListItems = _currentCustomer.Cart.Items.OrderBy(item => item.Name).ToList();
 
-            foreach (Item item in orderedListItems)
+            _currentCustomer.Cart.Items = orderedListItems.ToList();
+
+            foreach (var item in orderedListItems)
             {
                 CartListBox.Items.Add(item.Name);
             }
@@ -147,12 +148,12 @@ namespace oop_winform.View.Tabs
             {
                 return;
             }
-            CurrentCustomer = _customers[index];
-            if (CurrentCustomer.Cart.Items == null)
+            _currentCustomer = _customers[index];
+            if (_currentCustomer.Cart.Items == null)
             {
                 return;
             }
-            AmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
+            AmountLabel.Text = _currentCustomer.Cart.Amount.ToString();
             UpdateCartListBox(-1);
         }
 
@@ -165,8 +166,8 @@ namespace oop_winform.View.Tabs
             {
                 return;
             }
-            CurrentCustomer.Cart.Items.Add(_items[indexListBox]);
-            AmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
+            _currentCustomer.Cart.Items.Add(_items[indexListBox]);
+            AmountLabel.Text = _currentCustomer.Cart.Amount.ToString();
             UpdateCartListBox(-1);
             CreateOrderButton.Enabled = true;
         }
@@ -180,32 +181,44 @@ namespace oop_winform.View.Tabs
             {
                 return; 
             }
-            CurrentCustomer.Cart.Items.RemoveAt(indexListBox);
-            AmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
+            _currentCustomer.Cart.Items.RemoveAt(indexListBox);
+            AmountLabel.Text = _currentCustomer.Cart.Amount.ToString();
             UpdateCartListBox(-1);
         }
 
         private void ClearCartButton_Click(object sender, EventArgs e)
         {
-            CurrentCustomer.Cart = new Cart();
+            var indexComboBox = CustomerComboBox.SelectedIndex;
+            var indexListBox = CartListBox.SelectedIndex;
+            if (indexListBox == -1 || indexComboBox == -1)
+            {
+                return;
+            }
+            _currentCustomer.Cart = new Cart();
             UpdateCartListBox(-1);
-            AmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
+            AmountLabel.Text = _currentCustomer.Cart.Amount.ToString();
         }
 
         private void CreateOrderButton_Click(object sender, EventArgs e)
         {
-            Order order = new Order
+            var indexComboBox = CustomerComboBox.SelectedIndex;
+            var indexListBox = CartListBox.SelectedIndex;
+            if (indexListBox == -1 || indexComboBox == -1)
             {
-                Address = CurrentCustomer.Address,
-                Items = CurrentCustomer.Cart.Items,
+                return;
+            }
+            var order = new Order
+            {
+                Address = _currentCustomer.Address,
+                Items = _currentCustomer.Cart.Items,
                 Status = OrderStatusTypes.New
             };
 
-            CurrentCustomer.Orders.Add(order);
+            _currentCustomer.Orders.Add(order);
 
-            CurrentCustomer.Cart = new Cart();
+            _currentCustomer.Cart = new Cart();
             UpdateCartListBox(-1);
-            AmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
+            AmountLabel.Text = _currentCustomer.Cart.Amount.ToString();
             CreateOrderButton.Enabled = false;
         }
     }

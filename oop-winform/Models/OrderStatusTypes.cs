@@ -1,5 +1,8 @@
 ﻿namespace oop_winform.Models
 {
+    /// <summary>
+    /// Статус заказа.
+    /// </summary>
     public enum OrderStatusTypes
     {
         /// <summary>

@@ -37,7 +37,7 @@
             this.CartTab = new System.Windows.Forms.TabPage();
             this.CartsTab = new oop_winform.View.Tabs.CartTab();
             this.OrdersTab = new System.Windows.Forms.TabPage();
-            this.ordersTab1 = new oop_winform.View.Tabs.OrdersTab();
+            this.OrderTab = new oop_winform.View.Tabs.OrdersTab();
             this.cartTab1 = new oop_winform.View.Tabs.CartTab();
             this.MainTabControl.SuspendLayout();
             this.ItemsTabPage.SuspendLayout();
@@ -125,7 +125,7 @@
             // 
             // OrdersTab
             // 
-            this.OrdersTab.Controls.Add(this.ordersTab1);
+            this.OrdersTab.Controls.Add(this.OrderTab);
             this.OrdersTab.Location = new System.Drawing.Point(4, 22);
             this.OrdersTab.Name = "OrdersTab";
             this.OrdersTab.Size = new System.Drawing.Size(976, 635);
@@ -133,13 +133,13 @@
             this.OrdersTab.Text = "Orders";
             this.OrdersTab.UseVisualStyleBackColor = true;
             // 
-            // ordersTab1
+            // OrderTab
             // 
-            this.ordersTab1.Customers = null;
-            this.ordersTab1.Location = new System.Drawing.Point(0, 0);
-            this.ordersTab1.Name = "ordersTab1";
-            this.ordersTab1.Size = new System.Drawing.Size(980, 635);
-            this.ordersTab1.TabIndex = 0;
+            this.OrderTab.Customers = null;
+            this.OrderTab.Location = new System.Drawing.Point(0, 0);
+            this.OrderTab.Name = "OrderTab";
+            this.OrderTab.Size = new System.Drawing.Size(980, 635);
+            this.OrderTab.TabIndex = 0;
             // 
             // cartTab1
             // 
@@ -160,7 +160,7 @@
             this.MaximumSize = new System.Drawing.Size(1000, 700);
             this.MinimumSize = new System.Drawing.Size(700, 500);
             this.Name = "MainForm";
-            this.Text = "Object Oriented Practics";
+            this.Text = "a";
             this.MainTabControl.ResumeLayout(false);
             this.ItemsTabPage.ResumeLayout(false);
             this.CustomersTabPage.ResumeLayout(false);
@@ -180,7 +180,7 @@
         private System.Windows.Forms.TabPage CartTab;
         private View.Tabs.CartTab CartsTab;
         private System.Windows.Forms.TabPage OrdersTab;
-        private View.Tabs.OrdersTab ordersTab1;
+        private View.Tabs.OrdersTab OrderTab;
         private View.Tabs.CartTab cartTab1;
     }
 }

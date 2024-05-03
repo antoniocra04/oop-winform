@@ -1,8 +1,6 @@
 ﻿using oop_winform.Models;
-using oop_winform.View.Controls;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -17,6 +15,15 @@ namespace oop_winform.View.Tabs
         /// Список покупателей.
         /// </summary>
         private List<Customer> _customers;
+
+        /// <summary>
+        /// Создает экземпляр класса <see cref="OrdersTab"/>.
+        /// </summary>
+        public OrdersTab()
+        {
+            InitializeComponent();
+            StatusComboBox.DataSource = Enum.GetValues(typeof(OrderStatusTypes));
+        }
 
         /// <summary>
         /// Возвращает и задает список покупателей.
@@ -39,15 +46,6 @@ namespace oop_winform.View.Tabs
         /// Возвращает и задает список заказов.
         /// </summary>
         public List<Order> Orders { get; set; } = new List<Order>();
-
-        /// <summary>
-        /// Создает экзепмляр класса <see cref="OrdersTab"/>.
-        /// </summary>
-        public OrdersTab()
-        {
-            InitializeComponent();
-            StatusComboBox.DataSource = Enum.GetValues(typeof(OrderStatusTypes));
-        }
 
         /// <summary>
         /// Обновляет данные вкладки заказов.
@@ -110,9 +108,10 @@ namespace oop_winform.View.Tabs
 
             IdTextBox.Text = selectedCells == 0 ? "" : Orders[selectedIndex].Id.ToString();
             CreatedTextBox.Text = selectedCells == 0 ? "" : Orders[selectedIndex].CreationDate.ToString();
-            StatusComboBox.Enabled = selectedCells == 0 ? false : true;
+            StatusComboBox.Enabled = selectedCells != 0;
             AddressControl.Address = selectedCells == 0 ? null : Orders[selectedIndex].Address;
-            OrderItemsListBox.DataSource = selectedCells == 0 ? new List<string>() : ParseItemNames(Orders[selectedIndex].Items);
+            OrderItemsListBox.DataSource = selectedCells == 0 ? new List<string>() : ParseItemNames(
+                                                                                        Orders[selectedIndex].Items);
             AmountLabel.Text = selectedCells == 0 ? "" :Orders[selectedIndex].Amount.ToString();
         }
 
@@ -125,8 +124,8 @@ namespace oop_winform.View.Tabs
             var selectedIndex = OrdersDataGridView.SelectedCells[0].RowIndex;
             Orders[selectedIndex].Status = (OrderStatusTypes)StatusComboBox.SelectedItem;
             OrdersDataGridView[2, selectedIndex].Value = Enum.GetName(
-                                                                    typeof(OrderStatusTypes), 
-                                                                    Orders[selectedIndex].Status);
+                                                            typeof(OrderStatusTypes), 
+                                                            Orders[selectedIndex].Status);
         }
     }
 }

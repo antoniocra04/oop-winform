@@ -21,7 +21,7 @@ namespace oop_winform
             CustomersTab.Customers = _store.Customers;
             CartsTab.Items = _store.Items;
             CartsTab.Customers = _store.Customers;
-            ordersTab1.Customers = _store.Customers;
+            OrderTab.Customers = _store.Customers;
         }
 
         private void MainTabControl_TabIndexChanged(object sender, System.EventArgs e)
@@ -29,8 +29,8 @@ namespace oop_winform
             CartsTab.Items = ItemsTab.Items;
             CartsTab.Customers = CustomersTab.Customers;
             CartsTab.RefreshData();
-            ordersTab1.Customers = _store.Customers;
-            ordersTab1.RefreshData();
+            OrderTab.Customers = _store.Customers;
+            OrderTab.RefreshData();
         }
     }
 }
