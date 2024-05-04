@@ -94,28 +94,33 @@ namespace oop_winform.View.Tabs
 
         private void OrdersDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            var selectedCells = OrdersDataGridView.SelectedCells.Count;
-            var selectedIndex = OrdersDataGridView.SelectedCells[0].RowIndex;
-
             if (OrdersDataGridView.SelectedCells.Count == 0)
             {
                 StatusComboBox.SelectedIndex = -1;
+                StatusComboBox.Enabled = false;
             }
             else
             {
-                StatusComboBox.SelectedItem = Orders[selectedIndex].Status;
+                StatusComboBox.SelectedItem = Orders[OrdersDataGridView.SelectedCells[0].RowIndex].Status;
+                StatusComboBox.Enabled = true;
             }
 
-            IdTextBox.Text = selectedCells == 0 ? "" : Orders[selectedIndex].Id.ToString();
-            CreatedTextBox.Text = selectedCells == 0 ? "" : Orders[selectedIndex].CreationDate.ToString();
-            StatusComboBox.Enabled = selectedCells != 0;
-            AddressControl.Address = selectedCells == 0 ? null : Orders[selectedIndex].Address;
-            OrderItemsListBox.DataSource =
-                selectedCells == 0 ?
-                new List<string>() :
-                ParseItemNames(Orders[selectedIndex].Items);
-
-            AmountLabel.Text = selectedCells == 0 ? "" :Orders[selectedIndex].Amount.ToString();
+            IdTextBox.Text = (OrdersDataGridView.SelectedCells.Count == 0) ? 
+                string.Empty : 
+                Orders[OrdersDataGridView.SelectedCells[0].RowIndex].Id.ToString();
+            CreatedTextBox.Text = (OrdersDataGridView.SelectedCells.Count == 0) ? 
+                string.Empty : 
+                Orders[OrdersDataGridView.SelectedCells[0].RowIndex].CreationDate.ToString();
+            StatusComboBox.Enabled = (OrdersDataGridView.SelectedCells.Count == 0) ? false : true;
+            AddressControl.Address = (OrdersDataGridView.SelectedCells.Count == 0) ? 
+                null : 
+                Orders[OrdersDataGridView.SelectedCells[0].RowIndex].Address;
+            OrderItemsListBox.DataSource = (OrdersDataGridView.SelectedCells.Count == 0) ? 
+                new List<string>() : 
+                ParseItemNames(Orders[OrdersDataGridView.SelectedCells[0].RowIndex].Items);
+            AmountLabel.Text = (OrdersDataGridView.SelectedCells.Count == 0) ? 
+                string.Empty : 
+                Orders[OrdersDataGridView.SelectedCells[0].RowIndex].Amount.ToString();
         }
 
         private void StatusComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -127,8 +132,8 @@ namespace oop_winform.View.Tabs
             var selectedIndex = OrdersDataGridView.SelectedCells[0].RowIndex;
             Orders[selectedIndex].Status = (OrderStatusTypes)StatusComboBox.SelectedItem;
             OrdersDataGridView[2, selectedIndex].Value = Enum.GetName(
-                                                            typeof(OrderStatusTypes), 
-                                                            Orders[selectedIndex].Status);
+                typeof(OrderStatusTypes), 
+                Orders[selectedIndex].Status);
         }
     }
 }

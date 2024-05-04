@@ -203,10 +203,7 @@ namespace oop_winform.View.Tabs
         {
             var indexComboBox = CustomerComboBox.SelectedIndex;
             var indexListBox = CartListBox.SelectedIndex;
-            if (indexListBox == -1 || indexComboBox == -1)
-            {
-                return;
-            }
+
             var order = new Order
             {
                 Address = _currentCustomer.Address,
