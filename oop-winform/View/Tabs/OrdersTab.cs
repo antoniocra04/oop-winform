@@ -110,8 +110,11 @@ namespace oop_winform.View.Tabs
             CreatedTextBox.Text = selectedCells == 0 ? "" : Orders[selectedIndex].CreationDate.ToString();
             StatusComboBox.Enabled = selectedCells != 0;
             AddressControl.Address = selectedCells == 0 ? null : Orders[selectedIndex].Address;
-            OrderItemsListBox.DataSource = selectedCells == 0 ? new List<string>() : ParseItemNames(
-                                                                                        Orders[selectedIndex].Items);
+            OrderItemsListBox.DataSource =
+                selectedCells == 0 ?
+                new List<string>() :
+                ParseItemNames(Orders[selectedIndex].Items);
+
             AmountLabel.Text = selectedCells == 0 ? "" :Orders[selectedIndex].Amount.ToString();
         }
 
