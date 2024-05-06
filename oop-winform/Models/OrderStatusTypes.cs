@@ -1,37 +1,37 @@
 ﻿namespace oop_winform.Models
 {
     /// <summary>
-    /// Категория товара.
+    /// Статус заказа.
     /// </summary>
-    public enum CategoryTypes
+    public enum OrderStatusTypes
     {
         /// <summary>
-        /// Телефоны.
+        /// Новый.
         /// </summary>
-        Phones,
+        New,
         /// <summary>
-        /// Компьютеры.
+        /// В процессе.
         /// </summary>
-        Computers,
+        Processing,
         /// <summary>
-        /// Электроника.
+        /// В сборке.
         /// </summary>
-        Electronics,
+        Assembly,
         /// <summary>
-        /// Одежда.
+        /// Отправлен.
         /// </summary>
-        Cloths,
+        Sent,
         /// <summary>
-        /// Еда.
+        /// Доставлен.
         /// </summary>
-        Food,
+        Delivered,
         /// <summary>
-        /// Здоровье.
+        /// Возвращен.
         /// </summary>
-        Health,
+        Returned,
         /// <summary>
-        /// Игры.
+        /// Отклонен.
         /// </summary>
-        Games,
+        Abandoned
     }
 }

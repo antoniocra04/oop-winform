@@ -1,4 +1,5 @@
 ﻿using oop_winform.Services;
+using System.Collections.Generic;
 
 namespace oop_winform.Models
 {
@@ -22,7 +23,6 @@ namespace oop_winform.Models
         /// </summary>
         public Customer()
         {
-            Address = new Address();
             FullName = "";
         }
 
@@ -36,11 +36,6 @@ namespace oop_winform.Models
             FullName = fullname;
             Address = address;
         }
-
-        /// <summary>
-        /// Возвращает и задает адрес покупателя.
-        /// </summary>
-        public Address Address { get; set; }
 
         /// <summary>
         /// Возвращает Id покупателя.
@@ -62,5 +57,20 @@ namespace oop_winform.Models
                 _fullname = value;
             }
         }
+
+        /// <summary>
+        /// Возвращает и задает адрес покупателя.
+        /// </summary>
+        public Address Address { get; set; } = new Address();
+
+        /// <summary>
+        /// Возвращает и задает корзину покупателя.
+        /// </summary>
+        public Cart Cart { get; set; } = new Cart();
+
+        /// <summary>
+        /// Возвращает и задает список заказов покупателя.
+        /// </summary>
+        public List<Order> Orders { get; set; } = new List<Order>();
     }
 }
