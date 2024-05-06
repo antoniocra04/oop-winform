@@ -105,7 +105,7 @@ namespace oop_winform.View.Tabs
         /// <summary>
         /// Сортирует и обновляет товары.
         /// </summary>
-        /// <param name="selectedIndex">выбранный элемент.</param>
+        /// <param name="selectedIndex">Выбранный элемент.</param>
         private void UpdateItemsListBox(int selectedIndex)
         {
             ItemsListBox.Items.Clear();
@@ -122,7 +122,7 @@ namespace oop_winform.View.Tabs
         /// <summary>
         /// Сортирует и обновляет корзины.
         /// </summary>
-        /// <param name="selectedIndex">выбранный элемент.</param>
+        /// <param name="selectedIndex">Выбранный элемент.</param>
         private void UpdateCartListBox(int selectedIndex)
         {
             CartListBox.Items.Clear();
@@ -137,7 +137,11 @@ namespace oop_winform.View.Tabs
 
             CartListBox.SelectedIndex = selectedIndex;
 
-            CreateOrderButton.Enabled = false;
+            if (CartListBox.Items.Count < 1)
+            {
+                CreateOrderButton.Enabled = false;
+            }
+
         }
 
         private void CustomerComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -201,8 +205,10 @@ namespace oop_winform.View.Tabs
 
         private void CreateOrderButton_Click(object sender, EventArgs e)
         {
-            var indexComboBox = CustomerComboBox.SelectedIndex;
-            var indexListBox = CartListBox.SelectedIndex;
+            if (CartListBox.Items.Count < 1)
+            {
+                return;
+            }
 
             var order = new Order
             {
