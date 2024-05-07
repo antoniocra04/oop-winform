@@ -17,12 +17,13 @@ namespace oop_winform.View.Tabs
         private List<Customer> _customers;
 
         /// <summary>
-        /// Создает экземпляр класса <see cref="OrdersTab"/>.
+        /// Создает экзепляр класса <see cref="OrdersTab"/>.
         /// </summary>
         public OrdersTab()
         {
             InitializeComponent();
             StatusComboBox.DataSource = Enum.GetValues(typeof(OrderStatusTypes));
+            PriorityOptionPanel.Visible = false;
         }
 
         /// <summary>
@@ -51,16 +52,6 @@ namespace oop_winform.View.Tabs
         /// Приоритетный заказ. 
         /// </summary>
         private PriorityOrder PriorityOrder;
-
-        /// <summary>
-        /// Создает экзепляр класса <see cref="OrdersTab"/>.
-        /// </summary>
-        public OrdersTab()
-        {
-            InitializeComponent();
-            StatusComboBox.DataSource = Enum.GetValues(typeof(OrderStatusTypes));
-            PriorityOptionPanel.Visible = false;
-        }
 
         /// <summary>
         /// Обновляет данные вкладки заказов.
@@ -109,6 +100,7 @@ namespace oop_winform.View.Tabs
 
         private void OrdersDataGridView_SelectionChanged(object sender, EventArgs e)
         {
+            var selectedIndex = OrdersDataGridView.SelectedCells[0].RowIndex;
             if (OrdersDataGridView.SelectedCells.Count == 0)
             {
                 StatusComboBox.SelectedIndex = -1;

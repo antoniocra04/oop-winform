@@ -65,6 +65,7 @@ namespace oop_winform.View.Tabs
         private void SetValuesTextBoxes()
         {
             var isSelectedIndexCorrect = CustomersListBox.SelectedIndex != -1;
+            IsPriorityCheckBox.Enabled = isSelectedIndexCorrect;
             FullNameTextBox.Enabled = isSelectedIndexCorrect;
             AddressControl.Enabled = isSelectedIndexCorrect;
 

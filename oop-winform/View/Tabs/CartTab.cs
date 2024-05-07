@@ -206,7 +206,7 @@ namespace oop_winform.View.Tabs
         private void CreateOrderButton_Click(object sender, EventArgs e)
         {
             Order order;
-            if (CurrentCustomer.IsPriority)
+            if (_currentCustomer.IsPriority)
             {
                 order = new PriorityOrder();
             }
@@ -215,8 +215,8 @@ namespace oop_winform.View.Tabs
                 order = new Order();
             }
 
-            order.Address = CurrentCustomer.Address;
-            order.Items = CurrentCustomer.Cart.Items;
+            order.Address = _currentCustomer.Address;
+            order.Items = _currentCustomer.Cart.Items;
             order.Status = OrderStatusTypes.New;
 
             _currentCustomer.Orders.Add(order);
