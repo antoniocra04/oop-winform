@@ -1,12 +1,10 @@
 ﻿using oop_winform.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace oop_winform.Models
 {
+    /// <summary>
+    /// Хранит данные об адресе.
+    /// </summary>
     public class Address
     {
         /// <summary>
@@ -40,7 +38,7 @@ namespace oop_winform.Models
         private string _apartment;
 
         /// <summary>
-        /// Создает экзепляр класса <see cref="Address"/>.
+        /// Создает экземпляр класса <see cref="Address"/>.
         /// </summary>
         public Address()
         {
@@ -53,7 +51,7 @@ namespace oop_winform.Models
         }
 
         /// <summary>
-        /// Создает экзепляр класса <see cref="Address"/>.
+        /// Создает экземпляр класса <see cref="Address"/>.
         /// </summary>
         /// <param name="index">Почтовый индекс.</param>
         /// <param name="country">Страна.</param>

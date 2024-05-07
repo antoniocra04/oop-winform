@@ -44,9 +44,9 @@
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.DescriptionTextBox = new System.Windows.Forms.TextBox();
             this.SelectedItemPanel = new System.Windows.Forms.Panel();
-            this.MainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.CategoryComboBox = new System.Windows.Forms.ComboBox();
             this.CategoryLabel = new System.Windows.Forms.Label();
+            this.MainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.ItemsListPanel.SuspendLayout();
             this.ButtonPanel.SuspendLayout();
             this.SelectedItemPanel.SuspendLayout();
@@ -231,23 +231,9 @@
             this.SelectedItemPanel.Size = new System.Drawing.Size(594, 694);
             this.SelectedItemPanel.TabIndex = 1;
             // 
-            // MainTableLayoutPanel
-            // 
-            this.MainTableLayoutPanel.ColumnCount = 2;
-            this.MainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.MainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.MainTableLayoutPanel.Controls.Add(this.ItemsListPanel, 0, 0);
-            this.MainTableLayoutPanel.Controls.Add(this.SelectedItemPanel, 1, 0);
-            this.MainTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
-            this.MainTableLayoutPanel.Name = "MainTableLayoutPanel";
-            this.MainTableLayoutPanel.RowCount = 1;
-            this.MainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.MainTableLayoutPanel.Size = new System.Drawing.Size(1000, 700);
-            this.MainTableLayoutPanel.TabIndex = 2;
-            // 
             // CategoryComboBox
             // 
+            this.CategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CategoryComboBox.Enabled = false;
             this.CategoryComboBox.FormattingEnabled = true;
             this.CategoryComboBox.Location = new System.Drawing.Point(81, 105);
@@ -264,6 +250,21 @@
             this.CategoryLabel.Size = new System.Drawing.Size(52, 13);
             this.CategoryLabel.TabIndex = 17;
             this.CategoryLabel.Text = "Category:";
+            // 
+            // MainTableLayoutPanel
+            // 
+            this.MainTableLayoutPanel.ColumnCount = 2;
+            this.MainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.MainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.MainTableLayoutPanel.Controls.Add(this.ItemsListPanel, 0, 0);
+            this.MainTableLayoutPanel.Controls.Add(this.SelectedItemPanel, 1, 0);
+            this.MainTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.MainTableLayoutPanel.Name = "MainTableLayoutPanel";
+            this.MainTableLayoutPanel.RowCount = 1;
+            this.MainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.MainTableLayoutPanel.Size = new System.Drawing.Size(1000, 700);
+            this.MainTableLayoutPanel.TabIndex = 2;
             // 
             // ItemsTab
             // 

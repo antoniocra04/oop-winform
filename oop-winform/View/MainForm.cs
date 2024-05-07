@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace oop_winform
 {
+    /// <summary>
+    /// Управляет главным окном программы.
+    /// </summary>
     public partial class MainForm : Form
     {
         /// <summary>
@@ -16,18 +19,18 @@ namespace oop_winform
             InitializeComponent();
             ItemsTab.Items = _store.Items;
             CustomersTab.Customers = _store.Customers;
-            cartTab1.Items = _store.Items;
-            cartTab1.Customers = _store.Customers;
-            ordersTab1.Customers = _store.Customers;
+            CartsTab.Items = _store.Items;
+            CartsTab.Customers = _store.Customers;
+            OrderTab.Customers = _store.Customers;
         }
 
         private void MainTabControl_TabIndexChanged(object sender, System.EventArgs e)
         {
-            cartTab1.Items = ItemsTab.Items;
-            cartTab1.Customers = CustomersTab.Customers;
-            cartTab1.RefreshData();
-            ordersTab1.Customers = _store.Customers;
-            ordersTab1.RefreshData();
+            CartsTab.Items = ItemsTab.Items;
+            CartsTab.Customers = CustomersTab.Customers;
+            CartsTab.RefreshData();
+            OrderTab.Customers = _store.Customers;
+            OrderTab.RefreshData();
         }
     }
 }

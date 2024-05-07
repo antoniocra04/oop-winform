@@ -199,15 +199,25 @@
             this.SelectedOrderPanel.Size = new System.Drawing.Size(384, 544);
             this.SelectedOrderPanel.TabIndex = 2;
             // 
+            // AddressControl
+            // 
+            this.AddressControl.Address = null;
+            this.AddressControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddressControl.Location = new System.Drawing.Point(-2, 119);
+            this.AddressControl.Name = "AddressControl";
+            this.AddressControl.Size = new System.Drawing.Size(378, 137);
+            this.AddressControl.TabIndex = 15;
+            // 
             // AmountLabel
             // 
             this.AmountLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.AmountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            this.AmountLabel.Location = new System.Drawing.Point(277, 464);
+            this.AmountLabel.Location = new System.Drawing.Point(273, 464);
             this.AmountLabel.Name = "AmountLabel";
             this.AmountLabel.Size = new System.Drawing.Size(104, 21);
             this.AmountLabel.TabIndex = 14;
-            this.AmountLabel.Text = "49 999,90";
+            this.AmountLabel.Text = "0";
             this.AmountLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // OrderItemsListBox
@@ -218,7 +228,7 @@
             this.OrderItemsListBox.Location = new System.Drawing.Point(3, 286);
             this.OrderItemsListBox.Name = "OrderItemsListBox";
             this.OrderItemsListBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.OrderItemsListBox.Size = new System.Drawing.Size(381, 160);
+            this.OrderItemsListBox.Size = new System.Drawing.Size(373, 160);
             this.OrderItemsListBox.TabIndex = 13;
             // 
             // StatusComboBox
@@ -252,7 +262,7 @@
             this.AmountHeaderLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.AmountHeaderLabel.AutoSize = true;
             this.AmountHeaderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            this.AmountHeaderLabel.Location = new System.Drawing.Point(328, 449);
+            this.AmountHeaderLabel.Location = new System.Drawing.Point(324, 449);
             this.AmountHeaderLabel.Name = "AmountHeaderLabel";
             this.AmountHeaderLabel.Size = new System.Drawing.Size(53, 13);
             this.AmountHeaderLabel.TabIndex = 8;

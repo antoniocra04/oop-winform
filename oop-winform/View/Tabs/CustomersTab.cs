@@ -1,6 +1,5 @@
 ﻿using oop_winform.Models;
 using oop_winform.Services;
-using oop_winform.View.Controls;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -67,25 +66,17 @@ namespace oop_winform.View.Tabs
         {
             var isSelectedIndexCorrect = CustomersListBox.SelectedIndex != -1;
             FullNameTextBox.Enabled = isSelectedIndexCorrect;
-            IsPriorityCheckBox.Enabled = isSelectedIndexCorrect;
-            if (isSelectedIndexCorrect)
-            {
-                IdTextBox.Text = _currentCustomer.Id.ToString();
-                FullNameTextBox.Text = _currentCustomer.FullName;
-                IsPriorityCheckBox.Checked = Customers[CustomersListBox.SelectedIndex].IsPriority;
-            }
-            else
-            {
-                IdTextBox.Text = "";
-                FullNameTextBox.Text = "";
-                addressControl1.Address = null;
-                IsPriorityCheckBox.Checked = false;
-            }
+            AddressControl.Enabled = isSelectedIndexCorrect;
+
+            IdTextBox.Text = isSelectedIndexCorrect ? _currentCustomer.Id.ToString() : "";
+            FullNameTextBox.Text = isSelectedIndexCorrect ? _currentCustomer.FullName : "";
+            IsPriorityCheckBox.Checked = isSelectedIndexCorrect ? Customers[CustomersListBox.SelectedIndex].IsPriority : false;
+            AddressControl.Address = null;
         }
 
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int index = CustomersListBox.SelectedIndex;
+            var index = CustomersListBox.SelectedIndex;
 
             if (index == -1)
             {
@@ -95,7 +86,7 @@ namespace oop_winform.View.Tabs
             _currentCustomer = _customers[index];
             SetValuesTextBoxes();
             FullNameTextBox.Text = _currentCustomer.FullName;
-            addressControl1.Address = _currentCustomer.Address;
+            AddressControl.Address = _currentCustomer.Address;
         }
 
         private void AddButton_Click(object sender, EventArgs e)
@@ -107,20 +98,20 @@ namespace oop_winform.View.Tabs
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
-            int removeIndex = CustomersListBox.SelectedIndex;
+            var removeIndex = CustomersListBox.SelectedIndex;
 
-            if (removeIndex >= 0)
+            if (removeIndex < 0)
             {
-                Customers.RemoveAt(removeIndex);
-                UpdateCustomersListBox(-1);
+                return;
             }
-
+            Customers.RemoveAt(removeIndex);
+            UpdateCustomersListBox(-1);
             SetValuesTextBoxes();
         }
 
         private void FullNameTextBox_TextChanged(object sender, EventArgs e)
         {
-            int index = CustomersListBox.SelectedIndex;
+            var index = CustomersListBox.SelectedIndex;
 
             if (index == -1) return;
 
@@ -129,7 +120,7 @@ namespace oop_winform.View.Tabs
                 _currentCustomer.FullName = FullNameTextBox.Text;
                 UpdateCustomersListBox(CustomersListBox.SelectedIndex);
             }
-            catch(ArgumentException exception)
+            catch (ArgumentException exception)
             {
                 FullNameTextBox.BackColor = Constants.ErrorColor;
                 return;
