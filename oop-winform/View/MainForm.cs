@@ -1,4 +1,5 @@
 ﻿using oop_winform.Models;
+using oop_winform.View.Tabs;
 using System.Windows.Forms;
 
 namespace oop_winform
@@ -18,6 +19,18 @@ namespace oop_winform
             InitializeComponent();
             ItemsTab.Items = _store.Items;
             CustomersTab.Customers = _store.Customers;
+            CartsTab.Items = _store.Items;
+            CartsTab.Customers = _store.Customers;
+            OrderTab.Customers = _store.Customers;
+        }
+
+        private void MainTabControl_TabIndexChanged(object sender, System.EventArgs e)
+        {
+            CartsTab.Items = ItemsTab.Items;
+            CartsTab.Customers = CustomersTab.Customers;
+            CartsTab.RefreshData();
+            OrderTab.Customers = _store.Customers;
+            OrderTab.RefreshData();
         }
     }
 }
