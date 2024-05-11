@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace oop_winform.View.Tabs
@@ -17,7 +18,7 @@ namespace oop_winform.View.Tabs
         private List<Customer> _customers;
 
         /// <summary>
-        /// Создает экзепляр класса <see cref="OrdersTab"/>.
+        /// Создает экземпляр класса <see cref="OrdersTab"/>.
         /// </summary>
         public OrdersTab()
         {
@@ -100,7 +101,6 @@ namespace oop_winform.View.Tabs
 
         private void OrdersDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            var selectedIndex = OrdersDataGridView.SelectedCells[0].RowIndex;
             if (OrdersDataGridView.SelectedCells.Count == 0)
             {
                 StatusComboBox.SelectedIndex = -1;
@@ -110,16 +110,11 @@ namespace oop_winform.View.Tabs
             {
                 StatusComboBox.SelectedItem = Orders[OrdersDataGridView.SelectedCells[0].RowIndex].Status;
                 StatusComboBox.Enabled = true;
-                AddressControl.Address = Orders[selectedIndex].Address;
-                OrderItemsListBox.DataSource = ParseItemNames(Orders[selectedIndex].Items);
-                AmountLabel.Text = Orders[selectedIndex].Amount.ToString();
 
-                int index = OrdersDataGridView.CurrentCell.RowIndex;
-
-                if (Orders[index] is PriorityOrder priority)
+                if (Orders[OrdersDataGridView.CurrentCell.RowIndex] is PriorityOrder priority)
                 {
                     PriorityOptionPanel.Visible = true;
-                    PriorityOrder = (PriorityOrder)Orders[index];
+                    PriorityOrder = (PriorityOrder)Orders[OrdersDataGridView.CurrentCell.RowIndex];
                 }
                 else
                 {
@@ -128,21 +123,28 @@ namespace oop_winform.View.Tabs
                 }
             }
 
-            IdTextBox.Text = (OrdersDataGridView.SelectedCells.Count == 0) ? 
-                string.Empty : 
+            var cellsCount = OrdersDataGridView.SelectedCells.Count;
+
+            IdTextBox.Text = (cellsCount == 0) ?
+                string.Empty :
                 Orders[OrdersDataGridView.SelectedCells[0].RowIndex].Id.ToString();
-            CreatedTextBox.Text = (OrdersDataGridView.SelectedCells.Count == 0) ? 
-                string.Empty : 
+
+            CreatedTextBox.Text = (cellsCount == 0) ?
+                string.Empty :
                 Orders[OrdersDataGridView.SelectedCells[0].RowIndex].CreationDate.ToString();
-            StatusComboBox.Enabled = (OrdersDataGridView.SelectedCells.Count == 0) ? false : true;
-            AddressControl.Address = (OrdersDataGridView.SelectedCells.Count == 0) ? 
-                null : 
+
+            StatusComboBox.Enabled = (cellsCount == 0) ? false : true;
+
+            AddressControl.Address = (cellsCount == 0) ?
+                null :
                 Orders[OrdersDataGridView.SelectedCells[0].RowIndex].Address;
-            OrderItemsListBox.DataSource = (OrdersDataGridView.SelectedCells.Count == 0) ? 
-                new List<string>() : 
+
+            OrderItemsListBox.DataSource = (cellsCount == 0) ?
+                new List<string>() :
                 ParseItemNames(Orders[OrdersDataGridView.SelectedCells[0].RowIndex].Items);
-            AmountLabel.Text = (OrdersDataGridView.SelectedCells.Count == 0) ? 
-                string.Empty : 
+
+            AmountLabel.Text = (cellsCount == 0) ?
+                string.Empty :
                 Orders[OrdersDataGridView.SelectedCells[0].RowIndex].Amount.ToString();
         }
 
@@ -170,11 +172,6 @@ namespace oop_winform.View.Tabs
             Orders[selectedIndex].Status = (OrderStatusTypes)StatusComboBox.SelectedItem;
             OrdersDataGridView[3, selectedIndex].Value =
                 Enum.GetName(typeof(OrderStatusTypes), Orders[selectedIndex].Status);
-        }
-
-        private void PriorityOprionPanel_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

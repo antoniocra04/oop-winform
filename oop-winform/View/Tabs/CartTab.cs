@@ -205,15 +205,12 @@ namespace oop_winform.View.Tabs
 
         private void CreateOrderButton_Click(object sender, EventArgs e)
         {
-            Order order;
-            if (_currentCustomer.IsPriority)
+            if (CartListBox.Items.Count < 1)
             {
-                order = new PriorityOrder();
+                return;
             }
-            else
-            {
-                order = new Order();
-            }
+
+            var order = _currentCustomer.IsPriority ? new PriorityOrder() : new Order();
 
             order.Address = _currentCustomer.Address;
             order.Items = _currentCustomer.Cart.Items;

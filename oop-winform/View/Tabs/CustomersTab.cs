@@ -71,7 +71,9 @@ namespace oop_winform.View.Tabs
 
             IdTextBox.Text = isSelectedIndexCorrect ? _currentCustomer.Id.ToString() : "";
             FullNameTextBox.Text = isSelectedIndexCorrect ? _currentCustomer.FullName : "";
-            IsPriorityCheckBox.Checked = isSelectedIndexCorrect ? Customers[CustomersListBox.SelectedIndex].IsPriority : false;
+            IsPriorityCheckBox.Checked = isSelectedIndexCorrect ? 
+                Customers[CustomersListBox.SelectedIndex].IsPriority : 
+                false;
             AddressControl.Address = null;
         }
 

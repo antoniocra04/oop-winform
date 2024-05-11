@@ -324,7 +324,6 @@
             this.PriorityOptionPanel.Name = "PriorityOptionPanel";
             this.PriorityOptionPanel.Size = new System.Drawing.Size(188, 57);
             this.PriorityOptionPanel.TabIndex = 22;
-            this.PriorityOptionPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.PriorityOprionPanel_Paint);
             // 
             // PriorityOptionLabel
             // 

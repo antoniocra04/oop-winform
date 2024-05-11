@@ -19,17 +19,11 @@ namespace oop_winform.Models
         private string _fullname;
 
         /// <summary>
-        /// Статус покупателя.
-        /// </summary>
-        private bool _isPriority;
-
-        /// <summary>
         /// Создаёт экземпляр класса <see cref="Customer"/>.
         /// </summary>
         public Customer()
         {
             FullName = "";
-            IsPriority= false;
         }
 
         /// <summary>
@@ -80,12 +74,8 @@ namespace oop_winform.Models
         public List<Order> Orders { get; set; } = new List<Order>();
 
         /// <summary>
-        /// Возвращает и задает статус покупателя.
+        /// Возвращает и задает булево значение о том, является ли покупатель приоритетным.
         /// </summary>
-        public bool IsPriority
-        {
-            get => _isPriority;
-            set => _isPriority = value;
-        }
+        public bool IsPriority { get; set; } = false;
     }
 }
