@@ -154,7 +154,7 @@ namespace oop_winform.View.Tabs
             }
             var selectedIndex = OrdersDataGridView.SelectedCells[0].RowIndex;
             Orders[selectedIndex].Status = (OrderStatusTypes)StatusComboBox.SelectedItem;
-            OrdersDataGridView[3, selectedIndex].Value = Enum.GetName(
+            OrdersDataGridView[2, selectedIndex].Value = Enum.GetName(
                 typeof(OrderStatusTypes), 
                 Orders[selectedIndex].Status);
         }
@@ -166,10 +166,6 @@ namespace oop_winform.View.Tabs
             {
                 return;
             }
-
-            /*            Orders[selectedIndex].Status = (OrderStatusTypes)StatusComboBox.SelectedItem;
-                        OrdersDataGridView[3, selectedIndex].Value =
-                            Enum.GetName(typeof(OrderStatusTypes), Orders[selectedIndex].Status);*/
             _priorityOrder.DeliveryTime = (OrderTime)DeliveryTimeComboBox.SelectedIndex;
         }
     }
