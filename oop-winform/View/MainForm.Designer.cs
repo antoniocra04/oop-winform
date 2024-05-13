@@ -160,7 +160,7 @@
             this.MaximumSize = new System.Drawing.Size(1000, 700);
             this.MinimumSize = new System.Drawing.Size(700, 500);
             this.Name = "MainForm";
-            this.Text = "a";
+            this.Text = "Приложение";
             this.MainTabControl.ResumeLayout(false);
             this.ItemsTabPage.ResumeLayout(false);
             this.CustomersTabPage.ResumeLayout(false);

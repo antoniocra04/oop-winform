@@ -54,6 +54,8 @@
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderStatusTypes.cs" />
+    <Compile Include="Models\OrderTime.cs" />
+    <Compile Include="Models\PriorityOrder.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Services\Constants.cs" />
     <Compile Include="Models\Customer.cs" />

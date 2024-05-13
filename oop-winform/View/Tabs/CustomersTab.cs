@@ -65,11 +65,15 @@ namespace oop_winform.View.Tabs
         private void SetValuesTextBoxes()
         {
             var isSelectedIndexCorrect = CustomersListBox.SelectedIndex != -1;
+            IsPriorityCheckBox.Enabled = isSelectedIndexCorrect;
             FullNameTextBox.Enabled = isSelectedIndexCorrect;
-            AddressControl.Enabled= isSelectedIndexCorrect;
+            AddressControl.Enabled = isSelectedIndexCorrect;
 
             IdTextBox.Text = isSelectedIndexCorrect ? _currentCustomer.Id.ToString() : "";
             FullNameTextBox.Text = isSelectedIndexCorrect ? _currentCustomer.FullName : "";
+            IsPriorityCheckBox.Checked = isSelectedIndexCorrect ? 
+                Customers[CustomersListBox.SelectedIndex].IsPriority : 
+                false;
             AddressControl.Address = null;
         }
 
@@ -126,6 +130,11 @@ namespace oop_winform.View.Tabs
             }
 
             FullNameTextBox.BackColor = Constants.CorrectColor;
+        }
+
+        private void IsPriorityCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            _currentCustomer.IsPriority = IsPriorityCheckBox.Checked;
         }
     }
 }

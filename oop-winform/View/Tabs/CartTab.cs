@@ -210,12 +210,11 @@ namespace oop_winform.View.Tabs
                 return;
             }
 
-            var order = new Order
-            {
-                Address = _currentCustomer.Address,
-                Items = _currentCustomer.Cart.Items,
-                Status = OrderStatusTypes.New
-            };
+            var order = _currentCustomer.IsPriority ? new PriorityOrder() : new Order();
+
+            order.Address = _currentCustomer.Address;
+            order.Items = _currentCustomer.Cart.Items;
+            order.Status = OrderStatusTypes.New;
 
             _currentCustomer.Orders.Add(order);
 
