@@ -1,16 +1,9 @@
-﻿using oop_winform.Models.Orders;
-using oop_winform.Models;
-using oop_winform.View.Controls;
+﻿using oop_winform.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace oop_winform.View.Tabs
 {
@@ -25,14 +18,26 @@ namespace oop_winform.View.Tabs
         private List<Customer> _customers;
 
         /// <summary>
-        /// Возвращает и задает покупателей.
+        /// Приоритетный заказ. 
+        /// </summary>
+        private PriorityOrder _priorityOrder;
+
+        /// <summary>
+        /// Создает экземпляр класса <see cref="OrdersTab"/>.
+        /// </summary>
+        public OrdersTab()
+        {
+            InitializeComponent();
+            StatusComboBox.DataSource = Enum.GetValues(typeof(OrderStatusTypes));
+            PriorityOptionPanel.Visible = false;
+        }
+
+        /// <summary>
+        /// Возвращает и задает список покупателей.
         /// </summary>
         public List<Customer> Customers
         {
-            get
-            {
-                return _customers;
-            }
+            get => _customers;
             set
             {
                 _customers = value;
@@ -42,24 +47,9 @@ namespace oop_winform.View.Tabs
         }
 
         /// <summary>
-        /// Возвращает список заказов.
+        /// Возвращает и задает список заказов.
         /// </summary>
         public List<Order> Orders { get; set; } = new List<Order>();
-
-        /// <summary>
-        /// Приоритетный заказ. 
-        /// </summary>
-        private PriorityOrder PriorityOrder;
-
-        /// <summary>
-        /// Создает экзепляр класса <see cref="OrdersTab"/>.
-        /// </summary>
-        public OrdersTab()
-        {
-            InitializeComponent();
-            StatusComboBox.DataSource = Enum.GetValues(typeof(OrderStatusTypes));
-            PriorityOptionPanel.Visible = false;
-        }
 
         /// <summary>
         /// Обновляет данные вкладки заказов.
@@ -110,50 +100,63 @@ namespace oop_winform.View.Tabs
         {
             if (OrdersDataGridView.SelectedCells.Count == 0)
             {
-                IdTextBox.Text = string.Empty;
-                CreatedTextBox.Text = string.Empty;
                 StatusComboBox.SelectedIndex = -1;
                 StatusComboBox.Enabled = false;
-                AddressControl.Address = null;
-                OrderItemsListBox.DataSource = new List<string>();
-                AmountLabel.Text = string.Empty;
             }
             else
             {
-                var selectedIndex = OrdersDataGridView.SelectedCells[0].RowIndex;
-
-                IdTextBox.Text = Orders[selectedIndex].Id.ToString();
-                CreatedTextBox.Text = Orders[selectedIndex].CreationDate.ToString();
-                StatusComboBox.SelectedItem = Orders[selectedIndex].Status;
+                StatusComboBox.SelectedItem = Orders[OrdersDataGridView.SelectedCells[0].RowIndex].Status;
                 StatusComboBox.Enabled = true;
-                AddressControl.Address = Orders[selectedIndex].Address;
-                OrderItemsListBox.DataSource = ParseItemNames(Orders[selectedIndex].Items);
-                AmountLabel.Text = Orders[selectedIndex].Amount.ToString();
 
-                int index = OrdersDataGridView.CurrentCell.RowIndex;
-
-                if (Orders[index] is PriorityOrder priority)
+                if (Orders[OrdersDataGridView.CurrentCell.RowIndex] is PriorityOrder priority)
                 {
                     PriorityOptionPanel.Visible = true;
-                    PriorityOrder = (PriorityOrder)Orders[index];
+                    _priorityOrder = (PriorityOrder)Orders[OrdersDataGridView.CurrentCell.RowIndex];
+                    DeliveryTimeComboBox.SelectedIndex = (int)_priorityOrder.DeliveryTime;
                 }
                 else
                 {
                     PriorityOptionPanel.Visible = false;
-                    PriorityOrder = null;
+                    _priorityOrder = null;
                 }
             }
 
+            var cellsCount = OrdersDataGridView.SelectedCells.Count;
+
+            IdTextBox.Text = (cellsCount == 0) ?
+                string.Empty :
+                Orders[OrdersDataGridView.SelectedCells[0].RowIndex].Id.ToString();
+
+            CreatedTextBox.Text = (cellsCount == 0) ?
+                string.Empty :
+                Orders[OrdersDataGridView.SelectedCells[0].RowIndex].CreationDate.ToString();
+
+            StatusComboBox.Enabled = (cellsCount == 0) ? false : true;
+
+            AddressControl.Address = (cellsCount == 0) ?
+                null :
+                Orders[OrdersDataGridView.SelectedCells[0].RowIndex].Address;
+
+            OrderItemsListBox.DataSource = (cellsCount == 0) ?
+                new List<string>() :
+                ParseItemNames(Orders[OrdersDataGridView.SelectedCells[0].RowIndex].Items);
+
+            AmountLabel.Text = (cellsCount == 0) ?
+                string.Empty :
+                Orders[OrdersDataGridView.SelectedCells[0].RowIndex].Amount.ToString();
         }
 
         private void StatusComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (OrdersDataGridView.SelectedCells.Count != 0)
+            if (OrdersDataGridView.SelectedCells.Count == 0)
             {
-                var selectedIndex = OrdersDataGridView.SelectedCells[0].RowIndex;
-                Orders[selectedIndex].Status = (OrderStatusTypes)StatusComboBox.SelectedItem;
-                OrdersDataGridView[2, selectedIndex].Value = Enum.GetName(typeof(OrderStatusTypes), Orders[selectedIndex].Status);
+                return;
             }
+            var selectedIndex = OrdersDataGridView.SelectedCells[0].RowIndex;
+            Orders[selectedIndex].Status = (OrderStatusTypes)StatusComboBox.SelectedItem;
+            OrdersDataGridView[2, selectedIndex].Value = Enum.GetName(
+                typeof(OrderStatusTypes), 
+                Orders[selectedIndex].Status);
         }
 
         private void DeliveryTimeComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -163,15 +166,7 @@ namespace oop_winform.View.Tabs
             {
                 return;
             }
-
-            Orders[selectedIndex].Status = (OrderStatusTypes)StatusComboBox.SelectedItem;
-            OrdersDataGridView[3, selectedIndex].Value =
-                Enum.GetName(typeof(OrderStatusTypes), Orders[selectedIndex].Status);
-        }
-
-        private void PriorityOprionPanel_Paint(object sender, PaintEventArgs e)
-        {
-
+            _priorityOrder.DeliveryTime = (OrderTime)DeliveryTimeComboBox.SelectedIndex;
         }
     }
 }

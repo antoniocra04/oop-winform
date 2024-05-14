@@ -1,22 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace oop_winform.Models
+﻿namespace oop_winform.Models
 {
     /// <summary>
     /// Категория товара.
     /// </summary>
-    public enum Category
+    public enum CategoryTypes
     {
+        /// <summary>
+        /// Телефоны.
+        /// </summary>
         Phones,
+        /// <summary>
+        /// Компьютеры.
+        /// </summary>
         Computers,
+        /// <summary>
+        /// Электроника.
+        /// </summary>
         Electronics,
+        /// <summary>
+        /// Одежда.
+        /// </summary>
         Cloths,
+        /// <summary>
+        /// Еда.
+        /// </summary>
         Food,
+        /// <summary>
+        /// Здоровье.
+        /// </summary>
         Health,
+        /// <summary>
+        /// Игры.
+        /// </summary>
         Games,
     }
 }

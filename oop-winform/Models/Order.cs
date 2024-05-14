@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using oop_winform.Services;
 
-namespace oop_winform.Models.Orders
+namespace oop_winform.Models
 {
     /// <summary>
     /// Хранит данные о заказе.
@@ -18,6 +18,28 @@ namespace oop_winform.Models.Orders
         /// Дата создания заказа.
         /// </summary>
         private readonly DateTime _date = DateTime.Now;
+
+        /// <summary>
+        /// Создает экземпляр класса <see cref="Order"/>.
+        /// </summary>
+        public Order()
+        {
+            _id = IdGenerator.GetId();
+        }
+
+        /// <summary>
+        /// Создает экземпляр класса <see cref="Order"/>.
+        /// </summary>
+        /// <param name="status">Статус заказа.</param>
+        /// <param name="address">Адрес доставки.</param>
+        /// <param name="items">Список товаров заказа.</param>
+        public Order(OrderStatusTypes status, Address address, List<Item> items)
+        {
+            _id = IdGenerator.GetId();
+            Status = status;
+            Address = address;
+            Items = items;
+        }
 
         /// <summary>
         /// Возвращает уникальный индентификатор заказа.
@@ -38,17 +60,17 @@ namespace oop_winform.Models.Orders
         /// <summary>
         /// Возвращает и задает статус заказа.
         /// </summary>
-        public OrderStatusTypes Status { get; set; }
+        public OrderStatusTypes Status { get; set; } = OrderStatusTypes.New;
 
         /// <summary>
         /// Возращает и задает адрес доставки.
         /// </summary>
-        public Address Address { get; set; }
+        public Address Address { get; set; } = new Address();
 
         /// <summary>
         /// Возращает и задает адрес доставки.
         /// </summary>
-        public List<Item> Items { get; set; }
+        public List<Item> Items { get; set; } = new List<Item>();
 
         /// <summary>
         /// Возвращает и задает скидку на товары.

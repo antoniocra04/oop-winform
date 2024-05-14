@@ -1,13 +1,14 @@
 ﻿using oop_winform.Models;
-using oop_winform.Models.Orders;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace oop_winform.View.Tabs
 {
+    /// <summary>
+    /// Вкладка корзины.
+    /// </summary>
     public partial class CartTab : UserControl
     {
         /// <summary>
@@ -19,6 +20,11 @@ namespace oop_winform.View.Tabs
         /// Список покупателей.
         /// </summary>
         private List<Customer> _customers;
+
+        /// <summary>
+        /// Выбранный покупатель.
+        /// </summary>
+        private Customer _currentCustomer;
 
         /// <summary>
         /// Создает экземпляр класса <see cref="CartTab"/>.
@@ -33,10 +39,7 @@ namespace oop_winform.View.Tabs
         /// </summary>
         public List<Item> Items
         {
-            get
-            {
-                return _items;
-            }
+            get => _items;
             set
             {
                 _items = value;
@@ -53,20 +56,14 @@ namespace oop_winform.View.Tabs
         /// </summary>
         public List<Customer> Customers
         {
-            get
-            {
-                return _customers;
-            }
+            get => _customers;
             set
             {
                 _customers = value;
 
                 if (_customers != null)
                 {
-                    foreach (var customer in _customers)
-                    {
-                        CustomerComboBox.Items.Add(customer.FullName);
-                    }
+                    UpdateCustomerComboBox();
                 }
             }
         }
@@ -106,16 +103,26 @@ namespace oop_winform.View.Tabs
         }
 
         /// <summary>
+        /// Обновляет комбобокс с покупателями.
+        /// </summary>
+        private void UpdateCustomerComboBox()
+        {
+            foreach (var customer in _customers)
+            {
+                CustomerComboBox.Items.Add(customer.FullName);
+            }
+        }
+
+        /// <summary>
         /// Сортирует и обновляет товары.
         /// </summary>
-        /// <param name="selectedIndex">Выбраный элемент.</param>
+        /// <param name="selectedIndex">Выбранный элемент.</param>
         private void UpdateItemsListBox(int selectedIndex)
         {
             ItemsListBox.Items.Clear();
-
             var orderedListItems = _items.OrderBy(item => item.Name).ToList();
 
-            foreach (Item item in orderedListItems)
+            foreach (var item in orderedListItems)
             {
                 ItemsListBox.Items.Add(item.Name);
             }
@@ -126,21 +133,26 @@ namespace oop_winform.View.Tabs
         /// <summary>
         /// Сортирует и обновляет корзины.
         /// </summary>
-        /// <param name="selectedIndex">Выбраный элемент.</param>
+        /// <param name="selectedIndex">Выбранный элемент.</param>
         private void UpdateCartListBox(int selectedIndex)
         {
             CartListBox.Items.Clear();
+            var orderedListItems = _currentCustomer.Cart.Items.OrderBy(item => item.Name).ToList();
 
-            var orderedListItems = CurrentCustomer.Cart.Items.OrderBy(item => item.Name).ToList();
+            _currentCustomer.Cart.Items = orderedListItems.ToList();
 
-            foreach (Item item in orderedListItems)
+            foreach (var item in orderedListItems)
             {
                 CartListBox.Items.Add(item.Name);
             }
 
             CartListBox.SelectedIndex = selectedIndex;
 
-            CreateOrderButton.Enabled = false;
+            if (CartListBox.Items.Count < 1)
+            {
+                CreateOrderButton.Enabled = false;
+            }
+
         }
 
         /// <summary>
@@ -179,13 +191,14 @@ namespace oop_winform.View.Tabs
 
         private void CustomerComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int index = CustomerComboBox.SelectedIndex;
+            var index = CustomerComboBox.SelectedIndex;
 
             if (index == -1)
             {
                 return;
             }
-            else
+            _currentCustomer = _customers[index];
+            if (_currentCustomer.Cart.Items == null)
             {
                 CurrentCustomer = _customers[index];
 
@@ -200,12 +213,14 @@ namespace oop_winform.View.Tabs
                 }
                 UpdateDiscountCheckedListBox();
             }
+            AmountLabel.Text = _currentCustomer.Cart.Amount.ToString();
+            UpdateCartListBox(-1);
         }
 
         private void AddToCartButton_Click(object sender, EventArgs e)
         {
-            int indexListBox = ItemsListBox.SelectedIndex;
-            int indexComboBox = CustomerComboBox.SelectedIndex;
+            var indexListBox = ItemsListBox.SelectedIndex;
+            var indexComboBox = CustomerComboBox.SelectedIndex;
 
             if (indexListBox == -1 || indexComboBox == -1)
             {
@@ -221,12 +236,16 @@ namespace oop_winform.View.Tabs
                 CreateOrderButton.Enabled = true;
             }
             UpdateDiscount();
+            _currentCustomer.Cart.Items.Add(_items[indexListBox]);
+            AmountLabel.Text = _currentCustomer.Cart.Amount.ToString();
+            UpdateCartListBox(-1);
+            CreateOrderButton.Enabled = true;
         }
 
         private void RemoveItemButton_Click(object sender, EventArgs e)
         {
-            int indexComboBox = CustomerComboBox.SelectedIndex;
-            int indexListBox = CartListBox.SelectedIndex;
+            var indexComboBox = CustomerComboBox.SelectedIndex;
+            var indexListBox = CartListBox.SelectedIndex;
 
             if (indexListBox == -1 || indexComboBox == -1)
             {
@@ -240,11 +259,20 @@ namespace oop_winform.View.Tabs
                 UpdateCartListBox(-1);
             }
             UpdateDiscount();
+            _currentCustomer.Cart.Items.RemoveAt(indexListBox);
+            AmountLabel.Text = _currentCustomer.Cart.Amount.ToString();
+            UpdateCartListBox(-1);
         }
 
         private void ClearCartButton_Click(object sender, EventArgs e)
         {
-            CurrentCustomer.Cart = new Cart();
+            var indexComboBox = CustomerComboBox.SelectedIndex;
+            var indexListBox = CartListBox.SelectedIndex;
+            if (indexListBox == -1 || indexComboBox == -1)
+            {
+                return;
+            }
+            _currentCustomer.Cart = new Cart();
             UpdateCartListBox(-1);
             AmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
             UpdateDiscount();
@@ -252,19 +280,12 @@ namespace oop_winform.View.Tabs
 
         private void CreateOrderButton_Click(object sender, EventArgs e)
         {
-            Order order;
-            if (CurrentCustomer.IsPriority)
+            if (CartListBox.Items.Count < 1)
             {
-                order = new PriorityOrder();
-            }
-            else
-            {
-                order = new Order();
+                return;
             }
 
-            order.Address = CurrentCustomer.Address;
-            order.Items = CurrentCustomer.Cart.Items;
-            order.Status = OrderStatusTypes.New;
+            var order = _currentCustomer.IsPriority ? new PriorityOrder() : new Order();
 
             double discountAmount = 0;
             discountAmount = CurrentCustomer.Discounts
@@ -283,12 +304,15 @@ namespace oop_winform.View.Tabs
                 }
             }
             UpdateDiscountCheckedListBox();
+            order.Address = _currentCustomer.Address;
+            order.Items = _currentCustomer.Cart.Items;
+            order.Status = OrderStatusTypes.New;
 
-            CurrentCustomer.Orders.Add(order);
+            _currentCustomer.Orders.Add(order);
 
-            CurrentCustomer.Cart = new Cart();
+            _currentCustomer.Cart = new Cart();
             UpdateCartListBox(-1);
-            AmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
+            AmountLabel.Text = _currentCustomer.Cart.Amount.ToString();
             CreateOrderButton.Enabled = false;
         }
 

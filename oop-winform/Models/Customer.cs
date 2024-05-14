@@ -1,6 +1,5 @@
 ﻿using oop_winform.Services;
 using System.Collections.Generic;
-using oop_winform.Models.Orders;
 
 namespace oop_winform.Models
 {
@@ -20,16 +19,10 @@ namespace oop_winform.Models
         private string _fullname;
 
         /// <summary>
-        /// Статус покупателя.
-        /// </summary>
-        private bool _isPriority;
-
-        /// <summary>
         /// Создаёт экземпляр класса <see cref="Customer"/>.
         /// </summary>
         public Customer()
         {
-            Address = new Address();
             FullName = "";
             IsPriority= false;
             Discounts = new List<IDiscount>();
@@ -54,10 +47,7 @@ namespace oop_winform.Models
         /// </summary>
         public int Id
         {
-            get
-            {
-                return _id;
-            }
+            get => _id;
         }
 
         /// <summary>
@@ -65,10 +55,7 @@ namespace oop_winform.Models
         /// </summary>
         public string FullName
         {
-            get
-            {
-                return _fullname;
-            }
+            get => _fullname;
             set
             {
                 ValueValidator.StringLengthCheck(value, 200, 1, nameof(_fullname));
@@ -79,7 +66,7 @@ namespace oop_winform.Models
         /// <summary>
         /// Возвращает и задает адрес покупателя.
         /// </summary>
-        public Address Address { get; set; }
+        public Address Address { get; set; } = new Address();
 
         /// <summary>
         /// Возвращает и задает корзину покупателя.
@@ -92,7 +79,7 @@ namespace oop_winform.Models
         public List<Order> Orders { get; set; } = new List<Order>();
 
         /// <summary>
-        /// Возвращает и задает статус покупателя.
+        /// Возвращает и задает булево значение о том, является ли покупатель приоритетным.
         /// </summary>
         public bool IsPriority
         {
@@ -104,5 +91,7 @@ namespace oop_winform.Models
         /// Возвращает и задает скидки покупателя.
         /// </summary>
         public List<IDiscount> Discounts { get; set; }
+
+        public bool IsPriority { get; set; } = false;
     }
 }

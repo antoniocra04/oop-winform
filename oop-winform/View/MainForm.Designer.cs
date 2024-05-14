@@ -35,9 +35,10 @@
             this.CustomersTabPage = new System.Windows.Forms.TabPage();
             this.CustomersTab = new oop_winform.View.Tabs.CustomersTab();
             this.CartTab = new System.Windows.Forms.TabPage();
-            this.cartTab1 = new oop_winform.View.Tabs.CartTab();
+            this.CartsTab = new oop_winform.View.Tabs.CartTab();
             this.OrdersTab = new System.Windows.Forms.TabPage();
-            this.ordersTab1 = new oop_winform.View.Tabs.OrdersTab();
+            this.OrderTab = new oop_winform.View.Tabs.OrdersTab();
+            this.cartTab1 = new oop_winform.View.Tabs.CartTab();
             this.MainTabControl.SuspendLayout();
             this.ItemsTabPage.SuspendLayout();
             this.CustomersTabPage.SuspendLayout();
@@ -104,7 +105,7 @@
             // 
             // CartTab
             // 
-            this.CartTab.Controls.Add(this.cartTab1);
+            this.CartTab.Controls.Add(this.CartsTab);
             this.CartTab.Location = new System.Drawing.Point(4, 22);
             this.CartTab.Name = "CartTab";
             this.CartTab.Padding = new System.Windows.Forms.Padding(3);
@@ -112,6 +113,33 @@
             this.CartTab.TabIndex = 2;
             this.CartTab.Text = "Cart";
             this.CartTab.UseVisualStyleBackColor = true;
+            // 
+            // CartsTab
+            // 
+            this.CartsTab.Customers = null;
+            this.CartsTab.Items = null;
+            this.CartsTab.Location = new System.Drawing.Point(3, 3);
+            this.CartsTab.Name = "CartsTab";
+            this.CartsTab.Size = new System.Drawing.Size(976, 635);
+            this.CartsTab.TabIndex = 0;
+            // 
+            // OrdersTab
+            // 
+            this.OrdersTab.Controls.Add(this.OrderTab);
+            this.OrdersTab.Location = new System.Drawing.Point(4, 22);
+            this.OrdersTab.Name = "OrdersTab";
+            this.OrdersTab.Size = new System.Drawing.Size(976, 635);
+            this.OrdersTab.TabIndex = 3;
+            this.OrdersTab.Text = "Orders";
+            this.OrdersTab.UseVisualStyleBackColor = true;
+            // 
+            // OrderTab
+            // 
+            this.OrderTab.Customers = null;
+            this.OrderTab.Location = new System.Drawing.Point(0, 0);
+            this.OrderTab.Name = "OrderTab";
+            this.OrderTab.Size = new System.Drawing.Size(980, 635);
+            this.OrderTab.TabIndex = 0;
             // 
             // cartTab1
             // 
@@ -121,23 +149,6 @@
             this.cartTab1.Name = "cartTab1";
             this.cartTab1.Size = new System.Drawing.Size(976, 635);
             this.cartTab1.TabIndex = 0;
-            // 
-            // OrdersTab
-            // 
-            this.OrdersTab.Controls.Add(this.ordersTab1);
-            this.OrdersTab.Location = new System.Drawing.Point(4, 22);
-            this.OrdersTab.Name = "OrdersTab";
-            this.OrdersTab.Size = new System.Drawing.Size(976, 635);
-            this.OrdersTab.TabIndex = 3;
-            this.OrdersTab.Text = "Orders";
-            this.OrdersTab.UseVisualStyleBackColor = true;
-            // 
-            // ordersTab1
-            // 
-            this.ordersTab1.Location = new System.Drawing.Point(0, 0);
-            this.ordersTab1.Name = "ordersTab1";
-            this.ordersTab1.Size = new System.Drawing.Size(980, 635);
-            this.ordersTab1.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -149,7 +160,7 @@
             this.MaximumSize = new System.Drawing.Size(1000, 700);
             this.MinimumSize = new System.Drawing.Size(700, 500);
             this.Name = "MainForm";
-            this.Text = "Object Oriented Practics";
+            this.Text = "Приложение";
             this.MainTabControl.ResumeLayout(false);
             this.ItemsTabPage.ResumeLayout(false);
             this.CustomersTabPage.ResumeLayout(false);
@@ -167,8 +178,9 @@
         private System.Windows.Forms.TabPage CustomersTabPage;
         private View.Tabs.CustomersTab CustomersTab;
         private System.Windows.Forms.TabPage CartTab;
-        private View.Tabs.CartTab cartTab1;
+        private View.Tabs.CartTab CartsTab;
         private System.Windows.Forms.TabPage OrdersTab;
-        private View.Tabs.OrdersTab ordersTab1;
+        private View.Tabs.OrdersTab OrderTab;
+        private View.Tabs.CartTab cartTab1;
     }
 }

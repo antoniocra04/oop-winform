@@ -177,7 +177,7 @@
             this.AmountLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.AmountLabel.Size = new System.Drawing.Size(270, 20);
             this.AmountLabel.TabIndex = 4;
-            this.AmountLabel.Text = "49 999,90";
+            this.AmountLabel.Text = "0";
             this.AmountLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // AmountHeaderLabel

@@ -1,12 +1,11 @@
-﻿using oop_winform.Models.Orders;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace oop_winform.Models
 {
+    /// <summary>
+    /// Хранит данные о приоритетном заказе.
+    /// </summary>
     public class PriorityOrder : Order
     {
         /// <summary>
@@ -22,7 +21,9 @@ namespace oop_winform.Models
         /// <summary>
         /// Создаёт экземпляр класса <see cref="PriorityOrder"/>.
         /// </summary>
-        public PriorityOrder(){}
+        public PriorityOrder()
+        {
+        }
 
         /// <summary>
         /// Создаёт экземпляр класса <see cref="PriorityOrder"/>.
