@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomersTab));
             this.CustomersListPanel = new System.Windows.Forms.Panel();
             this.ButtonsPanel = new System.Windows.Forms.TableLayoutPanel();
             this.RemoveButton = new System.Windows.Forms.Button();
@@ -38,6 +37,7 @@
             this.MainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SplitedTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SelectedItemPanel = new System.Windows.Forms.Panel();
+            this.IsPriorityCheckBox = new System.Windows.Forms.CheckBox();
             this.AddressControl = new oop_winform.View.Controls.AddressControl();
             this.FullNameTextBox = new System.Windows.Forms.TextBox();
             this.IdTextBox = new System.Windows.Forms.TextBox();
@@ -158,6 +158,7 @@
             // 
             // SelectedItemPanel
             // 
+            this.SelectedItemPanel.Controls.Add(this.IsPriorityCheckBox);
             this.SelectedItemPanel.Controls.Add(this.AddressControl);
             this.SelectedItemPanel.Controls.Add(this.FullNameTextBox);
             this.SelectedItemPanel.Controls.Add(this.IdTextBox);
@@ -170,10 +171,22 @@
             this.SelectedItemPanel.Size = new System.Drawing.Size(588, 580);
             this.SelectedItemPanel.TabIndex = 3;
             // 
+            // IsPriorityCheckBox
+            // 
+            this.IsPriorityCheckBox.AutoSize = true;
+            this.IsPriorityCheckBox.Enabled = false;
+            this.IsPriorityCheckBox.Location = new System.Drawing.Point(70, 99);
+            this.IsPriorityCheckBox.Name = "IsPriorityCheckBox";
+            this.IsPriorityCheckBox.Size = new System.Drawing.Size(68, 17);
+            this.IsPriorityCheckBox.TabIndex = 13;
+            this.IsPriorityCheckBox.Text = "Is Priority";
+            this.IsPriorityCheckBox.UseVisualStyleBackColor = true;
+            this.IsPriorityCheckBox.CheckedChanged += new System.EventHandler(this.IsPriorityCheckBox_CheckedChanged);
+            // 
             // AddressControl
             // 
             this.AddressControl.Address = null;
-            this.AddressControl.Location = new System.Drawing.Point(-4, 107);
+            this.AddressControl.Location = new System.Drawing.Point(-4, 126);
             this.AddressControl.Name = "AddressControl";
             this.AddressControl.Size = new System.Drawing.Size(582, 137);
             this.AddressControl.TabIndex = 8;
@@ -269,6 +282,9 @@
         private System.Windows.Forms.Label FullNameLabel;
         private System.Windows.Forms.Label IdLabel;
         private System.Windows.Forms.Label SelectedCustomerLabel;
+        private System.Windows.Forms.Panel panel1;
+        private ItemsTab itemsTab1;
+        private System.Windows.Forms.CheckBox IsPriorityCheckBox;
         private System.Windows.Forms.Panel BottomPanel;
         private Controls.AddressControl AddressControl;
     }
