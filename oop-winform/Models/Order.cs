@@ -20,15 +20,18 @@ namespace oop_winform.Models
         private readonly DateTime _date = DateTime.Now;
 
         /// <summary>
-        /// Создает экземпляр класса <see cref="Order"/>.
+        /// Создает экзепляр класса <see cref="Order"/>.
         /// </summary>
         public Order()
         {
             _id = IdGenerator.GetId();
+            Status = OrderStatusTypes.New;
+            Address = new Address();
+            Items = new List<Item>();
         }
 
         /// <summary>
-        /// Создает экземпляр класса <see cref="Order"/>.
+        /// Создает экзепляр класса <see cref="Order"/>.
         /// </summary>
         /// <param name="status">Статус заказа.</param>
         /// <param name="address">Адрес доставки.</param>
@@ -98,31 +101,6 @@ namespace oop_winform.Models
 
                 return total;
             }
-        }
-
-        /// <summary>
-        /// Создает экзепляр класса <see cref="Order"/>.
-        /// </summary>
-        public Order()
-        {
-            _id = IdGenerator.GetId();
-            Status = OrderStatusTypes.New;
-            Address = new Address();
-            Items = new List<Item>();
-        }
-
-        /// <summary>
-        /// Создает экзепляр класса <see cref="Order"/>.
-        /// </summary>
-        /// <param name="status">Статус заказа.</param>
-        /// <param name="address">Адрес доставки.</param>
-        /// <param name="items">Список товаров заказа.</param>
-        public Order(OrderStatusTypes status, Address address, List<Item> items)
-        {
-            _id = IdGenerator.GetId();
-            Status = status;
-            Address = address;
-            Items = items;
         }
 
         /// <summary>

@@ -79,15 +79,6 @@ namespace oop_winform.Models
         public List<Order> Orders { get; set; } = new List<Order>();
 
         /// <summary>
-        /// Возвращает и задает булево значение о том, является ли покупатель приоритетным.
-        /// </summary>
-        public bool IsPriority
-        {
-            get => _isPriority;
-            set => _isPriority = value;
-        }
-
-        /// <summary>
         /// Возвращает и задает скидки покупателя.
         /// </summary>
         public List<IDiscount> Discounts { get; set; }

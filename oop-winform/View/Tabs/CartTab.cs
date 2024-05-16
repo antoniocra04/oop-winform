@@ -274,7 +274,8 @@ namespace oop_winform.View.Tabs
             }
             _currentCustomer.Cart = new Cart();
             UpdateCartListBox(-1);
-            AmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
+            AmountLabel.Text = "0";
+            TotalLabel.Text = "0";
             UpdateDiscount();
         }
 
@@ -313,6 +314,7 @@ namespace oop_winform.View.Tabs
             _currentCustomer.Cart = new Cart();
             UpdateCartListBox(-1);
             AmountLabel.Text = _currentCustomer.Cart.Amount.ToString();
+            TotalLabel.Text = "0";
             CreateOrderButton.Enabled = false;
         }
 
