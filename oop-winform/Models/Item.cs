@@ -1,11 +1,12 @@
 ﻿using oop_winform.Services;
+using System;
 
 namespace oop_winform.Models
 {
     /// <summary>
     /// Хранит данные о товаре.
     /// </summary>
-    public class Item
+    public class Item: ICloneable, IEquatable<Item>, IComparable<Item>
     {
         /// <summary>
         /// Id товара.
@@ -32,6 +33,18 @@ namespace oop_winform.Models
         /// </summary>
         public Item()
         {
+            Name = "";
+            Info = "";
+            Cost = 0;
+            Category = CategoryTypes.Food;
+        }
+
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Item"/>.
+        /// </summary>
+        public Item(int id)
+        {
+            _id = id;
             Name = "";
             Info = "";
             Cost = 0;
@@ -103,6 +116,49 @@ namespace oop_winform.Models
                 ValueValidator.FloatLimitCheck(value, 1, 100000, nameof(_cost));
                 _cost = value;
             }
+        }
+
+
+        /// <summary>
+        /// Создает копию объекта <see cref="Item"/>.
+        /// </summary>
+        /// <returns>Копия объекта.</returns>
+        public object Clone()
+        {
+            var item = new Item(Id);
+            item.Name = Name;
+            item.Info = Info;
+            item.Cost = Cost;
+            item.Category = Category;
+            return item;
+        }
+
+        /// <summary>
+        /// Проверка равенство объекта с передаваемым.
+        /// </summary>
+        /// <param name="subject">Объект класса <see cref="Item"/>.</param>
+        /// <returns>Равны ли объекты.</returns>
+        public bool Equals(Item subject)
+        {
+            if (subject == null) return false;
+
+            if (ReferenceEquals(this, subject)) return true;
+
+            return Id == subject.Id;
+        }
+
+        /// <summary>
+        /// Сравнивает цену.
+        /// </summary>
+        /// <param name="subject">Объект класса <see cref="Item"/>.</param>
+        /// <returns>0 - цены равны, 1 - цена меньше, -1 - цена больше</returns>
+        public int CompareTo(Item subject)
+        {
+            if (Cost == subject.Cost) return 0;
+
+            else if (Cost > subject.Cost) return 1;
+
+            else return -1;
         }
     }
 }

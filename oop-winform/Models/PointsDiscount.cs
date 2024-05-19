@@ -7,7 +7,7 @@ namespace oop_winform.Models
     /// <summary>
     /// Хранит данные о накопительных баллах.
     /// </summary>
-    public class PointsDiscount : IDiscount
+    public class PointsDiscount : IDiscount, IComparable<PointsDiscount>
     {
         /// <summary>
         /// Накопительные баллы.
@@ -105,6 +105,20 @@ namespace oop_winform.Models
         private PointsDiscount(int points)
         {
             Points = points;
+        }
+
+        /// <summary>
+        /// Сравнивает исходный объект с передаваемым.
+        /// </summary>
+        /// <param name="subject">Объект класса <see cref="PointsDiscount"/>.</param>
+        /// <returns>0 - баллы равны, 1 - баллов меньше, -1 - баллов больше.</returns>
+        public int CompareTo(PointsDiscount subject)
+        {
+            if (Points == subject.Points) return 0;
+
+            else if (Points > subject.Points) return 1;
+
+            else return -1;
         }
     }
 }

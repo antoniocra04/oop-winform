@@ -1,9 +1,10 @@
 ﻿using oop_winform.Services;
+using System;
 using System.Collections.Generic;
 
 namespace oop_winform.Models
 {
-    public class PercentDiscount : IDiscount
+    public class PercentDiscount : IDiscount, IComparable<PercentDiscount>
     {
         /// <summary>
         /// Скидка в процентах.
@@ -26,7 +27,7 @@ namespace oop_winform.Models
         /// <summary>
         /// Возвращает скидочную категорию.
         /// </summary>
-        public Category Category { get; }
+        public CategoryTypes Category { get; }
 
         /// <summary>
         /// Возвращает сумму которую потратил покупатель в данной категории.
@@ -103,7 +104,7 @@ namespace oop_winform.Models
         /// Создает экзепляр класса <see cref="PercentDiscount"/>.
         /// </summary>
         /// <param name="category">Скидочная категория</param>
-        public PercentDiscount(Category category)
+        public PercentDiscount(CategoryTypes category)
         {
             Category = category;
             Discount = 1;
@@ -115,11 +116,25 @@ namespace oop_winform.Models
         /// <param name="category">Скидочная категория</param>
         /// <param name="discount">Скидка.</param>
         /// <param name="spendingPerCategory">Размер потраченных денег на категорию.</param>
-        private PercentDiscount(Category category, int discount, double spendingPerCategory)
+        private PercentDiscount(CategoryTypes category, int discount, double spendingPerCategory)
         {
             Category = category;
             Discount = discount;
             SpendingPerCategory = spendingPerCategory;
+        }
+
+        /// <summary>
+        /// Сравнивает исходный объект с передаваемым.
+        /// </summary>
+        /// <param name="subject">Объект класса <see cref="PercentDiscount"/>.</param>
+        /// <returns>0 - проценты равны, 1 - процентов меньше, -1 - процентов больше.</returns>
+        public int CompareTo(PercentDiscount subject)
+        {
+            if (Discount == subject.Discount) return 0;
+
+            else if (Discount > subject.Discount) return 1;
+
+            else return -1;
         }
     }
 }

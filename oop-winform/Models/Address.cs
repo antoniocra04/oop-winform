@@ -1,11 +1,12 @@
 ﻿using oop_winform.Services;
+using System;
 
 namespace oop_winform.Models
 {
     /// <summary>
     /// Хранит данные об адресе.
     /// </summary>
-    public class Address
+    public class Address: ICloneable, IEquatable<Address>
     {
         /// <summary>
         /// Почтовый индекс.
@@ -151,6 +152,42 @@ namespace oop_winform.Models
                 ValueValidator.StringLengthCheck(value, 10, 0, nameof(Apartment));
                 _apartment = value;
             }
+        }
+
+        /// <summary>
+        /// Создает копию объекта <see cref="Address"/>.
+        /// </summary>
+        /// <returns>Копия объекта.</returns>
+        public object Clone()
+        {
+            return new Address(
+                Index,
+                Country,
+                City,
+                Street,
+                Building,
+                Apartment);
+        }
+
+        /// <summary>
+        /// Проверяет равенство объекта с передаваемым.
+        /// </summary>
+        /// <param name="subject">Объект класса <see cref="Address"/>.</param>
+        /// <returns>Равны ли объекты.</returns>
+        public bool Equals(Address subject)
+        {
+            if (subject == null) return false;
+
+            if (ReferenceEquals(this, subject)) return true;
+
+            var result = Index == subject.Index && 
+                Country == subject.Country && 
+                City == subject.City && 
+                Street == subject.Street && 
+                Building == subject.Building && 
+                Apartment == subject.Apartment;
+
+            return result;
         }
     }
 }
