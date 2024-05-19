@@ -11,7 +11,7 @@ namespace oop_winform.View.ModalWindows
         /// <summary>
         /// Возвращает категорию товара скидки.
         /// </summary>
-        public Category Category { get; set; }
+        public CategoryTypes Category { get; set; }
 
         /// <summary>
         /// Возвращает покупателя.
@@ -36,8 +36,8 @@ namespace oop_winform.View.ModalWindows
                 .Distinct()
                 .ToList();
 
-            var dataCategories = Enum.GetValues(typeof(Category))
-                .Cast<Category>()
+            var dataCategories = Enum.GetValues(typeof(CategoryTypes))
+                .Cast<CategoryTypes>()
                 .ToList()
                 .Except(customerCategories)
                 .ToList();
@@ -47,8 +47,8 @@ namespace oop_winform.View.ModalWindows
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            Category = (Category)Enum.Parse(
-                typeof(Category),
+            Category = (CategoryTypes)Enum.Parse(
+                typeof(CategoryTypes),
                 CategoryComboBox.SelectedItem.ToString());
             this.DialogResult = DialogResult.OK;
         }
