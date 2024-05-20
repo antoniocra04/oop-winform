@@ -15,6 +15,23 @@ namespace oop_winform.Models
         private int _points;
 
         /// <summary>
+        /// Создает экземпляр класса <see cref="PointsDiscount"/>.
+        /// </summary>
+        /// <param name="points">Размер накопительных баллов.</param>
+        private PointsDiscount(int points)
+        {
+            Points = points;
+        }
+
+        /// <summary>
+        /// Создает экземпляр класса <see cref="PointsDiscount"/>.
+        /// </summary>
+        public PointsDiscount()
+        {
+            Points = 0;
+        }
+
+        /// <summary>
         /// Возвращает и задает накопительные баллы.
         /// </summary>
         public int Points
@@ -28,7 +45,7 @@ namespace oop_winform.Models
         }
 
         /// <summary>
-        /// Информация о скидке.
+        /// Возвращает информацию о скидке.
         /// </summary>
         public string Info
         {
@@ -64,7 +81,7 @@ namespace oop_winform.Models
         }
 
         /// <summary>
-        /// Применяет накопительные баллы
+        /// Применяет накопительные баллы.
         /// </summary>
         /// <param name="items">Список товаров.</param>
         /// <returns>Размер скидки.</returns>
@@ -76,7 +93,7 @@ namespace oop_winform.Models
         }
 
         /// <summary>
-        /// Добавляет баллы.
+        /// Обновляет баллы.
         /// </summary>
         /// <param name="items">Список товаров.</param>
         public void Update(List<Item> items)
@@ -88,23 +105,6 @@ namespace oop_winform.Models
                 amount += item.Cost;
             }
             Points += (int)Math.Ceiling(amount * 0.1);
-        }
-
-        /// <summary>
-        /// Создает экзепляр класса <see cref="PointsDiscount"/>.
-        /// </summary>
-        public PointsDiscount()
-        {
-            Points = 0;
-        }
-
-        /// <summary>
-        /// Создает экзепляр класса <see cref="PointsDiscount"/>.
-        /// </summary>
-        /// <param name="points">Размер накопительных баллов.</param>
-        private PointsDiscount(int points)
-        {
-            Points = points;
         }
     }
 }

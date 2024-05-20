@@ -3,12 +3,38 @@ using System.Collections.Generic;
 
 namespace oop_winform.Models
 {
+    /// <summary>
+    /// Хранит процентную скидку.
+    /// </summary>
     public class PercentDiscount : IDiscount
     {
         /// <summary>
         /// Скидка в процентах.
         /// </summary>
         private int _discount;
+
+        /// <summary>
+        /// Создает экземпляр класса <see cref="PercentDiscount"/>.
+        /// </summary>
+        /// <param name="category">Скидочная категория</param>
+        /// <param name="discount">Скидка.</param>
+        /// <param name="spendingPerCategory">Размер потраченных денег на категорию.</param>
+        private PercentDiscount(CategoryTypes category, int discount, double spendingPerCategory)
+        {
+            Category = category;
+            Discount = discount;
+            SpendingPerCategory = spendingPerCategory;
+        }
+
+        /// <summary>
+        /// Создает экземпляр класса <see cref="PercentDiscount"/>.
+        /// </summary>
+        /// <param name="category">Скидочная категория</param>
+        public PercentDiscount(CategoryTypes category)
+        {
+            Category = category;
+            Discount = 1;
+        }
 
         /// <summary>
         /// Возвращает и задает скидку в процентах.
@@ -29,12 +55,12 @@ namespace oop_winform.Models
         public CategoryTypes Category { get; }
 
         /// <summary>
-        /// Возвращает сумму которую потратил покупатель в данной категории.
+        /// Возвращает и задает сумму которую потратил покупатель в данной категории.
         /// </summary>
         public double SpendingPerCategory { get; private set; } = 0;
 
         /// <summary>
-        /// Информация о скидке.
+        /// Возвращает информацию о скидке.
         /// </summary>
         public string Info
         {
@@ -97,29 +123,6 @@ namespace oop_winform.Models
             {
                 Discount = percentage;
             }
-        }
-
-        /// <summary>
-        /// Создает экзепляр класса <see cref="PercentDiscount"/>.
-        /// </summary>
-        /// <param name="category">Скидочная категория</param>
-        public PercentDiscount(CategoryTypes category)
-        {
-            Category = category;
-            Discount = 1;
-        }
-
-        /// <summary>
-        /// Создает экзепляр класса <see cref="PercentDiscount"/>.
-        /// </summary>
-        /// <param name="category">Скидочная категория</param>
-        /// <param name="discount">Скидка.</param>
-        /// <param name="spendingPerCategory">Размер потраченных денег на категорию.</param>
-        private PercentDiscount(CategoryTypes category, int discount, double spendingPerCategory)
-        {
-            Category = category;
-            Discount = discount;
-            SpendingPerCategory = spendingPerCategory;
         }
     }
 }

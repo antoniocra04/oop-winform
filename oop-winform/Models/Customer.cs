@@ -83,6 +83,9 @@ namespace oop_winform.Models
         /// </summary>
         public List<IDiscount> Discounts { get; set; }
 
+        /// <summary>
+        /// Возвращает и задает является ли покупатель приоритетным.
+        /// </summary>
         public bool IsPriority { get; set; } = false;
     }
 }

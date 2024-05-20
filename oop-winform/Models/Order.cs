@@ -20,7 +20,7 @@ namespace oop_winform.Models
         private readonly DateTime _date = DateTime.Now;
 
         /// <summary>
-        /// Создает экзепляр класса <see cref="Order"/>.
+        /// Создает экземпляр класса <see cref="Order"/>.
         /// </summary>
         public Order()
         {
@@ -28,20 +28,22 @@ namespace oop_winform.Models
             Status = OrderStatusTypes.New;
             Address = new Address();
             Items = new List<Item>();
+            DiscountAmount = 0;
         }
 
         /// <summary>
-        /// Создает экзепляр класса <see cref="Order"/>.
+        /// Создает экземпляр класса <see cref="Order"/>.
         /// </summary>
         /// <param name="status">Статус заказа.</param>
         /// <param name="address">Адрес доставки.</param>
         /// <param name="items">Список товаров заказа.</param>
-        public Order(OrderStatusTypes status, Address address, List<Item> items)
+        public Order(OrderStatusTypes status, Address address, List<Item> items, double discountAmount)
         {
             _id = IdGenerator.GetId();
             Status = status;
             Address = address;
             Items = items;
+            DiscountAmount = discountAmount;
         }
 
         /// <summary>
@@ -104,7 +106,7 @@ namespace oop_winform.Models
         }
 
         /// <summary>
-        /// Суммарная скидка заказа.
+        /// Возвращает суммарную скидку заказа.
         /// </summary>
         public double DiscountAmount { get; }
     }

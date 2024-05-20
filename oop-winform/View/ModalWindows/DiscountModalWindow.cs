@@ -6,24 +6,31 @@ using System.Windows.Forms;
 
 namespace oop_winform.View.ModalWindows
 {
+    /// <summary>
+    /// Модальное окно для выбора категории товара для скидки.
+    /// </summary>
     public partial class DiscountModalWindow : Form
     {
         /// <summary>
-        /// Возвращает категорию товара скидки.
+        /// Возвращает и задает категорию товара скидки.
         /// </summary>
         public CategoryTypes Category { get; set; }
 
         /// <summary>
-        /// Возвращает покупателя.
+        /// Создает экземпляр класса <see cref="DiscountModalWindow"/>.
         /// </summary>
-        public Customer Customer { get; }
-
+        /// /// <param name="customer">Текущий покупатель.</param>
         public DiscountModalWindow(Customer customer)
         {
             InitializeComponent();
             Customer = customer;
             UpdateCategoryComboBox();
         }
+
+        /// <summary>
+        /// Возвращает покупателя.
+        /// </summary>
+        public Customer Customer { get; }
 
         /// <summary>
         /// Обновляет данные выпадающего списка категорий товара.
@@ -50,12 +57,12 @@ namespace oop_winform.View.ModalWindows
             Category = (CategoryTypes)Enum.Parse(
                 typeof(CategoryTypes),
                 CategoryComboBox.SelectedItem.ToString());
-            this.DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            DialogResult = DialogResult.Cancel;
         }
 
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
