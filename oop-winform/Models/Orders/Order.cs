@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using oop_winform.Models.Enums;
 using oop_winform.Services;
 
-namespace oop_winform.Models
+namespace oop_winform.Models.Orders
 {
     /// <summary>
     /// Хранит данные о заказе.

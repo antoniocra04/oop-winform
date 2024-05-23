@@ -50,15 +50,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Cart.cs" />
-    <Compile Include="Models\CategoryTypes.cs" />
+    <Compile Include="Models\Enums\CategoryTypes.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\IDiscount.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\OrderStatusTypes.cs" />
-    <Compile Include="Models\OrderTime.cs" />
-    <Compile Include="Models\PercentDiscount.cs" />
-    <Compile Include="Models\PointsDiscount.cs" />
-    <Compile Include="Models\PriorityOrder.cs" />
+    <Compile Include="Models\Orders\Order.cs" />
+    <Compile Include="Models\Enums\OrderStatusTypes.cs" />
+    <Compile Include="Models\Enums\OrderTime.cs" />
+    <Compile Include="Models\Discounts\PercentDiscount.cs" />
+    <Compile Include="Models\Discounts\PointsDiscount.cs" />
+    <Compile Include="Models\Orders\PriorityOrder.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Services\Constants.cs" />
     <Compile Include="Models\Customer.cs" />

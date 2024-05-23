@@ -1,4 +1,6 @@
 ﻿using oop_winform.Models;
+using oop_winform.Models.Enums;
+using oop_winform.Models.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -107,6 +109,21 @@ namespace oop_winform.View.Tabs
         }
 
         /// <summary>
+        /// Обновляет скидки покупателя.
+        /// </summary>
+        private void UpdateCustomerDiscounts()
+        {
+            for (int i = 0; i < DiscountsCheckedListBox.Items.Count; i++)
+            {
+                if (DiscountsCheckedListBox.GetItemChecked(i))
+                {
+                    CurrentCustomer.Discounts[i].Apply(CurrentCustomer.Cart.Items);
+                }
+                CurrentCustomer.Discounts[i].Update(CurrentCustomer.Cart.Items);
+            }
+        }
+
+        /// <summary>
         /// Сортирует и обновляет товары.
         /// </summary>
         /// <param name="selectedIndex">Выбраный элемент.</param>
@@ -141,7 +158,10 @@ namespace oop_winform.View.Tabs
 
             CartListBox.SelectedIndex = selectedIndex;
 
-            CreateOrderButton.Enabled = false;
+            if(CartListBox.Items.Count == 0)
+            {
+                CreateOrderButton.Enabled = false;
+            }
         }
 
         /// <summary>
@@ -149,7 +169,7 @@ namespace oop_winform.View.Tabs
         /// </summary>
         private void UpdateDiscount()
         {
-            double discountAmount = 0;
+            var discountAmount = 0.0;
             for (int i = 0; i < DiscountsCheckedListBox.Items.Count; i++)
             {
                 if (DiscountsCheckedListBox.GetItemChecked(i))
@@ -253,35 +273,19 @@ namespace oop_winform.View.Tabs
 
         private void CreateOrderButton_Click(object sender, EventArgs e)
         {
-            Order order;
-            if (CurrentCustomer.IsPriority)
-            {
-                order = new PriorityOrder();
-            }
-            else
-            {
-                order = new Order();
-            }
+            var order = CurrentCustomer.IsPriority ? new PriorityOrder() : new Order();
 
             order.Address = CurrentCustomer.Address;
             order.Items = CurrentCustomer.Cart.Items;
             order.Status = OrderStatusTypes.New;
 
-            double discountAmount = 0;
+            var discountAmount = 0.0;
             discountAmount = CurrentCustomer.Discounts
-                .Where(d => DiscountsCheckedListBox.Items.Contains(d))
                 .Sum(d => d.Calculate(CurrentCustomer.Cart.Items));
 
             order.Discount = discountAmount;
 
-            foreach (var discount in CurrentCustomer.Discounts)
-            {
-                if (DiscountsCheckedListBox.Items.Contains(discount))
-                {
-                    discount.Apply(CurrentCustomer.Cart.Items);
-                    discount.Update(CurrentCustomer.Cart.Items);
-                }
-            }
+            UpdateCustomerDiscounts();
             UpdateDiscountCheckedListBox();
 
             CurrentCustomer.Orders.Add(order);
@@ -289,6 +293,8 @@ namespace oop_winform.View.Tabs
             CurrentCustomer.Cart = new Cart();
             UpdateCartListBox(-1);
             AmountLabel.Text = CurrentCustomer.Cart.Amount.ToString();
+            TotalLabel.Text = "0";
+            DiscountAmountLabel.Text = "0";
             CreateOrderButton.Enabled = false;
         }
 

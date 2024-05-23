@@ -1,4 +1,5 @@
 ﻿using oop_winform.Models;
+using oop_winform.Models.Enums;
 using oop_winform.Services;
 using System;
 using System.Collections.Generic;

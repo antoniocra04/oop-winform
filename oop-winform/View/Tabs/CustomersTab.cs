@@ -1,4 +1,5 @@
 ﻿using oop_winform.Models;
+using oop_winform.Models.Discounts;
 using oop_winform.Services;
 using oop_winform.View.Controls;
 using oop_winform.View.ModalWindows;
@@ -110,6 +111,7 @@ namespace oop_winform.View.Tabs
             DiscountsListBox.Enabled = isSelectedIndexCorrect;
             AddDiscountButton.Enabled = isSelectedIndexCorrect;
             RemoveDiscountButton.Enabled = isSelectedIndexCorrect;
+            RemoveDiscountButton.Enabled = DiscountsListBox.SelectedIndex > 0;
 
             IdTextBox.Text = isSelectedIndexCorrect ? _currentCustomer.Id.ToString() : "";
             FullNameTextBox.Text = isSelectedIndexCorrect ? _currentCustomer.FullName : "";

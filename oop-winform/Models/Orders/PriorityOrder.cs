@@ -1,7 +1,8 @@
-﻿using System;
+﻿using oop_winform.Models.Enums;
+using System;
 using System.Collections.Generic;
 
-namespace oop_winform.Models
+namespace oop_winform.Models.Orders
 {
     /// <summary>
     /// Хранит данные о приоритетном заказе.

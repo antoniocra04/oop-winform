@@ -1,7 +1,8 @@
-﻿using oop_winform.Services;
+﻿using oop_winform.Models.Enums;
+using oop_winform.Services;
 using System.Collections.Generic;
 
-namespace oop_winform.Models
+namespace oop_winform.Models.Discounts
 {
     /// <summary>
     /// Хранит процентную скидку.
@@ -12,19 +13,6 @@ namespace oop_winform.Models
         /// Скидка в процентах.
         /// </summary>
         private int _discount;
-
-        /// <summary>
-        /// Создает экземпляр класса <see cref="PercentDiscount"/>.
-        /// </summary>
-        /// <param name="category">Скидочная категория</param>
-        /// <param name="discount">Скидка.</param>
-        /// <param name="spendingPerCategory">Размер потраченных денег на категорию.</param>
-        private PercentDiscount(CategoryTypes category, int discount, double spendingPerCategory)
-        {
-            Category = category;
-            Discount = discount;
-            SpendingPerCategory = spendingPerCategory;
-        }
 
         /// <summary>
         /// Создает экземпляр класса <see cref="PercentDiscount"/>.

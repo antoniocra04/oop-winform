@@ -1,21 +1,17 @@
 ﻿using oop_winform.Models;
+using oop_winform.Models.Discounts;
+using oop_winform.Models.Enums;
 using System;
-using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace oop_winform.View.ModalWindows
 {
     /// <summary>
-    /// Модальное окно для выбора категории товара для скидки.
+    /// Модальное окно для добавление новой процентной скидки покупателю.
     /// </summary>
     public partial class DiscountModalWindow : Form
     {
-        /// <summary>
-        /// Возвращает и задает категорию товара скидки.
-        /// </summary>
-        public CategoryTypes Category { get; set; }
-
         /// <summary>
         /// Создает экземпляр класса <see cref="DiscountModalWindow"/>.
         /// </summary>
@@ -26,6 +22,11 @@ namespace oop_winform.View.ModalWindows
             Customer = customer;
             UpdateCategoryComboBox();
         }
+
+        /// <summary>
+        /// Возвращает и задает категорию товара скидки.
+        /// </summary>
+        public CategoryTypes Category { get; set; }
 
         /// <summary>
         /// Возвращает покупателя.

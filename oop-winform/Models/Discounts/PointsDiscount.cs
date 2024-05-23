@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System;
 
-namespace oop_winform.Models
+namespace oop_winform.Models.Discounts
 {
     /// <summary>
     /// Хранит данные о накопительных баллах.
@@ -13,15 +13,6 @@ namespace oop_winform.Models
         /// Накопительные баллы.
         /// </summary>
         private int _points;
-
-        /// <summary>
-        /// Создает экземпляр класса <see cref="PointsDiscount"/>.
-        /// </summary>
-        /// <param name="points">Размер накопительных баллов.</param>
-        private PointsDiscount(int points)
-        {
-            Points = points;
-        }
 
         /// <summary>
         /// Создает экземпляр класса <see cref="PointsDiscount"/>.
