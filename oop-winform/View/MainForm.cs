@@ -26,6 +26,7 @@ namespace oop_winform
 
         private void MainTabControl_TabIndexChanged(object sender, System.EventArgs e)
         {
+            CustomersTab.UpdateDiscountsListBox();
             CartsTab.Items = ItemsTab.Items;
             CartsTab.Customers = CustomersTab.Customers;
             CartsTab.RefreshData();

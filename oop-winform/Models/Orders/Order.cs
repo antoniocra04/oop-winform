@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using oop_winform.Models.Enums;
 using oop_winform.Services;
 
-namespace oop_winform.Models
+namespace oop_winform.Models.Orders
 {
     /// <summary>
     /// Хранит данные о заказе.
@@ -25,6 +26,10 @@ namespace oop_winform.Models
         public Order()
         {
             _id = IdGenerator.GetId();
+            Status = OrderStatusTypes.New;
+            Address = new Address();
+            Items = new List<Item>();
+            Discount = 0;
         }
 
         /// <summary>
@@ -33,12 +38,13 @@ namespace oop_winform.Models
         /// <param name="status">Статус заказа.</param>
         /// <param name="address">Адрес доставки.</param>
         /// <param name="items">Список товаров заказа.</param>
-        public Order(OrderStatusTypes status, Address address, List<Item> items)
+        public Order(OrderStatusTypes status, Address address, List<Item> items, double discount)
         {
             _id = IdGenerator.GetId();
             Status = status;
             Address = address;
             Items = items;
+            Discount = discount;
         }
 
         /// <summary>
@@ -73,6 +79,11 @@ namespace oop_winform.Models
         public List<Item> Items { get; set; } = new List<Item>();
 
         /// <summary>
+        /// Возвращает и задает скидку на товары.
+        /// </summary>
+        public double Discount { get; set; }
+
+        /// <summary>
         /// Возвращает общую стоимость товаров в заказе.
         /// </summary>
         public float Amount
@@ -92,6 +103,18 @@ namespace oop_winform.Models
                 }
 
                 return total;
+            }
+        }
+
+
+        /// <summary>
+        /// Возращает стоимость заказа со скидкой.
+        /// </summary>
+        public double Total
+        {
+            get
+            {
+                return Amount - Discount;
             }
         }
     }

@@ -1,5 +1,8 @@
 ﻿using oop_winform.Models;
+using oop_winform.Models.Discounts;
 using oop_winform.Services;
+using oop_winform.View.Controls;
+using oop_winform.View.ModalWindows;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -46,6 +49,19 @@ namespace oop_winform.View.Tabs
         }
 
         /// <summary>
+        /// Обновляет данные в списке скидок покупателя.
+        /// </summary>
+        public void UpdateDiscountsListBox()
+        {
+            if (CustomersListBox.SelectedIndex < 0)
+            {
+                return;
+            }
+
+            UpdateDiscountsListBox(Customers[CustomersListBox.SelectedIndex]);
+        }
+
+        /// <summary>
         /// Обновляет данные в CustomerList.
         /// </summary>
         /// /// <param name="selectedIndex">Выбранный элемент.</param>
@@ -60,14 +76,42 @@ namespace oop_winform.View.Tabs
         }
 
         /// <summary>
+        /// Обновляет данные в списке скидок покупателя.
+        /// </summary>
+        /// <param name="customer">Текущий покупатель.</param>
+        private void UpdateDiscountsListBox(Customer customer)
+        {
+            DiscountsListBox.Items.Clear();
+
+            foreach (var discount in customer.Discounts)
+            {
+                DiscountsListBox.Items.Add(discount.Info);
+            }
+        }
+
+        /// <summary>
         /// Установка корректных данных в тексбоксах.
         /// </summary>
         private void SetValuesTextBoxes()
         {
             var isSelectedIndexCorrect = CustomersListBox.SelectedIndex != -1;
+
+            if (isSelectedIndexCorrect)
+            {
+                UpdateDiscountsListBox(Customers[CustomersListBox.SelectedIndex]);
+            }
+            else
+            {
+                DiscountsListBox.Items.Clear();
+            }
+            
             IsPriorityCheckBox.Enabled = isSelectedIndexCorrect;
             FullNameTextBox.Enabled = isSelectedIndexCorrect;
             AddressControl.Enabled = isSelectedIndexCorrect;
+            DiscountsListBox.Enabled = isSelectedIndexCorrect;
+            AddDiscountButton.Enabled = isSelectedIndexCorrect;
+            RemoveDiscountButton.Enabled = isSelectedIndexCorrect;
+            RemoveDiscountButton.Enabled = DiscountsListBox.SelectedIndex > 0;
 
             IdTextBox.Text = isSelectedIndexCorrect ? _currentCustomer.Id.ToString() : "";
             FullNameTextBox.Text = isSelectedIndexCorrect ? _currentCustomer.FullName : "";
@@ -135,6 +179,44 @@ namespace oop_winform.View.Tabs
         private void IsPriorityCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             _currentCustomer.IsPriority = IsPriorityCheckBox.Checked;
+        }
+
+        private void AddDiscountButton_Click(object sender, EventArgs e)
+        {
+            var selectedIndex = CustomersListBox.SelectedIndex;
+            var addDiscountPopUp = new DiscountModalWindow(Customers[selectedIndex]);
+
+            if (addDiscountPopUp.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            var discount = new PercentDiscount(addDiscountPopUp.Category);
+            Customers[selectedIndex].Discounts.Add(discount);
+            UpdateDiscountsListBox(Customers[selectedIndex]);
+        }
+
+        private void RemoveDiscountButton_Click(object sender, EventArgs e)
+        {
+            var selectedIndex = CustomersListBox.SelectedIndex;
+            var removedIndex = DiscountsListBox.SelectedIndex;
+            Customers[selectedIndex].Discounts.RemoveAt(
+                DiscountsListBox.SelectedIndex);
+            UpdateDiscountsListBox(Customers[selectedIndex]);
+
+            if (removedIndex >= DiscountsListBox.Items.Count)
+            {
+                DiscountsListBox.SelectedIndex = removedIndex - 1;
+            }
+            else
+            {
+                DiscountsListBox.SelectedIndex = removedIndex;
+            }
+        }
+
+        private void DiscountsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RemoveDiscountButton.Enabled = DiscountsListBox.SelectedIndex > 0;
         }
     }
 }

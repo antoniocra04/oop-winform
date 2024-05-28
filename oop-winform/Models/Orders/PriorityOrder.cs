@@ -1,7 +1,8 @@
-﻿using System;
+﻿using oop_winform.Models.Enums;
+using System;
 using System.Collections.Generic;
 
-namespace oop_winform.Models
+namespace oop_winform.Models.Orders
 {
     /// <summary>
     /// Хранит данные о приоритетном заказе.
@@ -38,8 +39,9 @@ namespace oop_winform.Models
             Address address,
             List<Item> items,
             DateTime deliveryDate,
-            OrderTime deliveryTime
-            ) : base(status, address, items)
+            OrderTime deliveryTime,
+            double discountAmount
+            ) : base(status, address, items, discountAmount)
         {
             DeliveryDate = deliveryDate;
             DeliveryTime = deliveryTime;

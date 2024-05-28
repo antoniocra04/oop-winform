@@ -117,6 +117,7 @@
             // CartsTab
             // 
             this.CartsTab.Customers = null;
+            this.CartsTab.DiscountAmount = 0D;
             this.CartsTab.Items = null;
             this.CartsTab.Location = new System.Drawing.Point(3, 3);
             this.CartsTab.Name = "CartsTab";
@@ -144,6 +145,7 @@
             // cartTab1
             // 
             this.cartTab1.Customers = null;
+            this.cartTab1.DiscountAmount = 0D;
             this.cartTab1.Items = null;
             this.cartTab1.Location = new System.Drawing.Point(3, 3);
             this.cartTab1.Name = "cartTab1";

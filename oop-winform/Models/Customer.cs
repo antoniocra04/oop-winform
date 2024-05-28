@@ -1,4 +1,6 @@
-﻿using oop_winform.Services;
+﻿using oop_winform.Models.Discounts;
+using oop_winform.Models.Orders;
+using oop_winform.Services;
 using System.Collections.Generic;
 
 namespace oop_winform.Models
@@ -24,6 +26,9 @@ namespace oop_winform.Models
         public Customer()
         {
             FullName = "";
+            IsPriority= false;
+            Discounts = new List<IDiscount>();
+            Discounts.Add(new PointsDiscount());
         }
 
         /// <summary>
@@ -35,6 +40,8 @@ namespace oop_winform.Models
         {
             FullName = fullname;
             Address = address;
+            Discounts = new List<IDiscount>();
+            Discounts.Add(new PointsDiscount());
         }
 
         /// <summary>
@@ -74,7 +81,12 @@ namespace oop_winform.Models
         public List<Order> Orders { get; set; } = new List<Order>();
 
         /// <summary>
-        /// Возвращает и задает булево значение о том, является ли покупатель приоритетным.
+        /// Возвращает и задает скидки покупателя.
+        /// </summary>
+        public List<IDiscount> Discounts { get; set; }
+
+        /// <summary>
+        /// Возвращает и задает значение является ли покупатель приоритетным.
         /// </summary>
         public bool IsPriority { get; set; } = false;
     }

@@ -1,4 +1,6 @@
 ﻿using oop_winform.Models;
+using oop_winform.Models.Enums;
+using oop_winform.Models.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,7 +82,7 @@ namespace oop_winform.View.Tabs
                     Orders.Add(order);
                     OrdersDataGridView.Rows.Add(
                         order.Id, order.CreationDate, order.Status, customer.FullName,
-                        address, order.Amount);
+                        address, order.Amount, order.Total);
                 }
             }
         }
@@ -143,7 +145,7 @@ namespace oop_winform.View.Tabs
 
             AmountLabel.Text = (cellsCount == 0) ?
                 string.Empty :
-                Orders[OrdersDataGridView.SelectedCells[0].RowIndex].Amount.ToString();
+                (Orders[OrdersDataGridView.SelectedCells[0].RowIndex].Amount - Orders[OrdersDataGridView.SelectedCells[0].RowIndex].Discount).ToString();
         }
 
         private void StatusComboBox_SelectedIndexChanged(object sender, EventArgs e)
