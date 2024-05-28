@@ -82,7 +82,7 @@ namespace oop_winform.View.Tabs
                     Orders.Add(order);
                     OrdersDataGridView.Rows.Add(
                         order.Id, order.CreationDate, order.Status, customer.FullName,
-                        address, order.Amount);
+                        address, order.Amount, order.Total);
                 }
             }
         }

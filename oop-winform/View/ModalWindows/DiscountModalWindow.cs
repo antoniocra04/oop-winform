@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace oop_winform.View.ModalWindows
 {
     /// <summary>
-    /// Модальное окно для добавление новой процентной скидки покупателю.
+    /// Модальное окно для добавления новой процентной скидки покупателю.
     /// </summary>
     public partial class DiscountModalWindow : Form
     {

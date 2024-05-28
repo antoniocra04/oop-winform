@@ -29,7 +29,7 @@ namespace oop_winform.Models.Orders
             Status = OrderStatusTypes.New;
             Address = new Address();
             Items = new List<Item>();
-            DiscountAmount = 0;
+            Discount = 0;
         }
 
         /// <summary>
@@ -38,13 +38,13 @@ namespace oop_winform.Models.Orders
         /// <param name="status">Статус заказа.</param>
         /// <param name="address">Адрес доставки.</param>
         /// <param name="items">Список товаров заказа.</param>
-        public Order(OrderStatusTypes status, Address address, List<Item> items, double discountAmount)
+        public Order(OrderStatusTypes status, Address address, List<Item> items, double discount)
         {
             _id = IdGenerator.GetId();
             Status = status;
             Address = address;
             Items = items;
-            DiscountAmount = discountAmount;
+            Discount = discount;
         }
 
         /// <summary>
@@ -106,9 +106,16 @@ namespace oop_winform.Models.Orders
             }
         }
 
+
         /// <summary>
-        /// Возвращает суммарную скидку заказа.
+        /// Возращает стоимость заказа со скидкой.
         /// </summary>
-        public double DiscountAmount { get; }
+        public double Total
+        {
+            get
+            {
+                return Amount - Discount;
+            }
+        }
     }
 }
