@@ -1,15 +1,30 @@
 ﻿using oop_winform.Models;
+using oop_winform.Models.Discounts;
+using oop_winform.Models.Enums;
 using System;
-using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace oop_winform.View.ModalWindows
 {
+    /// <summary>
+    /// Модальное окно для добавления новой процентной скидки покупателю.
+    /// </summary>
     public partial class DiscountModalWindow : Form
     {
         /// <summary>
-        /// Возвращает категорию товара скидки.
+        /// Создает экземпляр класса <see cref="DiscountModalWindow"/>.
+        /// </summary>
+        /// /// <param name="customer">Текущий покупатель.</param>
+        public DiscountModalWindow(Customer customer)
+        {
+            InitializeComponent();
+            Customer = customer;
+            UpdateCategoryComboBox();
+        }
+
+        /// <summary>
+        /// Возвращает и задает категорию товара скидки.
         /// </summary>
         public CategoryTypes Category { get; set; }
 
@@ -17,13 +32,6 @@ namespace oop_winform.View.ModalWindows
         /// Возвращает покупателя.
         /// </summary>
         public Customer Customer { get; }
-
-        public DiscountModalWindow(Customer customer)
-        {
-            InitializeComponent();
-            Customer = customer;
-            UpdateCategoryComboBox();
-        }
 
         /// <summary>
         /// Обновляет данные выпадающего списка категорий товара.
@@ -50,12 +58,12 @@ namespace oop_winform.View.ModalWindows
             Category = (CategoryTypes)Enum.Parse(
                 typeof(CategoryTypes),
                 CategoryComboBox.SelectedItem.ToString());
-            this.DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            DialogResult = DialogResult.Cancel;
         }
 
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)

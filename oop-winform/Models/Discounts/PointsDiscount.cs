@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System;
 
-namespace oop_winform.Models
+namespace oop_winform.Models.Discounts
 {
     /// <summary>
     /// Хранит данные о накопительных баллах.
@@ -13,6 +13,14 @@ namespace oop_winform.Models
         /// Накопительные баллы.
         /// </summary>
         private int _points;
+
+        /// <summary>
+        /// Создает экземпляр класса <see cref="PointsDiscount"/>.
+        /// </summary>
+        public PointsDiscount()
+        {
+            Points = 0;
+        }
 
         /// <summary>
         /// Возвращает и задает накопительные баллы.
@@ -28,7 +36,7 @@ namespace oop_winform.Models
         }
 
         /// <summary>
-        /// Информация о скидке.
+        /// Возвращает информацию о скидке.
         /// </summary>
         public string Info
         {
@@ -64,7 +72,7 @@ namespace oop_winform.Models
         }
 
         /// <summary>
-        /// Применяет накопительные баллы
+        /// Применяет накопительные баллы.
         /// </summary>
         /// <param name="items">Список товаров.</param>
         /// <returns>Размер скидки.</returns>
@@ -76,7 +84,7 @@ namespace oop_winform.Models
         }
 
         /// <summary>
-        /// Добавляет баллы.
+        /// Обновляет баллы.
         /// </summary>
         /// <param name="items">Список товаров.</param>
         public void Update(List<Item> items)
@@ -88,23 +96,6 @@ namespace oop_winform.Models
                 amount += item.Cost;
             }
             Points += (int)Math.Ceiling(amount * 0.1);
-        }
-
-        /// <summary>
-        /// Создает экзепляр класса <see cref="PointsDiscount"/>.
-        /// </summary>
-        public PointsDiscount()
-        {
-            Points = 0;
-        }
-
-        /// <summary>
-        /// Создает экзепляр класса <see cref="PointsDiscount"/>.
-        /// </summary>
-        /// <param name="points">Размер накопительных баллов.</param>
-        private PointsDiscount(int points)
-        {
-            Points = points;
         }
 
         /// <summary>

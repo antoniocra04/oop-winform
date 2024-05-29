@@ -1,4 +1,5 @@
 ﻿using oop_winform.Models;
+using oop_winform.Models.Discounts;
 using oop_winform.Services;
 using oop_winform.View.Controls;
 using oop_winform.View.ModalWindows;
@@ -108,6 +109,9 @@ namespace oop_winform.View.Tabs
             FullNameTextBox.Enabled = isSelectedIndexCorrect;
             AddressControl.Enabled = isSelectedIndexCorrect;
             DiscountsListBox.Enabled = isSelectedIndexCorrect;
+            AddDiscountButton.Enabled = isSelectedIndexCorrect;
+            RemoveDiscountButton.Enabled = isSelectedIndexCorrect;
+            RemoveDiscountButton.Enabled = DiscountsListBox.SelectedIndex > 0;
 
             IdTextBox.Text = isSelectedIndexCorrect ? _currentCustomer.Id.ToString() : "";
             FullNameTextBox.Text = isSelectedIndexCorrect ? _currentCustomer.FullName : "";
@@ -179,7 +183,8 @@ namespace oop_winform.View.Tabs
 
         private void AddDiscountButton_Click(object sender, EventArgs e)
         {
-            var addDiscountPopUp = new DiscountModalWindow(Customers[CustomersListBox.SelectedIndex]);
+            var selectedIndex = CustomersListBox.SelectedIndex;
+            var addDiscountPopUp = new DiscountModalWindow(Customers[selectedIndex]);
 
             if (addDiscountPopUp.ShowDialog() != DialogResult.OK)
             {
@@ -187,16 +192,17 @@ namespace oop_winform.View.Tabs
             }
 
             var discount = new PercentDiscount(addDiscountPopUp.Category);
-            Customers[CustomersListBox.SelectedIndex].Discounts.Add(discount);
-            UpdateDiscountsListBox(Customers[CustomersListBox.SelectedIndex]);
+            Customers[selectedIndex].Discounts.Add(discount);
+            UpdateDiscountsListBox(Customers[selectedIndex]);
         }
 
         private void RemoveDiscountButton_Click(object sender, EventArgs e)
         {
+            var selectedIndex = CustomersListBox.SelectedIndex;
             var removedIndex = DiscountsListBox.SelectedIndex;
-            Customers[CustomersListBox.SelectedIndex].Discounts.RemoveAt(
+            Customers[selectedIndex].Discounts.RemoveAt(
                 DiscountsListBox.SelectedIndex);
-            UpdateDiscountsListBox(Customers[CustomersListBox.SelectedIndex]);
+            UpdateDiscountsListBox(Customers[selectedIndex]);
 
             if (removedIndex >= DiscountsListBox.Items.Count)
             {

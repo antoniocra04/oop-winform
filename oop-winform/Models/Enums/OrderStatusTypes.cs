@@ -1,4 +1,4 @@
-﻿namespace oop_winform.Models
+﻿namespace oop_winform.Models.Enums
 {
     /// <summary>
     /// Статус заказа.

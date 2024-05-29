@@ -75,7 +75,7 @@ namespace oop_winform.Services
             {
                 throw new
                     ArgumentException(
-                    $"{propertyName} expect to be less than {minimum}.");
+                    $"{propertyName} expect to be greater than {minimum}.");
             }
         }
 

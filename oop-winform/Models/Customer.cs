@@ -1,4 +1,6 @@
-﻿using oop_winform.Services;
+﻿using oop_winform.Models.Discounts;
+using oop_winform.Models.Orders;
+using oop_winform.Services;
 using System.Collections.Generic;
 
 namespace oop_winform.Models
@@ -83,6 +85,9 @@ namespace oop_winform.Models
         /// </summary>
         public List<IDiscount> Discounts { get; set; }
 
+        /// <summary>
+        /// Возвращает и задает значение является ли покупатель приоритетным.
+        /// </summary>
         public bool IsPriority { get; set; } = false;
     }
 }

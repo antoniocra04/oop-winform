@@ -1,5 +1,6 @@
-﻿using oop_winform.Services;
+using oop_winform.Services;
 using System;
+﻿using oop_winform.Models.Enums;
 
 namespace oop_winform.Models
 {

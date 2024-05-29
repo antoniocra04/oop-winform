@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using oop_winform.Models.Enums;
 using oop_winform.Services;
 
-namespace oop_winform.Models
+namespace oop_winform.Models.Orders
 {
     /// <summary>
     /// Хранит данные о заказе.
@@ -20,7 +21,7 @@ namespace oop_winform.Models
         private readonly DateTime _date = DateTime.Now;
 
         /// <summary>
-        /// Создает экзепляр класса <see cref="Order"/>.
+        /// Создает экземпляр класса <see cref="Order"/>.
         /// </summary>
         public Order()
         {
@@ -28,20 +29,22 @@ namespace oop_winform.Models
             Status = OrderStatusTypes.New;
             Address = new Address();
             Items = new List<Item>();
+            Discount = 0;
         }
 
         /// <summary>
-        /// Создает экзепляр класса <see cref="Order"/>.
+        /// Создает экземпляр класса <see cref="Order"/>.
         /// </summary>
         /// <param name="status">Статус заказа.</param>
         /// <param name="address">Адрес доставки.</param>
         /// <param name="items">Список товаров заказа.</param>
-        public Order(OrderStatusTypes status, Address address, List<Item> items)
+        public Order(OrderStatusTypes status, Address address, List<Item> items, double discount)
         {
             _id = IdGenerator.GetId();
             Status = status;
             Address = address;
             Items = items;
+            Discount = discount;
         }
 
         /// <summary>
@@ -104,11 +107,6 @@ namespace oop_winform.Models
         }
 
         /// <summary>
-        /// Суммарная скидка заказа.
-        /// </summary>
-        public double DiscountAmount { get; }
-
-        /// <summary>
         /// Проверяет равенство объекта с передаваемым.
         /// </summary>
         /// <param name="subject">Объект класса <see cref="Order"/>.</param>
@@ -120,6 +118,17 @@ namespace oop_winform.Models
             if (ReferenceEquals(this, subject)) return true;
 
             return this.Id == subject.Id;
+        }
+
+        /// <summary>
+        /// Возращает стоимость заказа со скидкой.
+        /// </summary>
+        public double Total
+        {
+            get
+            {
+                return Amount - Discount;
+            }
         }
     }
 }
