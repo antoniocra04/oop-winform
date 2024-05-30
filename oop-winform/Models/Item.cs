@@ -1,6 +1,7 @@
 using oop_winform.Services;
 using System;
 ﻿using oop_winform.Models.Enums;
+using oop_winform.Models.Orders;
 
 namespace oop_winform.Models
 {
@@ -43,13 +44,13 @@ namespace oop_winform.Models
         /// <summary>
         /// Создаёт экземпляр класса <see cref="Item"/>.
         /// </summary>
-        public Item(int id)
+        public Item(int id, string name, string info, float cost, CategoryTypes category)
         {
             _id = id;
-            Name = "";
-            Info = "";
-            Cost = 0;
-            Category = CategoryTypes.Food;
+            Name = name;
+            Info = info;
+            Cost = cost;
+            Category = category;
         }
 
         /// <summary>
@@ -126,40 +127,47 @@ namespace oop_winform.Models
         /// <returns>Копия объекта.</returns>
         public object Clone()
         {
-            var item = new Item(Id);
-            item.Name = Name;
-            item.Info = Info;
-            item.Cost = Cost;
-            item.Category = Category;
-            return item;
+            return new Item(Id, Name, Info, Cost, Category);
         }
 
         /// <summary>
-        /// Проверка равенство объекта с передаваемым.
+        /// Проверка на равенство объекта с передаваемым.
         /// </summary>
         /// <param name="subject">Объект класса <see cref="Item"/>.</param>
         /// <returns>Равны ли объекты.</returns>
         public bool Equals(Item subject)
         {
             if (subject == null) return false;
-
             if (ReferenceEquals(this, subject)) return true;
+            return Id == subject.Id &&
+                    Name == subject.Name &&
+                    Info == subject.Info &&
+                    Cost == subject.Cost &&
+                    Category == subject.Category;
+        }
 
-            return Id == subject.Id;
+        /// <summary>
+        /// Проверка на равенство объекта с передаваемым.
+        /// </summary>
+        /// <param name="subject">Объект класса.</param>
+        /// <returns>Равны ли объекты.</returns>
+        public override bool Equals(object subject)
+        {
+            if (subject == null) return false;
+            if (ReferenceEquals(this, subject)) return true;
+            return Equals(subject);
         }
 
         /// <summary>
         /// Сравнивает цену.
         /// </summary>
         /// <param name="subject">Объект класса <see cref="Item"/>.</param>
-        /// <returns>0 - цены равны, 1 - цена меньше, -1 - цена больше</returns>
+        /// <returns>0 - цены равны, 1 - цена меньше, -1 - цена больше.</returns>
         public int CompareTo(Item subject)
         {
-            if (Cost == subject.Cost) return 0;
-
-            else if (Cost > subject.Cost) return 1;
-
-            else return -1;
+            if (subject == null) return 1;
+            if (ReferenceEquals(this, subject)) return 0;
+            else return _cost.CompareTo(subject.Cost);
         }
     }
 }

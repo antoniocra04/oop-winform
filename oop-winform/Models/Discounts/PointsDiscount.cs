@@ -102,14 +102,12 @@ namespace oop_winform.Models.Discounts
         /// Сравнивает исходный объект с передаваемым.
         /// </summary>
         /// <param name="subject">Объект класса <see cref="PointsDiscount"/>.</param>
-        /// <returns>0 - баллы равны, 1 - баллов меньше, -1 - баллов больше.</returns>
+        /// <returns>0 - баллы равны, 1 - баллов меньше, -1 - баллов больше</returns>
         public int CompareTo(PointsDiscount subject)
         {
-            if (Points == subject.Points) return 0;
-
-            else if (Points > subject.Points) return 1;
-
-            else return -1;
+            if (ReferenceEquals(this, subject)) return 0;
+            if (ReferenceEquals(null, subject)) return 1;
+            else return _points.CompareTo(subject._points);
         }
     }
 }

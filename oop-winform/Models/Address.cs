@@ -177,9 +177,7 @@ namespace oop_winform.Models
         public bool Equals(Address subject)
         {
             if (subject == null) return false;
-
             if (ReferenceEquals(this, subject)) return true;
-
             var result = Index == subject.Index && 
                 Country == subject.Country && 
                 City == subject.City && 
@@ -188,6 +186,18 @@ namespace oop_winform.Models
                 Apartment == subject.Apartment;
 
             return result;
+        }
+
+        /// <summary>
+        /// Проверяет равенство объекта с передаваемым.
+        /// </summary>
+        /// <param name="subject">Объект класса.</param>
+        /// <returns>Равны ли объекты.</returns>
+        public override bool Equals(object subject)
+        {
+            if (subject == null) return false;
+            if (ReferenceEquals(this, subject)) return true;
+            return Equals(subject);
         }
     }
 }

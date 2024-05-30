@@ -121,11 +121,9 @@ namespace oop_winform.Models.Discounts
         /// <returns>0 - проценты равны, 1 - процентов меньше, -1 - процентов больше.</returns>
         public int CompareTo(PercentDiscount subject)
         {
-            if (Discount == subject.Discount) return 0;
-
-            else if (Discount > subject.Discount) return 1;
-
-            else return -1;
+            if (ReferenceEquals(this, subject)) return 0;
+            if (ReferenceEquals(null, subject)) return 1;
+            else return _discount.CompareTo(subject);
         }
     }
 }

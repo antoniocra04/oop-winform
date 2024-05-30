@@ -114,10 +114,18 @@ namespace oop_winform.Models.Orders
         public bool Equals(Order subject)
         {
             if (subject == null) return false;
-
             if (ReferenceEquals(this, subject)) return true;
+            return Id == subject.Id &&
+                    Items == subject.Items &&
+                    Status == subject.Status &&
+                    Address == subject.Address;
+        }
 
-            return this.Id == subject.Id;
+        public override bool Equals(object subject)
+        {
+            if (subject == null) return false;
+            if (ReferenceEquals(this, subject)) return true;
+            return Equals(subject);
         }
 
         /// <summary>
