@@ -13,7 +13,7 @@ namespace oop_winform.Models
         /// <summary>
         /// Id товара.
         /// </summary>
-        private readonly int _id = IdGenerator.GetId();
+        private int _id = IdGenerator.GetId();
 
         /// <summary>
         /// Название товара.
@@ -79,6 +79,10 @@ namespace oop_winform.Models
         public int Id 
         {
             get => _id;
+            private set
+            {
+                _id = value;
+            }
         }
 
         /// <summary>
@@ -140,10 +144,10 @@ namespace oop_winform.Models
             if (subject == null) return false;
             if (ReferenceEquals(this, subject)) return true;
             return Id == subject.Id &&
-                    Name == subject.Name &&
-                    Info == subject.Info &&
-                    Cost == subject.Cost &&
-                    Category == subject.Category;
+                   Name == subject.Name &&
+                   Info == subject.Info &&
+                   Cost == subject.Cost &&
+                   Category == subject.Category;
         }
 
         /// <summary>
@@ -155,7 +159,7 @@ namespace oop_winform.Models
         {
             if (subject == null) return false;
             if (ReferenceEquals(this, subject)) return true;
-            return Equals(subject);
+            return Equals((Item) subject);
         }
 
         /// <summary>
