@@ -1,5 +1,6 @@
-﻿using oop_winform.Models.Enums;
 using oop_winform.Services;
+using System;
+﻿using oop_winform.Models.Enums;
 using System.Collections.Generic;
 
 namespace oop_winform.Models.Discounts
@@ -7,7 +8,7 @@ namespace oop_winform.Models.Discounts
     /// <summary>
     /// Хранит процентную скидку.
     /// </summary>
-    public class PercentDiscount : IDiscount
+    public class PercentDiscount : IDiscount, IComparable<PercentDiscount>
     {
         /// <summary>
         /// Скидка в процентах.
@@ -111,6 +112,18 @@ namespace oop_winform.Models.Discounts
             {
                 Discount = percentage;
             }
+        }
+
+        /// <summary>
+        /// Сравнивает исходный объект с передаваемым.
+        /// </summary>
+        /// <param name="subject">Объект класса <see cref="PercentDiscount"/>.</param>
+        /// <returns>0 - проценты равны, 1 - процентов меньше, -1 - процентов больше.</returns>
+        public int CompareTo(PercentDiscount subject)
+        {
+            if (ReferenceEquals(this, subject)) return 0;
+            if (ReferenceEquals(null, subject)) return 1;
+            else return _discount.CompareTo(subject);
         }
     }
 }

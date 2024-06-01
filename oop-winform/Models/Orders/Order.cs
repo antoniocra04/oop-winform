@@ -8,7 +8,7 @@ namespace oop_winform.Models.Orders
     /// <summary>
     /// Хранит данные о заказе.
     /// </summary>
-    public class Order
+    public class Order: IEquatable<Order>
     {
         /// <summary>
         /// Id заказа.
@@ -106,6 +106,28 @@ namespace oop_winform.Models.Orders
             }
         }
 
+        /// <summary>
+        /// Проверяет равенство объекта с передаваемым.
+        /// </summary>
+        /// <param name="subject">Объект класса <see cref="Order"/>.</param>
+        /// <returns>Равны ли объекты.</returns>
+        public bool Equals(Order subject)
+        {
+            if (subject == null) return false;
+            if (ReferenceEquals(this, subject)) return true;
+            return 
+                Id == subject.Id &&
+                Items == subject.Items &&
+                Status == subject.Status &&
+                Address == subject.Address;
+        }
+
+        public override bool Equals(object subject)
+        {
+            if (subject == null) return false;
+            if (ReferenceEquals(this, subject)) return true;
+            return Equals((Order) subject);
+        }
 
         /// <summary>
         /// Возращает стоимость заказа со скидкой.

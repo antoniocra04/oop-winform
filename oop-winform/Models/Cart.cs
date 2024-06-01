@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace oop_winform.Models
 {
     /// <summary>
     /// Описывает корзину товаров.
     /// </summary>
-    public class Cart
+    public class Cart: ICloneable
     {
         /// <summary>
         /// Возвращает и задает cписок товаров в корзине.
@@ -33,6 +34,22 @@ namespace oop_winform.Models
 
                 return total;
             }
+        }
+
+        /// <summary>
+        /// Создает копию объекта <see cref="Cart"/>.
+        /// </summary>
+        /// <returns>Копия объекта.</returns>
+        public object Clone()
+        {
+            var cart = new Cart();
+
+            foreach (var item in Items)
+            {
+                cart.Items.Add((Item)item.Clone());
+            }
+
+            return cart;
         }
     }
 }
