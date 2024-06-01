@@ -42,18 +42,6 @@ namespace oop_winform.Models
         }
 
         /// <summary>
-        /// Создаёт экземпляр класса <see cref="Item"/>.
-        /// </summary>
-        public Item(int id, string name, string info, float cost, CategoryTypes category)
-        {
-            _id = id;
-            Name = name;
-            Info = info;
-            Cost = cost;
-            Category = category;
-        }
-
-        /// <summary>
         /// Создает экземпляр класса <see cref="Item"/>.
         /// </summary>
         /// <param name="name">Имя продукта.</param>
@@ -131,7 +119,14 @@ namespace oop_winform.Models
         /// <returns>Копия объекта.</returns>
         public object Clone()
         {
-            return new Item(Id, Name, Info, Cost, Category);
+            return new Item
+            {
+                Id = Id,
+                Name = Name,
+                Info = Info,
+                Cost = Cost,
+                Category = Category
+            };
         }
 
         /// <summary>
@@ -143,11 +138,12 @@ namespace oop_winform.Models
         {
             if (subject == null) return false;
             if (ReferenceEquals(this, subject)) return true;
-            return Id == subject.Id &&
-                   Name == subject.Name &&
-                   Info == subject.Info &&
-                   Cost == subject.Cost &&
-                   Category == subject.Category;
+            return 
+                Id == subject.Id &&
+                Name == subject.Name &&
+                Info == subject.Info &&
+                Cost == subject.Cost &&
+                Category == subject.Category;
         }
 
         /// <summary>

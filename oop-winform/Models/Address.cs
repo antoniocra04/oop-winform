@@ -178,12 +178,13 @@ namespace oop_winform.Models
         {
             if (subject == null) return false;
             if (ReferenceEquals(this, subject)) return true;
-            var result = Index == subject.Index && 
-                         Country == subject.Country && 
-                         City == subject.City && 
-                         Street == subject.Street && 
-                         Building == subject.Building && 
-                         Apartment == subject.Apartment;
+            var result = 
+                Index == subject.Index && 
+                Country == subject.Country && 
+                City == subject.City && 
+                Street == subject.Street && 
+                Building == subject.Building && 
+                Apartment == subject.Apartment;
 
             return result;
         }
