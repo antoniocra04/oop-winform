@@ -28,12 +28,12 @@ namespace oop_winform.View.Tabs
         private List<Item> _displayedItems;
 
         /// <summary>
-        /// Возвращает и задает делигат критерия фильтрации.
+        /// Возвращает и задает делегат критерия фильтрации.
         /// </summary>
         private Predicate<Item> FilterСriterion{ get; set; }
 
         /// <summary>
-        /// Возвращает и задает делигат критерия сортировки.
+        /// Возвращает и задает делегат критерия сортировки.
         /// </summary>
         private DataTools.CompareCriteria SortСriterion { get; set; }
 
@@ -43,7 +43,9 @@ namespace oop_winform.View.Tabs
         public ItemsTab()
         {
             InitializeComponent();
+            ItemsListBox.DisplayMember = "Name";
             CategoryComboBox.DataSource = Enum.GetValues(typeof(CategoryTypes));
+            OrderByComboBox.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -112,7 +114,7 @@ namespace oop_winform.View.Tabs
             ItemsListBox.Items.Clear();
             foreach (var item in currentListItems)
             {
-                ItemsListBox.Items.Add(item.Name);
+                ItemsListBox.Items.Add(item);
             }
             ItemsListBox.SelectedIndex = selectedIndex;
         }
@@ -135,7 +137,9 @@ namespace oop_winform.View.Tabs
             var newItem = new Item("Item", "info", 1, CategoryTypes.Cloths);
             Items.Add(newItem);
             _displayedItems = Items;
-            UpdateItemsListBox(Items, Items.Count - 1);
+            ItemsListBox.Items.Add(newItem);
+            UpdateDisplayedItems();
+            ItemsListBox.SelectedItem = newItem;
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
@@ -146,7 +150,7 @@ namespace oop_winform.View.Tabs
             {
                 Items.RemoveAt(removeIndex);
                 _displayedItems = Items;
-                UpdateItemsListBox(Items, -1);
+                UpdateItemsListBox(_displayedItems, -1);
             }
 
             SetValuesTextBoxes();
@@ -270,6 +274,13 @@ namespace oop_winform.View.Tabs
 
             _displayedItems = _items;
             UpdateDisplayedItems();
+        }
+
+        private void NameTextBox_Leave(object sender, EventArgs e)
+        {
+            var selectedItem = ItemsListBox.SelectedItem;
+            UpdateDisplayedItems();
+            ItemsListBox.SelectedItem = selectedItem;
         }
     }
 }

@@ -252,6 +252,7 @@
             this.NameTextBox.Size = new System.Drawing.Size(577, 94);
             this.NameTextBox.TabIndex = 7;
             this.NameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
+            this.NameTextBox.Leave += new System.EventHandler(this.NameTextBox_Leave);
             // 
             // DescriptionTextBox
             // 

@@ -1,12 +1,12 @@
 ﻿using oop_winform.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace oop_winform.Services
 {
+    /// <summary>
+    /// Осуществляет сортировку и фильтрацию продуктов. 
+    /// </summary>
     public class DataTools
     {
         /// <summary>
