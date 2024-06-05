@@ -8,7 +8,7 @@ namespace oop_winform.Models
     /// <summary>
     /// Хранит данные о товаре.
     /// </summary>
-    public class Item: ICloneable, IEquatable<Item>, IComparable<Item>
+    public class Item : ICloneable, IEquatable<Item>, IComparable<Item>
     {
         /// <summary>
         /// Id товара.
@@ -138,7 +138,7 @@ namespace oop_winform.Models
         {
             if (subject == null) return false;
             if (ReferenceEquals(this, subject)) return true;
-            return 
+            return
                 Id == subject.Id &&
                 Name == subject.Name &&
                 Info == subject.Info &&
@@ -155,7 +155,7 @@ namespace oop_winform.Models
         {
             if (subject == null) return false;
             if (ReferenceEquals(this, subject)) return true;
-            return Equals((Item) subject);
+            return Equals((Item)subject);
         }
 
         /// <summary>

@@ -23,12 +23,29 @@ namespace oop_winform.View.Tabs
         private Item _currentItem;
 
         /// <summary>
+        /// Список фильтрованных товаров.
+        /// </summary>
+        private List<Item> _displayedItems;
+
+        /// <summary>
+        /// Возвращает и задает делегат критерия фильтрации.
+        /// </summary>
+        private Predicate<Item> FilterСriterion{ get; set; }
+
+        /// <summary>
+        /// Возвращает и задает делегат критерия сортировки.
+        /// </summary>
+        private DataTools.CompareCriteria SortСriterion { get; set; }
+
+        /// <summary>
         /// Создает экземпляр класса <see cref="ItemsTab"/>.
         /// </summary>
         public ItemsTab()
         {
             InitializeComponent();
+            ItemsListBox.DisplayMember = "Name";
             CategoryComboBox.DataSource = Enum.GetValues(typeof(CategoryTypes));
+            OrderByComboBox.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -40,9 +57,10 @@ namespace oop_winform.View.Tabs
             set
             {
                 _items = value;
+                _displayedItems = value;
                 if (value != null)
                 {
-                    UpdateItemsListBox(ItemsListBox.SelectedIndex);
+                    UpdateItemsListBox(_displayedItems, -1);
                 }
             }
         }
@@ -66,15 +84,37 @@ namespace oop_winform.View.Tabs
         }
 
         /// <summary>
+        /// Обновить список товаров, который будет выведен на экран.
+        /// </summary>
+        private void UpdateDisplayedItems()
+        {
+            var displayedItems = Items;
+
+            if (FilterСriterion != null)
+            {
+                displayedItems = DataTools.FilterItems(displayedItems, FilterСriterion);
+            }
+
+            if (SortСriterion != null)
+            {
+                displayedItems = DataTools.SortItems(displayedItems, SortСriterion);
+            }
+
+            _displayedItems = displayedItems;
+            UpdateItemsListBox(_displayedItems, -1);
+        }
+
+        /// <summary>
         /// Обновляет данные в ItemList.
         /// </summary>
         /// <param name="selectedIndex">Выбранный элемент.</param>
-        private void UpdateItemsListBox(int selectedIndex)
+        /// <param name="selectedIndex">Выбранный элемент.</param>
+        private void UpdateItemsListBox(List<Item> currentListItems, int selectedIndex)
         {
             ItemsListBox.Items.Clear();
-            foreach (var item in Items)
+            foreach (var item in currentListItems)
             {
-                ItemsListBox.Items.Add(item.Name);
+                ItemsListBox.Items.Add(item);
             }
             ItemsListBox.SelectedIndex = selectedIndex;
         }
@@ -88,7 +128,7 @@ namespace oop_winform.View.Tabs
                 return;
             }
 
-            _currentItem = _items[index];
+            _currentItem = _displayedItems[index];
             SetValuesTextBoxes();
         }
 
@@ -96,7 +136,10 @@ namespace oop_winform.View.Tabs
         {
             var newItem = new Item("Item", "info", 1, CategoryTypes.Cloths);
             Items.Add(newItem);
-            UpdateItemsListBox(Items.Count - 1);
+            _displayedItems = Items;
+            ItemsListBox.Items.Add(newItem);
+            UpdateDisplayedItems();
+            ItemsListBox.SelectedItem = newItem;
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
@@ -106,7 +149,8 @@ namespace oop_winform.View.Tabs
             if (removeIndex >= 0)
             {
                 Items.RemoveAt(removeIndex);
-                UpdateItemsListBox(-1);
+                _displayedItems = Items;
+                UpdateItemsListBox(_displayedItems, -1);
             }
 
             SetValuesTextBoxes();
@@ -122,7 +166,7 @@ namespace oop_winform.View.Tabs
             {
                 var cost = CostTextBox.Text;
                 _currentItem.Cost = float.Parse(cost);
-                UpdateItemsListBox(ItemsListBox.SelectedIndex);
+                UpdateItemsListBox(_displayedItems, ItemsListBox.SelectedIndex);
 
             }
             catch (ArgumentException exception)
@@ -148,7 +192,7 @@ namespace oop_winform.View.Tabs
             try
             {
                 _currentItem.Name = NameTextBox.Text;
-                UpdateItemsListBox(ItemsListBox.SelectedIndex);
+                UpdateItemsListBox(_displayedItems, ItemsListBox.SelectedIndex);
             }
             catch (ArgumentException exception)
             {
@@ -169,7 +213,7 @@ namespace oop_winform.View.Tabs
             {
                 var info = DescriptionTextBox.Text;
                 _currentItem.Info = info;
-                UpdateItemsListBox(ItemsListBox.SelectedIndex);
+                UpdateItemsListBox(_displayedItems, ItemsListBox.SelectedIndex);
             }
             catch (ArgumentException exception)
             {
@@ -187,7 +231,58 @@ namespace oop_winform.View.Tabs
             if (index == -1) return;
 
             _currentItem.Category = (CategoryTypes) CategoryComboBox.SelectedItem;
-            UpdateItemsListBox(ItemsListBox.SelectedIndex);
+            UpdateItemsListBox(_displayedItems, ItemsListBox.SelectedIndex);
+        }
+
+        private void FindTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (FindTextBox.Text.Length == 0)
+            {
+                FilterСriterion = null;
+            }
+            else
+            {
+                FilterСriterion = (item) => { return item.Name.Contains(FindTextBox.Text); };
+            }
+
+            UpdateDisplayedItems();
+        }
+
+        private void OrderByComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (OrderByComboBox.SelectedIndex)
+            {
+                case 0:
+                    SortСriterion = (first, second) =>
+                    {
+                        return first.Name.CompareTo(second.Name) < 0;
+                    };
+                    break;
+                case 1:
+                    SortСriterion = (first, second) =>
+                    {
+                        return first.Cost.CompareTo(second.Cost) < 0;
+                    };
+                    break;
+                case 2:
+                    SortСriterion = (first, second) =>
+                    {
+                        return first.Cost.CompareTo(second.Cost) > 0;
+                    };
+                    break;
+            }
+
+            var selectedItem = ItemsListBox.SelectedItem;
+            _displayedItems = _items;
+            UpdateDisplayedItems();
+            ItemsListBox.SelectedItem = selectedItem;
+        }
+
+        private void NameTextBox_Leave(object sender, EventArgs e)
+        {
+            var selectedItem = ItemsListBox.SelectedItem;
+            UpdateDisplayedItems();
+            ItemsListBox.SelectedItem = selectedItem;
         }
     }
 }
