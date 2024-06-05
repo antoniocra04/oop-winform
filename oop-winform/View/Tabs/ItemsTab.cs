@@ -272,8 +272,10 @@ namespace oop_winform.View.Tabs
                     break;
             }
 
+            var selectedItem = ItemsListBox.SelectedItem;
             _displayedItems = _items;
             UpdateDisplayedItems();
+            ItemsListBox.SelectedItem = selectedItem;
         }
 
         private void NameTextBox_Leave(object sender, EventArgs e)
