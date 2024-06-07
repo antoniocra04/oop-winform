@@ -1,5 +1,6 @@
 ﻿using oop_winform.Models;
 using oop_winform.View.Tabs;
+using System;
 using System.Windows.Forms;
 
 namespace oop_winform
@@ -22,15 +23,20 @@ namespace oop_winform
             CartsTab.Items = _store.Items;
             CartsTab.Customers = _store.Customers;
             OrderTab.Customers = _store.Customers;
+            ItemsTab.ItemsChanged += ItemsChanged;
+        }
+
+        private void ItemsChanged(object sender, EventArgs e)
+        {
+            CartsTab.Items = ItemsTab.Items;
+            CartsTab.RefreshData();
         }
 
         private void MainTabControl_TabIndexChanged(object sender, System.EventArgs e)
         {
-            CustomersTab.UpdateDiscountsListBox();
-            CartsTab.Items = ItemsTab.Items;
-            CartsTab.Customers = CustomersTab.Customers;
-            CartsTab.RefreshData();
             OrderTab.Customers = _store.Customers;
+            CartsTab.Customers = CustomersTab.Customers;
+            CustomersTab.UpdateDiscountsListBox();
             OrderTab.RefreshData();
         }
     }
