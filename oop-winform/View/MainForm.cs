@@ -24,6 +24,8 @@ namespace oop_winform
             CartsTab.Customers = _store.Customers;
             OrderTab.Customers = _store.Customers;
             ItemsTab.ItemsChanged += ItemsChanged;
+            CustomersTab.CustomersChanged += CustomersChanged;
+            CartsTab.OrderCreated += OrderCreated;
         }
 
         private void ItemsChanged(object sender, EventArgs e)
@@ -32,11 +34,18 @@ namespace oop_winform
             CartsTab.RefreshData();
         }
 
-        private void MainTabControl_TabIndexChanged(object sender, System.EventArgs e)
+        private void CustomersChanged(object sender, EventArgs e)
         {
             OrderTab.Customers = _store.Customers;
             CartsTab.Customers = CustomersTab.Customers;
             CustomersTab.UpdateDiscountsListBox();
+            CartsTab.RefreshData();
+        }
+
+        private void OrderCreated(object sender, EventArgs e)
+        {
+            CartsTab.Items = ItemsTab.Items;
+            CartsTab.RefreshData();
             OrderTab.RefreshData();
         }
     }
