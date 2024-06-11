@@ -25,6 +25,11 @@ namespace oop_winform.View.Tabs
         private Customer _currentCustomer;
 
         /// <summary>
+        /// Событие при обновлении информации о покупателях.
+        /// </summary>
+        public event EventHandler<EventArgs> CustomersChanged;
+
+        /// <summary>
         /// Создает экземпляр класса <see cref="CustomersTab"/>.
         /// </summary>
         public CustomersTab()
@@ -141,6 +146,7 @@ namespace oop_winform.View.Tabs
             var newCustomer = new Customer("Customer", new Address());
             Customers.Add(newCustomer);
             UpdateCustomersListBox(Customers.Count - 1);
+            CustomersChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
@@ -154,6 +160,7 @@ namespace oop_winform.View.Tabs
             Customers.RemoveAt(removeIndex);
             UpdateCustomersListBox(-1);
             SetValuesTextBoxes();
+            CustomersChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void FullNameTextBox_TextChanged(object sender, EventArgs e)
@@ -166,6 +173,7 @@ namespace oop_winform.View.Tabs
             {
                 _currentCustomer.FullName = FullNameTextBox.Text;
                 UpdateCustomersListBox(CustomersListBox.SelectedIndex);
+                CustomersChanged?.Invoke(this, EventArgs.Empty);
             }
             catch (ArgumentException exception)
             {
@@ -179,6 +187,7 @@ namespace oop_winform.View.Tabs
         private void IsPriorityCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             _currentCustomer.IsPriority = IsPriorityCheckBox.Checked;
+            CustomersChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void AddDiscountButton_Click(object sender, EventArgs e)
@@ -194,6 +203,7 @@ namespace oop_winform.View.Tabs
             var discount = new PercentDiscount(addDiscountPopUp.Category);
             Customers[selectedIndex].Discounts.Add(discount);
             UpdateDiscountsListBox(Customers[selectedIndex]);
+            CustomersChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void RemoveDiscountButton_Click(object sender, EventArgs e)
@@ -212,6 +222,7 @@ namespace oop_winform.View.Tabs
             {
                 DiscountsListBox.SelectedIndex = removedIndex;
             }
+            CustomersChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void DiscountsListBox_SelectedIndexChanged(object sender, EventArgs e)

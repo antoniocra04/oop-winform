@@ -38,6 +38,11 @@ namespace oop_winform.View.Tabs
         private DataTools.CompareCriteria SortСriterion { get; set; }
 
         /// <summary>
+        /// Событие при изменении информации о товарах.
+        /// </summary>
+        public event EventHandler<EventArgs> ItemsChanged;
+
+        /// <summary>
         /// Создает экземпляр класса <see cref="ItemsTab"/>.
         /// </summary>
         public ItemsTab()
@@ -140,6 +145,7 @@ namespace oop_winform.View.Tabs
             ItemsListBox.Items.Add(newItem);
             UpdateDisplayedItems();
             ItemsListBox.SelectedItem = newItem;
+            ItemsChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
@@ -151,6 +157,7 @@ namespace oop_winform.View.Tabs
                 Items.RemoveAt(removeIndex);
                 _displayedItems = Items;
                 UpdateItemsListBox(_displayedItems, -1);
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
 
             SetValuesTextBoxes();
@@ -167,6 +174,7 @@ namespace oop_winform.View.Tabs
                 var cost = CostTextBox.Text;
                 _currentItem.Cost = float.Parse(cost);
                 UpdateItemsListBox(_displayedItems, ItemsListBox.SelectedIndex);
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
 
             }
             catch (ArgumentException exception)
@@ -193,6 +201,7 @@ namespace oop_winform.View.Tabs
             {
                 _currentItem.Name = NameTextBox.Text;
                 UpdateItemsListBox(_displayedItems, ItemsListBox.SelectedIndex);
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
             catch (ArgumentException exception)
             {
@@ -214,6 +223,7 @@ namespace oop_winform.View.Tabs
                 var info = DescriptionTextBox.Text;
                 _currentItem.Info = info;
                 UpdateItemsListBox(_displayedItems, ItemsListBox.SelectedIndex);
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
             catch (ArgumentException exception)
             {
@@ -232,6 +242,7 @@ namespace oop_winform.View.Tabs
 
             _currentItem.Category = (CategoryTypes) CategoryComboBox.SelectedItem;
             UpdateItemsListBox(_displayedItems, ItemsListBox.SelectedIndex);
+            ItemsChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void FindTextBox_TextChanged(object sender, EventArgs e)

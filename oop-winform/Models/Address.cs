@@ -39,6 +39,11 @@ namespace oop_winform.Models
         private string _apartment;
 
         /// <summary>
+        /// Событие при изменении объекта класса.
+        /// </summary>
+        public event EventHandler<EventArgs> AddressChanged;
+
+        /// <summary>
         /// Создает экземпляр класса <see cref="Address"/>.
         /// </summary>
         public Address()
@@ -86,6 +91,7 @@ namespace oop_winform.Models
             {
                 ValueValidator.CheckDigitsInInt(value, 6, nameof(Index));
                 _index = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -99,6 +105,7 @@ namespace oop_winform.Models
             {
                 ValueValidator.StringLengthCheck(value, 50, 0, nameof(Country));
                 _country = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -112,6 +119,7 @@ namespace oop_winform.Models
             {
                 ValueValidator.StringLengthCheck(value, 50, 0, nameof(City));
                 _city = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -125,6 +133,7 @@ namespace oop_winform.Models
             {
                 ValueValidator.StringLengthCheck(value, 100, 0, nameof(Street));
                 _street = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -138,6 +147,7 @@ namespace oop_winform.Models
             {
                 ValueValidator.StringLengthCheck(value, 10, 0, nameof(Building));
                 _building = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -151,6 +161,7 @@ namespace oop_winform.Models
             {
                 ValueValidator.StringLengthCheck(value, 10, 0, nameof(Apartment));
                 _apartment = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 

@@ -31,6 +31,21 @@ namespace oop_winform.Models
         private float _cost;
 
         /// <summary>
+        /// Событие при изменении имени.
+        /// </summary>
+        public event EventHandler<EventArgs> NameChanged;
+
+        /// <summary>
+        /// Событие при изменении стоимости.
+        /// </summary>
+        public event EventHandler<EventArgs> CostChanged;
+
+        /// <summary>
+        /// Событие при изменении описания.
+        /// </summary>
+        public event EventHandler<EventArgs> InfoChanged;
+
+        /// <summary>
         /// Создаёт экземпляр класса <see cref="Item"/>.
         /// </summary>
         public Item()
@@ -83,6 +98,7 @@ namespace oop_winform.Models
             {
                 ValueValidator.StringLengthCheck(value, 200, 1, nameof(_name));
                 _name = value;
+                NameChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -96,6 +112,7 @@ namespace oop_winform.Models
             {
                 ValueValidator.StringLengthCheck(value, 1000, 0, nameof(_name));
                 _info = value;
+                InfoChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -109,6 +126,8 @@ namespace oop_winform.Models
             {
                 ValueValidator.FloatLimitCheck(value, 1, 100000, nameof(_cost));
                 _cost = value;
+                CostChanged?.Invoke(this, EventArgs.Empty);
+
             }
         }
 

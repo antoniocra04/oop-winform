@@ -24,6 +24,11 @@ namespace oop_winform.View.Tabs
         private List<Customer> _customers;
 
         /// <summary>
+        /// Событие при создании заказа.
+        /// </summary>
+        public event EventHandler<EventArgs> OrderCreated;
+
+        /// <summary>
         /// Создает экземпляр класса <see cref="CartTab"/>.
         /// </summary>
         public CartTab()
@@ -296,6 +301,7 @@ namespace oop_winform.View.Tabs
             TotalLabel.Text = "0";
             DiscountAmountLabel.Text = "0";
             CreateOrderButton.Enabled = false;
+            OrderCreated?.Invoke(this, EventArgs.Empty);
         }
 
         private void DiscountsCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
